@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="resume_content/css/main.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <style type="text/css">
+            body{
+                font-size: 30px;
+            }
+        </style>
+    </head>
+<body class="um-vp bc-bg" ontouchstart>
+    <div id='' class=' ub-fh  uof'>
+        <div id='slider' class='slider'></div>
+    </div>
+    <div class="ub bc-bg uinn-m">
+        <div class="ub line"></div>
+        <div class="right ub-f1 ub ub-ver">
+            <div class="ub ub-ac">
+                <div class="umw1 umh1 l-circle"></div>
+                <div class="ulev-1 tit ub">
+                    基本信息
+                </div>
+            </div>
+            <div class="ub ub-ac">
+                <div class="umw1 umh1 s-circle"></div>
+                <div class="ub ub-f1 contentbox">
+                    <div class="triangle c-wh"></div>
+                    <div class="c-wh lcontent uinn ub-f1 uc-a1">
+                        <div class="ulev-1">
+                            <p>
+                                性别：男
+                            </p>
+                            <p>
+                                出生年月：1995年10月
+                            </p>
+                            <p>
+                                当前学历：大三
+                            </p>
+                            <p>
+                                联系电话：18290876543
+                            </p>
+                            <p>
+                                联系邮箱：2436347334@qq.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ub ub-ac">
+                <div class="umw1 umh1 l-circle"></div>
+                <div class="ulev-1 tit ub">
+                    项目经历<p style="color: red">（必填）</p>
+                </div>
+            </div>
+            <div class="ub ub-ac">
+                <div class="umw1 umh1 s-circle"></div>
+                <div class="ub ub-f1 contentbox">
+                    <div class="triangle c-wh"></div>
+                    <div class="c-wh lcontent uinn ub-f1 uc-a1">
+                        <div class="ulev-1">
+                            <p>
+                                2016.5-至今
+                            </p>
+                            <p>
+                                [项目名称]：iCooc
+                            </p>
+                            <p>
+                                [项目职责]:ios客户端开发
+                            </p>
+                            <p>
+                                项目描述：这是一个为大学生就业困难而生的平台！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+             <div class="ub ub-ac">
+                <div class="umw1 umh1 l-circle"></div>
+                <div class="ulev-1 tit ub">
+                    教育经历<p style="color: red">（必填）</p>
+                </div>
+            </div>
+            <div class="ub ub-ac">
+                <div class="umw1 umh1 s-circle"></div>
+                <div class="ub ub-f1 contentbox">
+                    <div class="triangle c-wh"></div>
+                    <div class="c-wh lcontent uinn ub-f1 uc-a1">
+                        <div class="ulev-1">
+                            <p>
+                                 2018年毕业
+                            </p>
+                            <p>
+                                西安邮电大学
+                            </p>
+                            <p>
+                                本科：电子商务
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div> 
+     
+     <div class="ub ub-ac">
+                <div class="umw1 umh1 l-circle"></div>
+                <div class="ulev-1 tit ub">
+                 工作经历<p style="color: red">（必填）</p>
+                </div>
+            </div>
+            <div class="ub ub-ac">
+                <div class="umw1 umh1 s-circle"></div>
+                <div class="ub ub-f1 contentbox">
+                    <div class="triangle c-wh"></div>
+                    <div class="c-wh lcontent uinn ub-f1 uc-a1">
+                        <div class="ulev-1 basicinfo text-center">
+                          <input type="text"  value="+请在此处添加工作经历"  style="height: 200px;width:90%;text-align: center;margin-left: -20px;"/>
+                          <br /><br /><button type="button" class="btn btn-primary" style="height: 50px;">
+                            <a href="http://www.ijianli.com/archives/10031.html" style="color: #000000;font-size: 20px;">
+                                导入简历
+                            </a>                                                                                   
+                         </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/appcan.js"></script>
+    <script src="js/appcan.control.js"></script>
+    <script src="js/appcan.slider.js"></script>
+</body>
+<script>
+    appcan.ready(function() {
+        appcan.initBounce();
+        comImg();
+    })
+    function comImg() {
+        //产品详情图片轮播
+        var slider = appcan.slider({
+            selector : '#slider',
+            aspectRatio : 9 / 16,
+            hasLabel : false,
+            index : 0
+        });
+        slider.set([{
+            img : "indexCon_0/css/img/13718088,2560,1600.jpg_unsliced.png"
+        }, {
+            img : "resume_content/css/images/slider.png"
+        }])
+        slider.on("clickItem", function(index, data) {
+            console.log(index, data);
+
+        })
+    }
+</script>
+</html>

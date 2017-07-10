@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="indexCon_0/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        
+        <div class="ub ub-ver">
+            <div id="slider" class="slider">
+                <!--<div id="" style="position: absolute;z-index: 1;background-color: #FFFFFF;margin: 10px 20%;width: 60%;height: 35px;">
+                    <input type="text" name="" id="" placeholder="搜索职位/公司" style="padding: 5px;text-align: center;width: 90%;margin:3px 5px;color: #636363;"/>
+                </div>-->
+            </div>
+            <div class="ub uinn-busCon ub-ac c-gra1">
+                <div class="ub-f1 ulev-4 t-gra5 ut-s">
+                    当前：海淀区同辉寺大街
+                </div>
+                <div class="refresh ub-img umh1 umw1"></div>
+            </div>     
+             <!--<a href="test.html">测试通道</a>-->
+            <div class="ub ub-ver" id="jobList">
+
+            </div>
+           
+        </div>
+
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+   <script src="js/appcan.listview.js"></script>
+   <script src="js/appcan.slider.js"></script>
+ </body>
+ <script>
+    appcan.ready(function() {
+        appcan.initBounce();
+        //jobList1();  
+            appcan.ajax({
+                url:'http://39.108.2.139/online/job/getJobInfoList.do',
+                type:'GET',
+                data:{
+                    size:10,
+                    page:1,
+                    search:"",
+                    userid:"0213",
+                    type:0
+                },
+               contentType : 'application/json', 
+               dataType:'json',
+               success:function(data){
+                  // console.log(data);
+                   // alert("请求成功！");
+                    var data = data;
+                    
+                    
+    var jsonText = JSON.stringify(data);
+    //console.log(jsonText);
+    var contact = JSON.parse(jsonText);
+    var listData = [];  
+    for(var i=0;i<contact.data.length;i++){
+        var data1 = JSON.stringify(contact.data[i]);
+        var dataCon = JSON.parse(data1);
+        // console.log(dataCon);
+         //console.log("jobId:  " +dataCon.jobTag.id);
+         appcan.locStorage.setVal("jobId", dataCon.jobTag.id);
+        //alert(dataCon.jobName);
+        var com1 = JSON.stringify(dataCon.compId);
+        var compId = JSON.parse(com1);  
+        var list = {
+            title : '<div class="ub ub-ac"> <div class="ub ub-ac uinn">' + dataCon.jobName + '</div></div>',
+            icon : compId.compLogoUrl,
+            describe : '<div class="ub ub-ac"><div class=" ub-ac uba uc-a1 b-gre1 c-gre1 uinn-a14 ulev-2 t-gre2" style="margin-top:-10px;margin-left:5px;">'+ compId.compName +'</div></div>',
+            subDescribe : dataCon.modified,
+            note : compId.compCity + '&nbsp;|&nbsp;' +  compId.financingType + '&nbsp;|&nbsp;' +compId.type + '</br>'+ dataCon.education + '&nbsp;|&nbsp;' + dataCon.experience + '&nbsp;|&nbsp;' + dataCon.salary + '<div class="id" style="display:none;">' + dataCon.id + '</div>', 
+            id:contact.data[i],
+        }
+        listData.push(list);    
+    }
+    var lv1 = appcan.listview({
+        selector : "#jobList",
+        type : "thickLine",
+        hasIcon : true,
+        hasAngle : false,
+        hasSubTitle : true,
+        multiLine : 1,
+        hasCheckbox : false,
+        align : 'left'
+    });
+    lv1.set(listData);   
+    lv1.on("click",function(obj,data,subObj){
+        //alert(data.id);
+        appcan.locStorage.setVal("id", data.id);
+        //window.localStorage["id"] = data.id;
+        appcan.openWinWithUrl('1position_details','1position_details.html');
+    }) 
+                 // var arrDate = JSON.stringify(data);
+                  //var arrDate = JSON.parse(arrDate,function(key,value){
+                   //   alert(key);
+                     // return value;
+                     
+                     //jobList1();
+                  //});
+                
+                },
+                error:function(e){
+                    alert("请求失败！");
+                    alert(e);
+                }
+            });
+            //jobList1();
+            
+         
+    })
+ /*   
+function jobList1(){
+var data = {
+    "code": 0,
+    "data": [
+        {
+            "compId": {
+                "certify": true,
+                "compCity": "北京",
+                "compLocation": "北京市海淀区西北旺东路10号院百度科技园1号楼",
+                "compLogoUrl": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494152748581&di=44cf374fb0225d9a9edb2aee63a2379c&imgtype=0&src=http%3A%2F%2Fpic2.16pic.com%2F00%2F05%2F75%2F16pic_575305_b.jpg",
+                "compName": "北京百度网讯科技有限公司 ",
+                "financingType": "上市公司",
+                "id": "a5c75a19-8edc-4ec1-a0af-fe4c2647b18d",
+                "introduction": "百度,全球最大的中文搜索引擎、最大的中文网站。1999年底,身在美国硅谷的李彦宏看到了中国互联网及中文搜 索引擎服务的巨大发展潜力,抱着技术改变世界的梦想,他毅然辞掉硅谷的高薪工作,携搜索引擎专利技术,于 2000年1月1日在中关村创建了百度公司。",
+                "scale": "2000人以上",
+                "type": "计算机/互联网",
+                "welfare": "技术氛围好 团队年轻 免费零食"
+            },
+            "courses": [],
+            "detailPlace": "北京市海淀区西北旺东路10号院百度科技园1号楼",
+            "education": "本科",
+            "experience": "一年工作经验",
+            "id": "76cc7b09-9b81-4c70-9d73-75dfb2599ae1",
+            "interviewerid": "5b4ea936-60c8-4466-b97b-efbf5fc64edc",
+            "isFavorite": 0,
+            "jobName": "Java发工程师",
+            "jobTag": {
+                "id": "e73434cb-ae80-4bb4-bfb0-1b6179bd8d7a",
+                "jobType": {
+                    "id": "a6e2f880-d4e3-4a2b-99c7-bf66f7188586",
+                    "name": "计算机/互联网"
+                },
+                "name": "后台开发"
+            },
+            "modified": "2017-04-29 17:28:18.0",
+            "phone": "15091835714",
+            "place": "北京",
+            "req": "计算机、自动控制、数学等相关专业在读研究生\n掌握至少一门编程语言，最好是C++或Python\n熟悉至少一种数据存储，最好是SQL或Hadoop\n具备良好的团队沟通与协作能力\n拥有机器学习/深度学习应用经验者优先",
+            "salary": "2000-3000",
+            "shortDesc": "参与AI产品需求讨论和系统设计，构建可交付的软件模块与工具套件\n参与AI数据平台开发维护，并能持续进行改进，保障在线系统的稳定运行\n分析数据存储结构和日志，对数据进行高效组织，满足数据一致性要求",
+            "workType": 0
+        },
+        {
+            "compId": {
+                "certify": true,
+                "compCity": "杭州",
+                "compLocation": "中国杭州市余杭区文一西路969号(311121)",
+                "compLogoUrl": "http://www.ylsteel.cn/Uploads/201606/575e55303e593.jpg",
+                "compName": "阿里巴巴网络技术有限公司",
+                "financingType": "上市公司",
+                "id": "e3924c25-8ff3-40b4-bbda-455e6b142b5a",
+                "introduction": "阿里巴巴集团的使命是让天下没有难做的生意。\n我们为商家、品牌及其他提供产品、服务和数字内容的企业，提供基本的互联网基础设施以及营销平台，让其可借助互联网的力量与用户和客户互动。我们的业务包括核心电商、云计算、数字媒体和娱乐以及创新项目和其他业务。我们并通过所投资的关联公司参与物流和本地服务行业。",
+                "scale": "2000人以上",
+                "type": "计算机/互联网",
+                "welfare": "技术氛围好 福利待遇好"
+            },
+            "courses": [],
+            "detailPlace": "中国杭州市余杭区文一西路969号(311121)",
+            "education": "本科",
+            "experience": "无",
+            "id": "abc3af34-4915-4421-8c7d-9df08808dd56",
+            "interviewerid": "1e8aee89-dae2-44bc-9c26-daa34e4ab55d",
+            "isFavorite": 0,
+            "jobName": "前端实习生",
+            "jobTag": {
+                "id": "c1cccbe8-2c7e-466f-b4c7-6da6bfb379d4",
+                "jobType": {
+                    "id": "a6e2f880-d4e3-4a2b-99c7-bf66f7188586",
+                    "name": "计算机/互联网"
+                },
+                "name": "前端开发"
+            },
+            "modified": "2017-04-30 16:48:49.0",
+            "phone": "158999988888",
+            "place": "杭州",
+            "req": "对技术充满热情，勇于尝试，有较强创新的能力；\n\n较强的发现、分析和解决技术问题的能力； \n\n较强的编程能力，具备良好的编程习惯； \n\n熟练使用Java/C++/Object-C/JS开发语言中的一种或几种，对于面向对象模型和设计模式有比较清晰的认识； \n\n能够编写高质量技术文档。",
+            "salary": "2000-3000",
+            "shortDesc": "参与项目的研发工作，包括服务端、移动端、PC端和Web端。\n新技术的学习，调研，实验\n新产品原型系统的开发，框架设计\n已有产品技术难题的解决\n将原型系统转换为实际的产品\n",
+            "workType": 1
+        }
+    ],
+    "count": 6,
+    "page": 1
+};
+    var jsonText = JSON.stringify(data);
+    var contact = JSON.parse(jsonText);
+    var listData = [];  
+    for(var i=0;i<contact.data.length;i++){
+        var data1 = JSON.stringify(contact.data[i]);
+        var dataCon = JSON.parse(data1);
+        //alert(dataCon.jobName);
+        var com1 = JSON.stringify(dataCon.compId);
+        var compId = JSON.parse(com1);  
+        var list = {
+            title : '<div class="ub ub-ac"> <div class="ub ub-ac uinn">' + dataCon.jobName + '</div></div>',
+            icon : compId.compLogoUrl,
+            describe : '<div class="ub ub-ac"><div class=" ub-ac uba uc-a1 b-gre1 c-gre1 uinn-a14 ulev-2 t-gre2" style="margin-top:-10px;margin-left:5px;">'+ compId.compName +'</div></div>',
+            subDescribe : dataCon.modified,
+            note : compId.compCity + '&nbsp;|&nbsp;' +  compId.financingType + '&nbsp;|&nbsp;' +compId.type + '</br>'+ dataCon.education + '&nbsp;|&nbsp;' + dataCon.experience + '&nbsp;|&nbsp;' + dataCon.salary + '<div class="id" style="display:none;">' + dataCon.id + '</div>', 
+            id:contact.data[i],
+        }
+        listData.push(list);    
+    }
+    var lv1 = appcan.listview({
+        selector : "#jobList",
+        type : "thickLine",
+        hasIcon : true,
+        hasAngle : false,
+        hasSubTitle : true,
+        multiLine : 1,
+        hasCheckbox : false,
+        align : 'left'
+    });
+    lv1.set(listData);   
+    lv1.on("click",function(obj,data,subObj){
+        //alert(data.id);
+        appcan.locStorage.setVal("id", data.id);
+        //window.localStorage["id"] = data.id;
+        appcan.openWinWithUrl('position_details','position_details.html');
+    })
+
+    
+}*/
+/*    
+function jobList() {        
+        var arrData = [{
+            "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+            "postName" : "WEB前端开发",
+            "firmName" : "智一信息",
+            "date" : "2016年08月19日",
+            "info" : "西安｜高新路｜实习｜大四",
+            "address" : "上市公司 |13-26k|移动互联网",
+        },{
+            "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+            "postName" : "WEB前端开发",
+            "firmName" : "智一信息",
+            "date" : "2016年08月19日",
+            "info" : "西安｜高新路｜实习｜大四",
+            "address" : "上市公司 |13-26k|移动互联网",
+        },{
+            "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+            "postName" : "WEB前端开发",
+            "firmName" : "智一信息",
+            "date" : "2016年08月19日",
+            "info" : "西安｜高新路｜实习｜大四",
+            "address" : "上市公司 |13-26k|移动互联网",
+        },{
+            "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+            "postName" : "WEB前端开发",
+            "firmName" : "智一信息",
+            "date" : "2016年08月19日",
+            "info" : "西安｜高新路｜实习｜大四",
+            "address" : "上市公司 |13-26k|移动互联网",
+        },{
+            "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+            "postName" : "WEB前端开发",
+            "firmName" : "智一信息",
+            "date" : "2016年08月19日",
+            "info" : "西安｜高新路｜实习｜大四",
+            "address" : "上市公司 |13-26k|移动互联网",
+        },{
+            "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+            "postName" : "WEB前端开发",
+            "firmName" : "智一信息",
+            "date" : "2016年08月19日",
+            "info" : "西安｜高新路｜实习｜大四",
+            "address" : "上市公司 |13-26k|移动互联网",
+        },{
+            "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+            "postName" : "WEB前端开发",
+            "firmName" : "智一信息",
+            "date" : "2016年08月19日",
+            "info" : "西安｜高新路｜实习｜大四",
+            "address" : "上市公司 |13-26k|移动互联网",
+         },{
+            "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+            "postName" : "WEB前端开发",
+            "firmName" : "智一信息",
+            "date" : "2016年08月19日",
+            "info" : "西安｜高新路｜实习｜大四",
+            "address" : "上市公司 |13-26k|移动互联网",
+         },];
+            var listData = [];
+            for (var i = 0,
+                len = arrData.length; i < len; i++) {
+                var list = {
+                    title : '<div class="ub ub-ac"> <div class="ub ub-ac uinn">' + arrData[i].postName + '</div></div>',
+                    icon : arrData[i].icon,
+                    describe : '<div class="ub ub-ac"><div class=" ub-ac uba uc-a1 b-gre1 c-gre1 uinn-a14 ulev-2 t-gre2" style="margin-top:-10px;margin-left:5px;">'+ arrData[i].firmName +'</div></div>',
+                    subDescribe : arrData[i].date,
+                    note : arrData[i].info + '</br>'+ arrData[i].address,
+                }
+                listData.push(list);
+            }
+            var lv1 = appcan.listview({
+                selector : "#jobList",
+                type : "thickLine",
+                hasIcon : true,
+                hasAngle : false,
+                hasSubTitle : true,
+                multiLine : 1,
+                hasCheckbox : false,
+                align : 'left'
+            });
+            lv1.set(listData);
+        }*/
+
+   var slider = appcan.slider({
+  selector : '#slider',
+  aspectRatio:6/16,
+  hasLabel:true,
+  index:0
+});
+appcan.ajax({
+    url:'http://39.108.2.139/online/res/homeImages.do',
+    data:{
+        
+    },
+    success:function(data){
+        console.log('请求成功');
+        var content = JSON.parse(data);
+        for(var i=0;i<content.data.length;i++){
+            console.log(content.data[i].imgeUrl);
+        }
+        slider.set([{
+            img : content.data[0].imgeUrl,
+            label:""
+        }, {
+            img : content.data[1].imgeUrl,
+            label:""
+        }, {
+            img : content.data[2].imgeUrl,
+            label:""
+        }])
+        slider.on("clickItem",function(index,data){
+        })
+    }
+});
+/*slider.set([{
+    img : "indexCon_0/css/img/ad_image_01_639x338_@2x.png",
+    label:""
+}, {
+    img : "indexCon_0/css/img/ad_image_02_637x317_@2x.png",
+    label:""
+}, {
+    img : "indexCon_0/css/img/ad_image_03_637x316_@2x.png",
+    label:""
+}])
+slider.on("clickItem",function(index,data){
+})*/
+ //appcan.button("#jobList", "ani-act", function() {
+        //var id = document.getElementByClassName("id");
+        //alert("id.innerHTML");
+       // alert(dataCon.id);
+       // alert(dataCon.jobName);
+       // appcan.openWinWithUrl('position_details','position_details.html');
+   // });
+ </script>
+</html>

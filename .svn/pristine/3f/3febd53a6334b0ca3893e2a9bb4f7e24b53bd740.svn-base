@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="groupManagement_content/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver" id="listview"></div>
+        <div class="uinn">
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">
+                    群 ID
+                </div>
+                <div class="ub-f1 ulev-1"id="groupid"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">
+                    群名称
+                </div>
+                <div class="ub-f1 ulev-1"id="groupName"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">
+                    拥有者
+                </div>
+                <div class="ub-f1 ulev-1" id="groupowner"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">
+                    上限人数
+                </div>
+                <div class="ub-f1 ulev-1" id="groupmaxuser"></div>
+            </div>
+            <div class="ub ubb b-c2 uinn8">
+                <div class="t-9b ulev-1" style="min-width:5em;">
+                    群简介
+                </div>
+                <div class="ub-f1 ulev-1" id="groupdescription"></div>
+            </div>
+            <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btnShowGroupUsers">
+                点击查看群成员
+            </div>
+            <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btnAddUser">
+                添加群成员
+            </div>
+            <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn-exit">
+                退群
+            </div>
+        </div>
+
+    </body>
+    <script src="js/appcan.js"></script>
+    <script src="js/appcan.control.js"></script>
+    <script src="js/appcan.listview.js"></script>
+    <script>
+        var groupId = appcan.locStorage.getVal("inGroup");
+        var myId = appcan.locStorage.getVal("currUser");
+        var groupInfo = JSON.parse(appcan.locStorage.getVal("groupInfo"));
+
+        appcan.ready(function() {
+            appcan.initBounce();
+
+            var info = groupInfo.group;
+            $("#groupid").append(info['groupId']);
+            $("#groupName").append(info['groupName']);
+            $("#groupowner").append(info['owner']);
+            $("#groupmaxuser").append(info['groupMaxUsersCount']);
+            $("#groupdescription").append(info['groupDescription']);
+
+            // 退群按钮
+            if (info.owner == myId) {
+                appcan.button("#btn-exit", "btn-act", function() {
+                    appcan.window.alert({
+                        title : "提示",
+                        content : "您是否要解散此群?",
+                        buttons : ['确定', '取消'],
+                        callback : function(err, data, dataType, optId) {
+                            if (data == '0') {
+                                var param = {
+                                    groupId : groupId
+                                };
+                                uexEasemob.exitAndDeleteGroup(JSON.stringify(param));
+                            }
+                        }
+                    });
+                });
+            } else {
+                appcan.button("#btn-exit", "btn-act", function() {
+                    appcan.window.alert({
+                        title : "提示",
+                        content : "您是否要退出此群?",
+                        buttons : ['确定', '取消'],
+                        callback : function(err, data, dataType, optId) {
+                            if (data == '0') {
+                                var param = {
+                                    groupId : groupId
+                                };
+                                uexEasemob.exitFromGroup(JSON.stringify(param));
+                            }
+                        }
+                    });
+                });
+            }
+        });
+        appcan.button("#btnAddUser", "ani-act", function() {
+            appcan.window.open({
+                name : 'addGroupMember',
+                data : 'addGroupMember.html'
+            })
+        })
+        // appcan.button("#btnRemoveUser", "ani-act", function() {
+        // appcan.window.open({
+        // name : 'testRemoveGroupMember',
+        // data : 'testRemoveGroupMember.html'
+        // })
+        // })
+        appcan.button("#btnShowGroupUsers", "ani-act", function() {
+            appcan.window.open({
+                name: 'showGroupUsers',
+                data: 'removeGroupMember.html'
+            })
+        })
+    </script>
+</html>

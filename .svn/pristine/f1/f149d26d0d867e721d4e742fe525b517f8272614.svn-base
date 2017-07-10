@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="setApp_content/css/main.css">
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css"/>
+        <style type="text/css">
+            body{
+                font-size: 30px;
+            }
+        	.bg{
+                background: #EFEFF4;
+            }
+            .brg{
+                background: #EFEFF4;
+                height: 40px;
+            }
+            .content{
+                background: #FFFFFF;
+                padding-top: 5px;
+                height: 420px;
+            }
+            .item{
+                margin: 10px;
+                padding:10px;
+                position: relative;
+            }
+
+            .item-head{
+                margin: 10px;
+                height: 50px;
+                position: relative;
+                text-align: center;
+            }
+            .head-img{
+                height: 50px;
+                width: 50px;
+                float: right;
+            }
+
+            .itme-name{
+                float: left;
+            }
+            .itme-name-head{
+                float: left;
+                text-align: center;
+                line-height: 50px;
+            }
+            .itme-value{
+                float: right;
+            }
+            .next-img{
+                width: 20px;
+                height: 20px;
+                float: right;
+            }
+            .content-butt{
+                background: #FFFFFF;
+                padding-top: 5px;
+                height: 120px;
+            }
+            .item-exit{
+            	 margin: 10px;
+               
+            	text-align: center;
+            }
+            .exit{
+            	text-align: center;
+            }
+        </style>
+    
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+
+   		<div class="brg"></div>
+        <div class="content">
+      
+             <div  class="item" id="setpassword">
+                <span class="itme-name"> 
+                    <strong>修改密码</strong>
+                </span>
+                <span class="glyphicon glyphicon-chevron-right" style="float: right;">&nbsp;</span>
+                
+                
+                <span class="itme-value"></span>
+                <span><img src=""></span>
+                
+            </div>
+            
+            <div class="brg"></div>
+
+             <div  class="item">
+                <span class="itme-name"><strong>用户协议</strong></span>
+                <span class="glyphicon glyphicon-chevron-right" style="float: right;">&nbsp;</span>
+                <span class="itme-value"></span>
+                <span><img src=""></span>
+            </div>
+             <hr>
+
+            <div  class="item" id="icooc">
+                <span class="itme-name">
+                    <strong>关于iCooc</strong>
+                </span>
+                <span class="glyphicon glyphicon-chevron-right" style="float: right;">&nbsp;</span>
+                <span class="itme-value"></span>
+                <span><img src=""></span>                
+            </div>
+               
+           <div class="brg"></div>
+            <div class="item" style="background: #FFFFFF;">
+                <span class="itme-name">
+                    <strong>清除缓存</strong>
+                </span>
+                <span class="glyphicon glyphicon-trash" style="float: right;">&nbsp;</span>
+                
+                <span class="itme-value">0.04M</span>
+                <span><img src=""></span>
+            </div>
+            
+            <div class="brg"></div>  
+        </div><br />
+        <div style="text-align: center;" class="row">
+              <button type="button" class="btn btn-primary col-xs-12" style="text-align: center;height: 0px;font-size: 20px;" id="home">退出登录</button> 
+           </div>
+        <div class="brg"></div>
+       
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+        })
+        appcan.button("#submit", "ani-act", function() {
+            $("form").submit();
+        })
+
+        $("form").on('submit', function() {
+            appcan.request.postForm($("form"), function() {
+                appcan.window.alert({
+                    title : "提醒",
+                    content : "您已经提交了表单:)",
+                    buttons : '确定',
+                    callback : function(err, data, dataType, optId) {
+                        console.log(err, data, dataType, optId);
+                    }
+                });
+            }, function(err) {
+
+            });
+            return false;
+        });
+appcan.button("#setpassword","sni-act",function(){
+    appcan.window.open({
+        name:"setpassword",
+        data:"setpassword.html",
+        aniId:10
+    })
+})
+appcan.button("#home","sni-act",function(){
+    appcan.window.open({
+        name:"home",
+        data:"index.html",
+        aniId:10
+    })
+})     
+appcan.button("#icooc","sni-act",function(){
+    appcan.window.open({
+        name:"icooc",
+        data:"http://www.icooc.net/",
+        aniId:10
+    })
+})        
+    </script>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="position_details_content/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver">
+            <div id="top">
+                <div id="title" id="jobName"></div>
+                <div id="detail">
+                    <ul>
+                        <li><span class="glyphicon glyphicon glyphicon-map-marker" id="compCity"></span></li>
+                        <li><span class="glyphicon glyphicon glyphicon glyphicon-gift" id="education"></span></li>
+                        <li><span class="glyphicon glyphicon glyphicon glyphicon-dashboard" id="experience"></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class=" umar-at1">
+                <div id="listview1"  class="ubt bc-border c-wh">
+
+                </div>
+                <div class="span"><span class="glyphicon glyphicon-user">&nbsp;职位发布者</span></div>
+                <div id="listview2" class="ubt bc-border ubb c-wh umar-at1 uinn-a7">
+                    
+                </div>
+
+            </div>
+            <div class="span" style="margin-top: 1em;"><span class="glyphicon glyphicon-list-alt">&nbsp;职位描述</span></div>
+            <div id="listview3"  class="ubt ubb bc-border c-wh umar-at1 uinn-a7">
+
+            </div>
+            <div  id="listview4"  class="ubt ubb bc-border c-wh umar-at1 uinn-a7">
+
+            </div>
+        </div>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+        <script src="js/appcan.listview.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            //appcan.initBounce();
+           var id =  appcan.locStorage.getVal("id");
+           var dataCon = JSON.parse(id);
+           var compId1 = JSON.stringify(dataCon.compId);
+           var compId = JSON.parse(compId1);
+           appcan.locStorage.setVal("compId1", compId1);
+          // console.log(JSON.stringify(dataCon));
+          //  var userId = appcan.locStorage.getVal("userId");
+          // var userId = 'e78f5af9-3631-4cca-8ab1-1095fe3edbaa';
+           //var jobId =  appcan.locStorage.getVal("jobId");
+           document.getElementById("compCity").innerText = compId.compCity;
+           document.getElementById("education").innerText = dataCon.education;
+           document.getElementById("experience").innerText = dataCon.experience;
+            appcan.locStorage.setVal("userId1", dataCon.interviewerid);
+           appcan.ajax({
+                url:'http://39.108.2.139/online/user/getUserInfo.do',
+                data:{
+                    userId:' ',
+                    id:dataCon.interviewerid
+                },
+                success:function(data){
+                    console.log("请求发布者信息成功");
+                    console.log(data);
+                    var date = JSON.parse(data);
+                    appcan.locStorage.setVal("postDate",date.data);
+                    console.log(date.data.company);
+                    var lv2 = appcan.listview({
+                        selector : "#listview2",
+                        type : "thickLine",
+                        hasIcon : true,
+                        hasAngle : true,
+                        hasSubTitle : false,
+                        multiLine : 1
+                    });
+                    lv2.set([{
+                        icon : date.data.icon,
+                        title : '<div class="ub"><div class="umar-ar3" style="font-weight:bold;">'+date.data.name+'</div></div>',
+                        describe : '<div style="font-size:0.8em;color:orange;">'+date.data.phone+'</div>' + date.data.school +' | '+ date.data.major
+                    }]);
+                },
+                error:function(e){
+                    alert("请求失败！");
+                    alert(e);
+                }
+            });
+           
+           //var userId = 'e78f5af9-3631-4cca-8ab1-1095fe3edbaa';
+           //var jobId = appcan.locStorage.getVal("jobId");
+            //console.log(userId);
+            //console.log(jobId);
+            /*职位收藏成功*/
+             
+            /*取消职位收藏*/
+            appcan.ajax({
+                //url:'http://39.108.2.139/online/job/unFavorite.do',
+                type:'GET',
+                data:{
+                    userId: 'e78f5af9-3631-4cca-8ab1-1095fe3edbaa',
+                    jobId:'e73434cb-ae80-4bb4-bfb0-1b6179bd8d7a'
+                },
+               contentType : 'application/json',
+               dataType:'json',
+               success:function(data){
+                   //var data = data;
+                    //console.log(data);
+                    alert("取消请求成功！");
+                    console.log(data);
+                  //  var jsonText = JSON.stringify(data);
+                   // var contact = JSON.parse(jsonText);
+                    //appcan.locStorage.setVal("userId", contact.data.id);
+                   //console.log(contact.data.id);
+                },
+                error:function(xhr, erroType, error, msg){
+                    alert("请求失败！");
+                   // var err = JSON.stringify(errormessage);
+                    //console.log("error:   "+err);
+                alert("erroType:" + erroType);
+                alert("error:" + error);
+                alert("msg:" + msg);
+                alert("xhr:" + JSON.stringify(xhr));
+    
+                }
+            });
+            
+            
+        var lv1 = appcan.listview({
+            selector : "#listview1",
+            type : "thickLine",
+            hasIcon : true,
+            hasAngle : true,
+            hasSubTitle : false,
+            multiLine : 1
+        });
+        lv1.set([{
+            icon : compId.compLogoUrl,
+            title : '<div class="ub"><div class="umar-ar3" style="font-weight:bold;margin-bottom:0.5em;">'+ compId.compName +'</div></div>',
+            describe : compId.financingType + '  |  ' + compId.scale + '  |  ' + compId.type
+        }]);
+        
+        var lv3 = appcan.listview({
+            selector : "#listview3",
+            type : "thickLine",
+            hasIcon : false,
+            hasAngle : false,
+            multiLine : 1
+        });
+        lv3.set([{
+            title : '<div style="height:22em;"><p>岗位职责：</br>'+ dataCon.shortDesc +'</br></br>任职要求：</br>'+dataCon.req+'</p></div>'
+        }]);
+        var lv4 = appcan.listview({
+            selector : "#listview4",
+            type : "thinLine",
+            hasIcon : false,
+            hasAngle : false,
+            multiLine : 1
+        });
+        lv4.set([{
+            title : '<div id="footer" style="margin-right:-3em;"><div id="left" style="float:left;width:50%;"><input type="button" style="width:80%;margin:1em auto;" onclick="ftn2()" class="btn btn-primary" value="发送简历"/></div><div id="right" style="float:right;width:50%;"><input type="button" onclick="ftn1()" style="width:80%;margin:1em auto;" class="btn btn-primary" value="立即沟通"/></div></div>'
+        }]);
+            
+            
+        })
+        
+    function ftn1(){
+        uexCall.dial("");
+    }
+    function ftn2(){
+        appcan.openWinWithUrl('resume','resume.html');   
+    }
+    appcan.button("#listview2","sni-act",function(){
+        appcan.window.open({
+            name:"person",
+            data:"personal_info.html",
+            aniId:10
+        })
+    })
+    appcan.button("#listview1","sni-act",function(){
+        appcan.window.open({
+            name:"company_details",
+            data:"company_details.html",
+            aniId:10
+        })
+    })
+    /* var btn = document.getElementById("left");
+       btn.addEventListener("click",function(){
+           appcan.openWinWithUrl('resume','resume.html');       
+       });*/
+    </script>
+</html>

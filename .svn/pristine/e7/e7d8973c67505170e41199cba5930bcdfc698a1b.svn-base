@@ -1,0 +1,285 @@
+
+input{
+    color: black;
+    padding: 1px 6px;
+    margin-left:6px;
+}
+.f-sz{
+    font-size: 1.2em;
+}
+.marg{
+    margin-left: 2em;
+}
+.ip-sz{
+    width:8em;
+    padding: .2em 0.9em;
+    min-height: 1.2em;
+    font-size: 1em;    
+}
+.ip-sz1{
+    width:6em;
+    padding: .2em 0.9em;
+    min-height: 1.2em;
+    font-size: 1em;    
+}
+.add-c{
+    
+}
+.title-cs{
+    color: #636363;
+    margin: .2em .8em;
+}
+.srh{
+    width:18em;
+    margin:1.6em 1.2em;
+    min-height: 2.2em;
+    font-size: 1em;   
+    margin:.2em 2em;
+}
+.srh-f{
+    width:12em;
+    margin:1.6em 1.2em 0em 0em;
+    min-height: 2.2em;
+    font-size: 1em;   
+}
+.h-m{
+    margin-bottom: .8em;
+}
+.bg-color{
+    background-color:#E3E3E3;
+}
+.srh-cs{
+    background-color: #FFFFFF;
+    margin:.8em 1.2em;
+}
+.li-cs{
+    background-color: #FFFFFF;
+}
+
+.adf-marg{
+     margin:1.6em 12em .2em 6em;
+}
+.d-mag{
+    margin-left: 1.2em;
+}
+
+/*chatboard*/
+.head-position{
+   position:absolute;
+   top: 0em; 
+   left: 0em;
+}
+
+.line{
+    
+    padding:.5em;
+    width: 95%;
+    height: auto;
+}
+.send-msg{
+    width:55%;
+    height: auto;
+    float: right;
+    margin-top: 1.0em;
+    margin-bottom: .5em;
+}
+.r-user{
+    width:2em;
+    height: 2em;
+    float: right;
+    border: solid 1px grey;
+}
+.r-text{
+    padding:.3em .5em;
+    width:68%;
+    height: auto;
+    border:.1em #2294C3 solid;
+    border-radius:.5em;
+    background-color:#fff;
+    float: left;  
+    
+}
+
+.receive-msg{
+    width:55%;
+    height: auto; 
+    margin-top: .7em;
+    margin-bottom: .8em;
+    float: left;
+}
+.receive-msgs{
+    width:60%;
+    height: auto;
+     margin-top: .7em;
+    margin-bottom: .8em;
+    float: left;
+}
+.sender-box{
+    width:2.5em;
+    height: 3em;
+    float: left;
+}
+.sender-name{
+    margin-left:1.3em;
+}
+.l-users{
+    width:2em;
+    height: 2em;
+    margin-left: .5em;
+}
+.l-user{
+    width:2em;
+    height: 2em;
+    float: left;
+    border: solid 1px grey;
+}
+.l-text{
+    padding:.3em .5em;
+    width:67%;
+    height: auto;
+    /*height:1.3em;*/
+    border:.1em #2294C3 solid;
+    border-radius:.5em;
+    background-color:#fff;
+    float: right;  
+    
+}
+.marg-bottom{
+    margin-bottom: 3em;
+    padding-bottom: 3em;
+}
+
+/*indexCon_0*/
+
+.unread-box{
+    width: 19.6em;
+    height: 3.5em;
+    padding: .3em;
+}
+.chat-img{
+    margin: .7em;
+}
+.chat-text{
+    margin-left: .5em;
+}
+.chat-font{
+    margin-top: .3em;
+    color: #9B9B9B;
+}
+.chat-sup{
+    color: red;
+}
+
+/*news*/
+.news-box{
+    width: 19.6em;
+    height: 3em;
+    padding: .3em;
+}
+.news-img{
+    margin: .5em;
+}
+.news-text{
+    margin-top: .7em;
+    width: 4.5em;
+}
+.news-button{
+    margin-left:3.2em;
+}
+.btns{
+    padding:.4em .7em;    
+    margin: .5em .4em;
+}
+.uwh-set3{
+    width:6.25em;
+    height:6.25em;
+}
+.uwh-set4{
+    width:2.1875em;
+    height:2.1875em;
+}
+.uwh-set5{
+    width:1.35em;
+    height:1.35em;
+}
+.uc-a-set3 {
+    -webkit-border-radius: 5.25em;
+    border-radius: 5.25em;
+}
+.ub-a-set4{
+    -webkit-border-radius: 1.3125em;
+    border-radius: 1.3125em;
+}
+.uc-a-set4 {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.icon-set3{
+    background-image:url('myImg/icon-set3.png');
+}
+.uinn-a8{
+    padding:0.4em 0.7em 0.3em 0.7em;
+}
+.set-pos{
+    position:absolute;
+    bottom:1px;
+    right:0.25em;
+}
+.t-gra-set3{
+    color:#a1a1a1;
+}
+.uwh-pS1{
+    width:1.28em;
+    height:1.28em;
+}
+.setImg1{
+    background-image:url('icons/icon-user-act.png');
+}
+.setImg2{
+    background-image:url('myImg/set_img2.png');
+}
+.setImg3{
+    background-image:url('myImg/set_img3.png');
+}
+.setImg4{
+    background-image:url('myImg/set_img4.png');
+}
+.setImg5{
+    background-image:url('myImg/set_img5.png');
+}
+.setImg6{
+    background-image:url('myImg/set_img6.png');
+}
+.setImg7{
+    background-image:url('myImg/set_img7.png');
+}
+.uinn-a1{
+    padding:0.625em;
+}
+.umar-at1{
+    margin-top:0.625em;
+}
+.uinn-a7{
+    padding:0 0.625em;
+}
+.ulev-app1{
+    font-size:0.875em;
+}
+.c-wh
+{
+    background-color:#FFF;
+}
+.t-9b{
+    color:#9b9b9b;
+}
+.b-c2{
+    border-color:#c2c2c2;
+}
+.uinn8{
+    padding:0.9em 0.5em;
+}
+.ma-l{
+    padding-left:3em;
+}
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="add_content/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver" id="listview"></div>
+        <div class="ub-img uwh-ca1 catalog uabs-ca"></div>
+    </body>
+    <script src="js/appcan.js"></script>
+    <script src="js/appcan.control.js"></script>
+    <script src="js/appcan.listview.js"></script>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+        });
+        var lv = appcan.listview({
+            selector : "#listview",
+            type : "thinLine",
+            hasIcon : true,
+            hasAngle : false,
+            hasSubTitle : false,
+            multiLine : 1
+        });
+        lv.set([{
+            title : "创建组群",
+            icon : "./css/icons/icon-add-act.png",
+            pagename : "createGroup",
+            pageurl : "createGroup.html"
+        }, {
+            title : "添加好友",
+            icon : "./css/icons/icon-adduser-act.png",
+            pagename : "addFriend",
+            pageurl : "addFriend.html"
+        }, {
+            title : "加入组群",
+            icon : "./css/icons/icon-adduser-act.png",
+            pagename : "joinGroup",
+            pageurl : "joinGroup.html"
+        }]);
+        lv.on("click", function(ele, context, obj, subobj) {
+            // appcan.openWinWithUrl(context.name,context.name+'.html');
+            appcan.window.open(context.pagename, context.pageurl, 10);
+        });
+    </script>
+</html>

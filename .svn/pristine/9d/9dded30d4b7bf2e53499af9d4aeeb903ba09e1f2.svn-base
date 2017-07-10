@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="css/ui-btn.css">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/ui-color.css">
+    <link rel="stylesheet" href="css/ui-res.css">
+    <link rel="stylesheet" href="css/main.css">    
+    <link rel="stylesheet" href="css/appcan.icon.css">
+    <link rel="stylesheet" href="css/appcan.control.css">
+    <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+    <style>
+        input{
+            color: black;
+            padding: 1px 6px;
+            margin-left:6px;
+        }
+        input[type="text"]{
+            padding: .2em .4em;
+            margin:.4em .6em;
+            font-size:1em;
+        }
+        input[type="button"]{
+            padding: .6em .8em;
+            margin:.4em .6em;
+            font-size:1.2em;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style> 
+    
+    <script src="js/zy_control.js">
+    </script>      
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+    <script src="wgtRes/emojicons/emojson.js"></script>
+    <script type="text/javascript">
+        var nickname=appcan.locStorage.val("chatname");
+        var groupid=appcan.locStorage.val("groupid");
+        var myname=appcan.locStorage.val("username");
+        var myId=appcan.locStorage.val("userId");
+        
+        window.uexOnload = function() {
+            appcan.initBounce();
+            $('#to').append(nickname);    
+            uexEasemob.getMessageHistory('{"username":"'+groupid+'","chatType":"1","startMsgId":"0","pagesize":"0"}');  
+                     
+            var jsonstr ='{"emojicons":"res://emojicons/emojicons.xml","shares":"res://shares/shares.xml","placeHold":"请输入内容","touchDownImg":"res://3.png","dragOutsideImg":"res://4.png","textColor":"#FFF","textSize":"15.5"}';
+            uexChatKeyboard.open(jsonstr);      
+             
+            uexWidgetOne.cbError = function(opid,type,data){
+                alert(data);
+            }
+            
+            uexChatKeyboard.onCommit = function(json){
+                 var str=eval('('+json+')');
+                 str=str.emojiconsText;
+                 addmychat(str,1);                              uexEasemob.sendText('{"username":"'+groupid+'","chatType":"1","content":"'+str+'"}');                          
+            }
+            uexChatKeyboard.onShareMenuItem = function(json){
+                if(json==0){Cameraopen();}
+                if(json==1){photoopen();}
+                if(json==2){mapopen();}
+                if(json==3){fileopen();}
+            }
+            uexChatKeyboard.onVoiceAction = function(json){
+                var str=eval("("+json+")");
+                if(str.status==0){ly();}
+                if(str.status==1){stoply();}
+                if(str.status==-1){return;}
+            }            
+            
+            uexBaiduMap.cbCurrentLocation = function(json) {
+                var obj = eval('(' + json + ')');
+                lon=obj.longitude;
+                lat=obj.latitude;
+                uexBaiduMap.setCenter(obj.longitude, obj.latitude);
+            }
+                        
+            var historymessage=appcan.locStorage.getVal("historyMsg");
+            //alert(historymessage);             
+            historyhtml(historymessage);
+             
+        }
+
+            function newMessage(){
+                var message=appcan.locStorage.getVal("receiveMsg");             
+                sethtml(message);
+                appcan.locStorage.remove('receiveMsg');
+            }
+
+
+function historyhtml(message){
+        var json=eval('('+message+')');
+        for(var i=0;i<json.length;i++){        
+            if(groupid==json[i].to){
+                if(myId==json[i].from){ 
+                    var html="";                
+                    html+="<div class='line'>";
+                    html+="<div class='send-msg'>";
+                    html+="<img class='r-user' src='css/res/user.png'/>";
+                    html+="<p class='bc-text r-text ulev-3'>";
+                    if (json[i].messageType == 'text') {
+                        stremo = json[i].messageBody.text;
+                        var reg = /\[([^\]]+)\]/g;
+                        stremo = stremo.replace(reg, function($1){
+                            return emoarr[$1] || $1;
+                        });
+                        html += stremo;
+                        html+="</p>";
+                        html+="</div>";
+                        html+="</div>"; 
+                        $('#list').append(html);
+                    }
+                    if (json[i].messageType == 'image') {
+                        html+="<img src='"+json[i].messageBody.thumbnailRemotePath+"' width='100%'/>";
+                        html+="</p>";
+                        html+="</div>";
+                        html+="</div>"; 
+                        $('#list').append(html);
+                    }
+                    if (json[i].messageType == 'audio') {
+                        html+="<span class='bc-text' onclick=playly('"+json[i].messageBody.remotePath+"');>&nbsp;&nbsp;[点击播放音频]</span>";
+                        html+="</p>";
+                        html+="</div>";
+                        html+="</div>"; 
+                        $('#list').append(html);
+                    }
+                    if(json[i].messageType == 'file'){
+                        var filepath=0;
+                        var option = {
+                            maxtask: 3,
+                            url:json[i].messageBody.remotePath,
+                            progress: function(data, session){
+                                var sdata = JSON.parse(JSON.stringify(data));
+                                var statu = sdata['status'];
+                                var percent = sdata['percent'];                             
+                                switch (statu) {
+                                      case 0:
+                                            break;
+                                      case 1:
+                                            alert("下载完成");
+                                            break;
+                                      case 2:
+                                            alert("下载失败");
+                                            break;
+                                      default:
+                                            break;
+                                }
+                            },
+                            success: function(path, session){
+                                alert("path:"+path+", \nsession:"+JSON.stringify(session));
+                                filepath=path;
+                                html+="<span class='bc-text' onclick=openfile('"+filepath+"');>"+json[i].messageBody.displayName+"</span>";  
+                                html+="</p>";
+                                html+="</div>";
+                                html+="</div>"; 
+                                $('#list').append(html);
+                            },
+                            fail: function(session){
+                                alert("session:"+JSON.stringify(session));
+                                alert("Download Fail");
+                            }
+                        }; 
+                        var cache = appcan.icache(option);
+                        cache.run(option);            
+                    }
+                    if(json[i].messageType == 'location'){
+                        html+="<span class='bc-text' onclick=openmap('"+json[i].messageBody.latitude+"','"+json[i].messageBody.longitute+"');>&nbsp;&nbsp;[点击打开地图]</span>";               
+                        html+="</p>";
+                        html+="</div>";
+                        html+="</div>"; 
+                        $('#list').append(html);
+                    }
+                }                
+                else{
+                    var html="";
+                    html+="<div class='line'>";
+                    html+="<div class='receive-msgs'>";
+                    html+="<div class='sender-box'>";
+                    html+="<img class='l-users' src='css/res/user.png'/>";
+                    html+="<span class='bc-text ulev-1 sender-name'>"+json[i].from+"</span>";
+                    html+="</div>";
+                    html+="<p class='bc-text l-text ulev-3'>";
+                    if (json[i].messageType == 'text') {
+                        stremo = json[i].messageBody.text;
+                        var reg = /\[([^\]]+)\]/g;
+                        stremo = stremo.replace(reg, function($1){
+                            return emoarr[$1] || $1;
+                        });
+                        html += stremo;
+                        html+="</p>";
+                        html+="</div>";
+                        html+="</div>"; 
+                        $('#list').append(html);
+                    }
+                    if (json[i].messageType == 'image') {
+                        html+="<img src='"+json[i].messageBody.thumbnailRemotePath+"' width='100%'/>";
+                        html+="</p>";
+                        html+="</div>";
+                        html+="</div>"; 
+                        $('#list').append(html);
+                    }
+                    if (json[i].messageType == 'audio') {
+                        html+="<span class='bc-text' onclick=playly('"+json[i].messageBody.remotePath+"');>&nbsp;&nbsp;[点击播放音频]</span>";
+                        html+="</p>";
+                        html+="</div>";
+                        html+="</div>"; 
+                        $('#list').append(html);
+                    }
+                    if(json[i].messageType == 'file'){
+                        var filepath=0;
+                        var option = {
+                            maxtask: 3,
+                            url:json[i].messageBody.remotePath,
+                            progress: function(data, session){
+                                var sdata = JSON.parse(JSON.stringify(data));
+                                var statu = sdata['status'];
+                                var percent = sdata['percent'];                             
+                                switch (statu) {
+                                      case 0:
+                                            break;
+                                      case 1:
+                                            alert("下载完成");
+                                            break;
+                                      case 2:
+                                            alert("下载失败");
+                                            break;
+                                      default:
+                                            break;
+                                }
+                            },
+                            success: function(path, session){
+                                alert("path:"+path+", \nsession:"+JSON.stringify(session));
+                                filepath=path;
+                                html+="<span class='bc-text' onclick=openfile('"+filepath+"');>"+json[i].messageBody.displayName+"</span>";  
+                                html+="</p>";
+                                html+="</div>";
+                                html+="</div>"; 
+                                $('#list').append(html);
+                            },
+                            fail: function(session){
+                                alert("session:"+JSON.stringify(session));
+                                alert("Download Fail");
+                            }
+                        }; 
+                        var cache = appcan.icache(option);
+                        cache.run(option);            
+                    }
+                    if(json[i].messageType == 'location'){
+                        html+="<span class='bc-text' onclick=openmap('"+json[i].messageBody.latitude+"','"+json[i].messageBody.longitute+"');>&nbsp;&nbsp;[点击打开地图]</span>";               
+                        html+="</p>";
+                        html+="</div>";
+                        html+="</div>"; 
+                        $('#list').append(html);
+                    }
+                }                
+            }
+        }
+}
+
+
+function sethtml(message){
+        var json=eval('('+message+')');
+        if(groupid==json.to){ 
+                var html="";
+                html+="<div class='line'>";
+                html+="<div class='receive-msgs'>";
+                html+="<div class='sender-box'>";
+                html+="<img class='l-users' src='css/res/user.png'/>";
+                html+="<span class='bc-text ulev-1 sender-name'>"+json.from+"</span>";
+                html+="</div>";
+                html+="<p class='bc-text l-text ulev-3'>";
+                if (json.messageType == 'text') {
+                    stremo = json.messageBody.text;
+                    var reg = /\[([^\]]+)\]/g;
+                    stremo = stremo.replace(reg, function($1){
+                        return emoarr[$1] || $1;
+                    });
+                    html += stremo;
+                    html+="</p>";
+                    html+="</div>";
+                    html+="</div>"; 
+                    $('#list').append(html);
+                }
+                if (json.messageType == 'image') {
+                    html+="<img src='"+json.messageBody.thumbnailRemotePath+"' width='100%'/>";
+                    html+="</p>";
+                    html+="</div>";
+                    html+="</div>"; 
+                    $('#list').append(html);
+                }
+                if (json.messageType == 'audio') {
+                    html+="<span class='bc-text' onclick=playly('"+json.messageBody.remotePath+"');>&nbsp;&nbsp;[点击播放音频]</span>";
+                    html+="</p>";
+                    html+="</div>";
+                    html+="</div>"; 
+                    $('#list').append(html);
+                }
+                if(json.messageType == 'file'){
+                    var filepath=0;
+                    var option = {
+                        maxtask: 3,
+                        url:json.messageBody.remotePath,
+                        progress: function(data, session){
+                            var sdata = JSON.parse(JSON.stringify(data));
+                            var statu = sdata['status'];
+                            var percent = sdata['percent'];                             
+                            switch (statu) {
+                                  case 0:
+                                        //alert("下载中");
+                                        break;
+                                  case 1:
+                                        alert("下载完成");
+                                        break;
+                                  case 2:
+                                        alert("下载失败");
+                                        break;
+                                  default:
+                                        break;
+                            }
+                        },
+                        success: function(path, session){
+                            alert("path:"+path+", \nsession:"+JSON.stringify(session));
+                            filepath=path;
+                            html+="<span class='bc-text' onclick=openfile('"+filepath+"');>"+json.messageBody.displayName+"</span>";  
+                            html+="</p>";
+                            html+="</div>";
+                            html+="</div>"; 
+                            $('#list').append(html);
+                        },
+                        fail: function(session){
+                            alert("session:"+JSON.stringify(session));
+                            alert("Download Fail");
+                        }
+                    }; 
+                    var cache = appcan.icache(option);
+                    cache.run(option);            
+                }
+                if(json.messageType == 'location'){
+                    html+="<span class='bc-text' onclick=openmap('"+json.messageBody.latitude+"','"+json.messageBody.longitute+"');>&nbsp;&nbsp;[点击打开地图]</span>";               
+                    html+="</p>";
+                    html+="</div>";
+                    html+="</div>"; 
+                    $('#list').append(html);
+                }
+        }
+}
+
+        
+function addmychat(str,typestr){
+    var html="";
+    html+="<div class='line'>";
+    html+="<div class='send-msg'>";
+    html+="<img class='r-user' src='css/res/user.png'/>";
+    html+="<p class='bc-text r-text ulev-3'>";
+    if (typestr == 1) {
+        stremo = str;
+        var reg = /\[([^\]]+)\]/g;
+        stremo = stremo.replace(reg, function($1){
+            return emoarr[$1] || $1;
+        });
+        html += stremo;
+    }
+    if(typestr==2){
+        html+="<img src='"+str+"' width='100%' />";
+    }
+    if(typestr==3){
+        html+="<span class='bc-text' onclick=playly('"+str+"');>&nbsp;&nbsp;[点击播放音频]</span>";
+    }
+    if(typestr==4){
+        html+="<span class='bc-text' onclick=openfile('"+str+"');>&nbsp;&nbsp;[点击打开文件]</span>";
+    }
+    if(typestr==5){
+        html+="<img src='css/res/map.png' width='100%'/>";
+        html+="<span class='bc-text' onclick=openmap('"+lat+"','"+lon+"');>&nbsp;&nbsp;[点击打开地图]</span>";
+    }
+    html+="</p>";
+    html+="</div>";
+    html+="</div>";
+    $('#list').append(html);
+}   
+
+
+function Cameraopen(){
+    //uexCamera.cbOpen=function (opCode, dataType, data){
+    uexCamera.cbOpenInternal=function (opCode, dataType, data){//仅android
+        sendpic(data);
+    }
+    //uexCamera.open();
+    uexCamera.openInternal();
+}
+
+function photoopen(){
+    uexImageBrowser.cbPick=function (opCode,dataType,data){ 
+        sendpic(data);
+    }
+    uexImageBrowser.pick();
+}
+
+function sendpic(str){
+    if(str==""){return;}
+    imgurl=str;    
+    addmychat(str,2);//发送的是图片
+    uexEasemob.sendPicture('{"username":"'+groupid+'","chatType":"1","filePath":"'+str+'","displayName":"mypic"}');
+}
+
+
+function mapopen(){
+    var titHeight = $('#header').offset().height;
+    $("#to").addClass('hidden');
+    $("#nav-my").removeClass('hidden');
+    $("#nav-left").removeClass('hidden');
+    $("#nav-right").removeClass('hidden');
+    uexBaiduMap.open(0,titHeight,screen.availWidth,screen.availHeight,'116.401','39.925');
+    uexBaiduMap.setMyLocationEnable(1);
+    uexBaiduMap.getCurrentLocation();
+}
+function closemap(){
+    $("#nav-my").addClass('hidden');
+    $("#nav-left").addClass('hidden');
+    $("#nav-right").addClass('hidden');
+    $("#to").removeClass('hidden');
+    uexBaiduMap.close();
+}
+function checkmap(){
+    $("#nav-my").addClass('hidden');
+    $("#nav-left").addClass('hidden');
+    $("#nav-right").addClass('hidden');
+    $("#to").removeClass('hidden');
+    alert("lat+lon:"+lat+"+"+lon);
+    uexEasemob.sendLocationMsg('{"username":"'+groupid+'","chatType":"1","locationAddress":"位置信息","latitude":"'+lat+'","longitude":"'+lon+'"}');
+    var str=0;
+    addmychat(str,5);
+    uexBaiduMap.close();
+}
+function openmap(latitude,longitude){
+    var titHeight = $('#header').offset().height;
+    $("#to").addClass('hidden');
+    $("#nav-my").removeClass('hidden');
+    $("#nav-left").removeClass('hidden');
+    alert("lat+lon:"+latitude+"+"+longitude);
+    uexBaiduMap.open(0,titHeight,screen.availWidth,screen.availHeight,longitude,latitude);
+    uexBaiduMap.setMyLocationEnable(1);
+    uexBaiduMap.setCenter(longitude,latitude);
+}
+
+function fileopen(){
+    uexFileMgr.cbExplorer=function (opCode,dataType,data){ 
+        sendfile(data);
+    }
+    uexFileMgr.explorer('');
+}
+
+function sendfile(str){ 
+    addmychat(str,4);//发送的是文件
+    uexEasemob.sendFile('{"username":"'+groupid+'","chatType":"1","filePath":"'+str+'","displayName":"myfile"}');
+}
+
+function openfile(str){
+    alert("文件地址:"+str);
+    if(str){
+       uexFileMgr.cbOpenFile=function(opCode,dataType,data){
+            if(data == 0){
+                alert("打开文件成功");
+            }else{
+                alert("打开文件失败");
+            }
+        }
+        uexFileMgr.openFile(str , str, '1'); 
+    }    
+}
+
+
+function ly(){
+    var t=Math.round(new Date().getTime());//按时间做为文件名称
+    uexAudio.startBackgroundRecord(2,t);//录音为mp3格式，需删除插件再请选择最新的插件。
+}
+
+function stoply(){
+    uexAudio.cbBackgroundRecord = function(opCode, dataType, data){
+        postly(data);
+    }
+    uexAudio.stopBackgroundRecord();
+}
+
+function postly(str){
+    addmychat(str,3);//播放音频
+    uexEasemob.sendVoice('{"username":"'+groupid+'","chatType":"1","filePath":"'+str+'","length":"60","displayName":"voicename"}');   
+}
+
+function playly(str){
+   if(str){
+        uexAudio.open(str);
+        uexAudio.play('1');
+        isplay = true;
+    } 
+}
+
+function groupInfo(){
+        if(groupid){
+            appcan.window.open({
+                    name : 'groupinfo',
+                    data : 'indexCon_1/group-info.html'
+            });
+        }
+    }
+    
+
+    </script>
+</head>
+<body class="um-vp bc-bg" ontouchstart>     
+
+    
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+        <!--header开始-->
+        <div id="header" class="uh ub bc-text-head  bc-head head-p" >
+            <div class="map-head nav-btn">
+                <div class="fa fa-angle-left fa-2x hidden" id="nav-left" onclick="closemap();"></div>
+            </div>
+            <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0" id='to' onclick="groupInfo();"></h1>
+            <h1 class="map-head ut ub-f1 ulev-3 ut-s tx-c hidden" tabindex="0"id="nav-my">位置信息</h1>
+            <div class="map-head nav-btn nav-bt">
+                <div class="ub-img icon-ok umw2 umh4 hidden" id="nav-right" onclick="checkmap();"></div>
+            </div>
+        </div>
+        <!--header结束--><!--content开始-->
+        <div id="content" class="ub-f1 tx-l">          
+            <div class='bc-text' id='list'>
+            </div>
+       </div>
+    </div>
+</body>
+</html>

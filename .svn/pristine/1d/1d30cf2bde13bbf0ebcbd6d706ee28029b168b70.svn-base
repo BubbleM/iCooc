@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class="um-vp" ontouchstart >
+        <div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
+            <div id="header" class="bc-text-head ub bc-head">
+                <div class="uh bc-text-head ub bc-head" id="header0">
+                    <!--<h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">首页</h1>    -->
+                   <!-- <div class="ub-f1 uinn1" style="z-index: 1;margin: 0.5em;">
+                        <input placeholder="搜索职位/公司" type="text" class="ulev-ele text-center" style="color: #000000;width: 103%;text-align: center;padding: 0.3em;margin-left: -1em;"/>
+                    </div>    -->
+                   <div class="uinput ub ub-f1  bc-border uba srh-cs">                
+                        <div class="uinn fa fa-search sc-text"></div>
+                        <input placeholder="搜索职位/公司" type="search" class="ub-f1" style="text-align: center;">                 
+                   </div>         
+                </div>
+                <div class="uh bc-text-head ub bc-head" id="header1">
+                    <!--<h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">通讯录</h1> -->
+                    <div class="nav-btn" id="nav-left">
+                    </div>
+                    <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">通讯录</h1>
+                    <div class="nav-btn nav-bt" id="nav-add">
+                        <div class="fa fa-plus "></div>
+                    </div>                   
+                </div>
+                <div class="uhide" id="header2">
+                   <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">消息</h1>
+                   <!-- <div class="nav-btn" id="nav-left">
+                    </div>
+                    <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">消息</h1>
+                    <div class="nav-btn nav-bt" id="nav-right">
+                        <div class="fa fa-plus "></div>
+                    </div>-->
+                </div>
+                <div class="uhide" id="header3">
+                    <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">我的</h1>
+                </div>
+            </div>
+            <!--header结束--><!--content开始-->
+            <div id="content" class="ub-f1 tx-l ">
+
+            </div>
+            <!--content结束-->
+            <div id="footer" class="uf t-bla ub ubt bc-border">
+                <div class="ub ub-f1 tab bg-color" id="footer1">
+
+                </div>                
+            </div>
+        </div>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+        <script src="js/appcan.tab.js"></script>
+ </body>
+    <script>
+        var titHeight = 0;
+        var conArray = [false, false, false];
+        appcan.ready(function() {
+            titHeight = $('#header').offset().height;
+            openCon(0);
+        });
+       
+        var tabview = appcan.tab({
+            selector : "#footer1",
+            hasIcon : true,
+            hasAnim : false,
+            hasLabel : true,
+            hasBadge : true,
+            index : 0,
+            data : [{
+                label : "首页",
+                icon : "fa-home"
+            },{
+                label : "通讯录",
+                icon : "fa-user-md"
+            }, {
+                label : "消息",
+                icon : "fa-comments"
+            }, {
+                label : "我的",
+                icon : "fa-user"
+            }]
+        });
+        tabview.on("click", function(obj, index) {
+            openCon(index);
+        })
+        /*appcan.button(".nav-btn", "btn-act", function() {
+            appcan.window.open('add_friend','add_friend.html',10);
+        })*/
+        function openCon(idx) {
+            for (var i = 0, l = $("#header")[0].children.length; i < l; i++) {
+                if (idx == i) {
+                    $("#header")[0].children[i].className = "uh bc-text-head ub bc-head maxh";
+                    uexWindow.openPopover("content",0,"indexCon_"+idx+".html","",0,$('#header').offset().height,'',$("#content").height(),'',0,0);    
+                } 
+                else {
+                    $("#header")[0].children[i].className = "uhide";
+                }
+            }
+        }
+        appcan.button("#nav-add", "btn-act", function() {
+            appcan.window.open('add','add.html');
+        })
+ </script>
+</html>

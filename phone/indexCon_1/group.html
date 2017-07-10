@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+         <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh bc-text-head ub bc-head head-p h-m">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-angle-left fa-2x"></div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">群聊</h1>
+                <div class="nav-btn nav-bt" id="nav-right">               
+                </div>
+            </div>
+            <!--header结束--><!--content开始-->
+            <div id="content" class="ub-f1 tx-l">  
+                <div class="ub-f1">
+                    <div class="uinput ub ub-f1  bc-border uba srh-cs">                
+                         <div class="uinn fa fa-search sc-text"></div>
+                         <input placeholder="搜索" type="search" class="ub-f1">
+                    </div>
+                    <div id="listview"  class="ubt bc-border sc-bg li-cs">
+                    </div>  
+                    
+                    <div id="grouplist" class="ubt bc-border sc-bg bc-text">                    
+                    </div>      
+                </div>
+            </div>
+
+            <!--content结束-->
+        </div>
+
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>
+        <script src="../js/appcan.listview.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            var userID=appcan.locStorage.getVal('userId');
+            showGropList(userId);
+           /* appcan.request.ajax({
+                    url : 'http://114.215.145.215:8080/Wowtour/group/get_join_groups?userID='+userID+'',
+                    type : 'GET',
+                    datatype : 'json',
+                    success : function(data) {
+                        var data=eval('('+data+')');
+                        if (data.status == "200") {
+                            showGroupList(data);
+                        }
+                    },
+                    error : function(errMessage) {
+                        var errMessage=eval('('+errMessage+')');
+                        alert("errMessage:"+errMessage);                     
+                    }
+            }); */         
+        })
+         function showGroupList(groups){
+                var lv2 = appcan.listview({
+                    selector : "#grouplist",
+                    type : "thickLine",
+                    hasIcon : true,
+                    hasAngle : true,
+                    hasSubTitle : true,
+                    multiLine : 1
+                });
+            
+                var datalist =new Array();
+                for (var i = 0; i < groups.body.groups.length; i++) {
+                    var listarray=new Array();
+                    listarray["id"]=groups.body.groups[i].id;
+                    listarray["title"]=groups.body.groups[i].groupName;
+                    listarray["subtitle"]=groups.body.groups[i].huanGroupID;
+                    datalist.push(listarray);
+                }
+                lv2.set(datalist);
+                lv2.on("click", function(ele, obj, curEle) {
+                    appcan.locStorage.setVal('chatname',obj.title);               
+                    appcan.locStorage.setVal('groupid',obj.subtitle);
+                    appcan.locStorage.setVal('customid',obj.id);
+                    openDetail(obj.title);
+                })
+
+            }
+        function openDetail(id) {
+            appcan.window.open({
+                name : 'chatroom',
+                data : '../chatroom.html'
+            })            
+        }      
+        
+        var lv = appcan.listview({
+            selector : "#listview",
+            type : "thinLine",
+            hasIcon : true,
+            hasAngle : false,
+            hasSubTitle : false,
+             multiLine : 1
+        });
+        lv.set([{
+            title : "新建群组",
+            icon:"../css/res/users.png",
+            pagename : "add-group",
+            pageurl:"add-group.html"
+        }, {
+            title : "公开群",
+            icon:"../css/res/users.png",
+            pagename : "open-group",
+            pageurl:"open-group.html"
+        }])
+        lv.on("click",function(ele, context, obj, subobj){
+            appcan.window.open(context.pagename,context.pageurl,10);
+        })
+        
+    appcan.button(".nav-btn", "btn-act", function(a,b) {
+        var btn =  $(a.currentTarget);
+        var btn_id = btn.attr('id');
+        if(btn_id == 'nav-left'){
+            appcan.window.close(-1);  
+        }        
+  })
+    </script>
+</html>

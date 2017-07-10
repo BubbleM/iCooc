@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">        
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="group-info_content/css/main.css">
+        <style>
+        .hidden {
+            display: none !important;
+        }
+    </style> 
+    </head>
+    
+    <body class="um-vp " ontouchstart>
+        <div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh bc-text-head ub bc-head">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-angle-left fa-2x"></div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0" id="groupname"></h1>
+                <div class="nav-btn nav-bt" id="nav-right" onclick="outgroup();">退群</div>
+            </div>
+            <!--header结束--><!--content开始-->
+            <div id="content" class="ub-f1 tx-l">
+                <div class="uinn">
+                    <div class="ub ubb b-c2 uinn8">
+                        <div class="t-9b ulev-1" style="min-width:5em;">群 ID</div>
+                        <div class="ub-f1 ulev-1"id="groupid"></div>
+                    </div>
+                    <div class="ub ubb b-c2 uinn8">
+                        <div class="t-9b ulev-1" style="min-width:5em;">拥有者</div>
+                        <div class="ub-f1 ulev-1" id="groupowner"></div>
+                    </div>
+                    <div class="ub ubb b-c2 uinn8">
+                        <div class="t-9b ulev-1" style="min-width:5em;">上限人数</div>
+                        <div class="ub-f1 ulev-1" id="groupmaxuser"></div>
+                    </div>
+                    <div class="ub ubb b-c2 uinn8">
+                        <div class="t-9b ulev-1" style="min-width:5em;">群简介</div>
+                        <div class="ub-f1 ulev-1" id="groupdescription"></div>
+                    </div>
+                    <div class="ub ubb b-c2 uinn8">
+                        <div class="t-9b ulev-1" style="min-width:5em;">群成员</div>
+                        <div class="ub-f1 ulev-1" id="adduser" onclick="adduser();">&nbsp;&nbsp;&nbsp;&nbsp;<strong>点击添加群成员</strong></div>
+                    </div>                    
+                    <div id="groupuser" class="ubt bc-border sc-bg bc-text ma-l"></div> 
+                    
+                    <div id="newmembers" class="hidden">
+                         </br>
+                        <p class="d-mag">                                        
+                               用户名：<input type="search" id="AddUsername" class="ulev-ele srh-f" placeholder="群主添加新成员"> 
+                        </p></br></br>
+                        <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn">
+                                                                    添加新成员
+                        </div></br>
+                    </div>
+                </div>
+                
+            </div>
+            <!--content结束-->
+
+        </div>
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>        
+        <script src="../js/appcan.listview.js"></script>
+    </body>
+    <script>
+        var groupID=appcan.locStorage.getVal("customid");
+        appcan.ready(function() {
+            showOpenGroup();
+           /* appcan.request.ajax({
+                    url : 'http://114.215.145.215:8080/Wowtour/group/get?groupID='+groupID+'',
+                    type : 'GET',
+                    datatype : 'json',
+                    success : function(data) {
+                        alert("group:"+data);
+                        groups=eval('('+data+')');
+                        if (groups.status == "200") {
+                            showOpenGroup();
+                        }
+                    },
+                    error : function(errMessage) {
+                        var errMessage=eval('('+errMessage+')');
+                        alert("errMessage:"+errMessage);                     
+                    }
+            });*/
+        })
+        function showOpenGroup(){
+            $('#groupname').append(groups.body.groupName);
+            $('#groupid').append(groups.body.huanGroupID);
+            $('#groupowner').append(groups.body.members[0].email);
+            $('#groupmaxuser').append("2000");
+            $('#groupdescription').append(groups.body.describ);
+             var lv2 = appcan.listview({
+                    selector : "#groupuser",
+                    type : "thickLine",
+                    hasIcon : true,
+                    hasAngle : false,
+                    hasSubTitle : true,
+                    multiLine : 1
+                });
+            var datalist =new Array();
+                for (var i = 0; i < groups.body.members.length; i++) {
+                    var listarray=new Array();
+                    listarray["title"]=groups.body.members[i].email;
+                    datalist.push(listarray);
+                }
+            lv2.set(datalist);
+        }
+
+        appcan.button("#nav-left", "btn-act", function(a,b) {
+            appcan.window.close(-1);            
+        })
+        function adduser(){
+            $("#newmembers").removeClass('hidden');
+        }
+  
+            function outgroup(){
+            var userID=appcan.locStorage.getVal("userId");
+            appcan.window.alert({
+                title : "提示",
+                content : "您是否要退出此群?",
+                buttons : ['确定', '取消'],
+                callback : function(err, data, dataType, optId) {
+                    if(data==0){
+                        alert('退群成功!');
+                        appcan.window.open({
+                            name:'group',
+                            data:'group.html'
+                        })
+                        /*appcan.request.ajax({
+                            url : 'http://114.215.145.215:8080/Wowtour/group/get_out?groupID='+groupID+'&userID='+userID+'',
+                            type : 'POST',
+                            contentType : 'application/json',
+                            success : function(data) {
+                                user=eval('('+data+')');
+                                if (user.status == "200") {
+                                    alert("退群成功！");
+                                    appcan.window.open({
+                                        name : 'group',
+                                        data : 'group.html'
+                                    })
+                                }
+                            },
+                            error : function(errMessage) {
+                                var errMessage=eval('('+errMessage+')');
+                                alert("errMessage:"+errMessage);
+                            }
+                        });*/
+                    }
+                  }
+            });
+        }
+    
+       appcan.button("#btn", "ani-act", function() { 
+            var myname=appcan.locStorage.getVal("username");
+            var userID= document.getElementById("AddUsername").value;
+            var newmembers = document.getElementById("AddUsername").value;
+            history.go(0);
+            
+           
+            /*appcan.request.ajax({
+                    url : 'http://114.215.145.215:8080/Wowtour/group/direct_add_group?groupID='+groupID+'&userName='+userID+'',
+                    type : 'POST',
+                    contentType : 'application/json',
+                    success : function(data) {
+                        alert("data:"+data);
+                        var data=eval('('+data+')');
+                        if (data.status == "200") {
+                            history.go(0);
+                        }
+                        if(data.error){
+                            alert(data.error);
+                        }
+                    },
+                    error : function(errMessage) {
+                        var errMessage=eval('('+errMessage+')');
+                        alert("errMessage"+errMessage);
+                     
+                    }
+            });*/
+        })
+    </script>
+</html>

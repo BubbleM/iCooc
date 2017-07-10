@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="../css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+         <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh bc-text-head ub bc-head head-p">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-angle-left fa-2x"></div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">新建群组</h1>
+                <div class="nav-btn nav-bt"></div>
+            </div>
+            <!--header结束--><!--content开始-->
+            <div id="content" class="ub-f1 tx-l">   
+                <br />          
+                <div class="f-sz marg"><span>群名称：</span><input class="bc-text ub-pc ip-sz" id="groupName" type="text"></div></br>
+                <div class="f-sz marg"><span>群简介：</span><input class="bc-text ub-pc ip-sz" id="desc" type="text"></div></br>
+                 <div class="f-sz marg"><span>新加用户审核：</span> 
+                     <input type="radio" id="yes" name="check" value="是" />是&nbsp;&nbsp;
+                     <input type="radio"  id="no" name="check" value="否" checked />否
+                 </div></br>
+                 <div class="f-sz marg"><span>最大用户数：</span><input class="bc-text ub-pc ip-sz1" type="text" id="maxUsers" value="" placeholder="最大为2000"></div></br>  <br />      
+                <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="btn">
+                    新建
+                </div>
+             </div>
+            <!--content结束-->
+        </div>
+
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+        })
+        
+    appcan.button(".nav-btn", "btn-act", function(a,b) {
+        var btn =  $(a.currentTarget);
+        var btn_id = btn.attr('id');
+        if(btn_id == 'nav-left'){
+            appcan.window.close(-1);            
+        }
+    })
+    appcan.button("#btn", "ani-act", function() {
+       /* var groupName = document.getElementById("groupName").value;
+        var desc = document.getElementById("desc").value;
+        var maxUsers = document.getElementById("maxUsers").value;*/
+        
+        /*appcan.button("#btn", "ani-act", function() {*/
+            var param = {
+                groupName : $("#groupName").val(), //要创建的群聊的名称
+                desc : $("#groupDesc").val(), //群聊简介
+                allowInvite : true, //是否允许群成员邀请人进群
+                needApprovalRequired : true,
+                maxUsers : $("#maxUsers").val(), //最大群聊用户数，可选参数，默认为200，最大为2000
+              //  initialWelcomeMessage : $("#welcome").val()//群组创建时发送给每个初始成员的欢迎信息（仅iOS需要）
+            }
+            uexEasemob.createPublicGroup(JSON.stringify(param));
+       /* });*/
+       /* appcan.request.ajax({
+                    url : 'http://114.215.145.215:8080/Wowtour/group/build_group?groupName='+groupName+'&describ='+desc+'',
+                    type : 'POST',
+                    contentType : 'application/json',
+                    success : function(data) {
+                        alert("data"+data);
+                        var data=eval('('+data+')');
+                        if (data.status == "200") {
+                            alert("新建群组成功！");
+                            uexEasemob.getGroupsFromServer('{"loadCache":"false"}');
+                            appcan.openWinWithUrl('group','group.html');
+                        }
+                    },
+                    error : function(errMessage) {
+                        var errMessage=eval('('+errMessage+')');
+                        alert("errMessage"+errMessage);
+                    }
+        });*/
+      //  uexEasemob.createPublicGroup('{"groupName":"'+toAddUsername+'","desc":"欢迎加入！","members":["appcanw","appcann"],"needApprovalRequired":"false","maxUsers":"20"}');
+        //uexEasemob.createPublicGroup('{"groupName":"'+groupName+'","desc":"'+desc+'","needApprovalRequired":"false","maxUsers":"'+maxUsers+'"}');  
+    })
+    
+    
+    </script>
+</html>

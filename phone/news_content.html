@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="news_content/css/main.css">
+    </head>
+    <style>
+        .hidden {
+            display: none !important;
+        }
+        .btn-0 .btn-1 {
+            width: 40% !important;
+        }
+    </style>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver" id="listview2"></div>
+        <div class="ub ub-ver" id="listview"></div>
+    </body>
+    <script src="js/appcan.js"></script>
+    <script src="js/appcan.control.js"></script>
+    <script src="js/appcan.listview.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+            var lv2 = appcan.listview({
+                selector : "#listview2",
+                type : "thinLineTmp",
+                hasIcon : true,
+                hasAngle : false,
+                hasSubTitle : true
+            });
+            var data = JSON.parse(appcan.locStorage.getVal("groupApplications"));
+            if (null == data) {
+                data = new Array();
+            }
+            var groupApplications = new Array();
+           // alert('groupApplications:' + data);
+            $.each(data, function(i, ele) {
+                ele = JSON.parse(ele);
+                groupApplications.push({
+                    "title" : ele['applyer'] + "申请加入" + ele['groupName'] + "<div id='btn-group-accept-" + ele['applyer'] + "-" + ele['groupId'] + "' class='btn-1 btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1'>同意</div><div id='btn-group-refuse-" + ele['applyer'] + "-" + ele['groupId'] + "' class='btn-1 btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1'>拒绝</div>",
+                    "subtitle" : ele['reason'],
+                    "icon" : "css/icons/icon-chat-act.png"
+                })
+            })
+           // alert(JSON.stringify(groupApplications));
+            lv2.set(groupApplications);
+
+            var lv = appcan.listview({
+                selector : "#listview",
+                type : "thinLineTmp",
+                hasIcon : true,
+                hasAngle : false,
+                hasSubTitle : true
+            });
+            var data2 = JSON.parse(appcan.locStorage.getVal("friendsNews"));
+            if (null == data2) {
+                data2 = new Array();
+            }
+            var friendsNews = new Array();
+            //alert('friendsNews:' + data2);
+            $.each(data2, function(i, ele) {
+                ele = JSON.parse(ele);
+                friendsNews.push({
+                    "title" : ele['username'] + "申请添加好友<div id='btn-accept-" + ele['username'] + "' class='btn-0 btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1'>同意</div><div id='btn-refuse-" + ele['username'] + "' class='btn-0 btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1'>拒绝</div>",
+                    "subtitle" : ele['reason'],
+                    "icon" : "css/icons/icon-user-act.png"
+                })
+            })
+            lv.set(friendsNews);
+            // lv.on('click', function(ele, context, obj, subobj) {
+            // //appcan.window.open(context.pagename,context.pageurl,10);
+            // })
+            appcan.button('.btn-0', 'btn-act', function() {
+                var btnId = this.id;
+                //alert(btnId);
+                var btnIdArr = btnId.split('-');
+                if (btnIdArr[1] == 'accept') {
+                    accept(btnIdArr[2]);
+                } else if (btnIdArr[1] == 'refuse') {
+                    refuse(btnIdArr[2]);
+                }
+            });
+            appcan.button('.btn-1', 'btn-act', function() {
+                var btnId = this.id;
+                var btnIdArr = btnId.split('-');
+                //alert(btnId);
+                if (btnIdArr[2] == 'accept') {
+                    alert("btn-group-accept");
+                    groupAccept(btnIdArr[4], btnIdArr[3]);
+                } else if (btnIdArr[2] == 'refuse') {
+                    groupRefuse(btnIdArr[4], btnIdArr[3]);
+                }
+            });
+        });
+        function accept(username) {
+            var param = {};
+            param.username = username;
+            uexEasemob.acceptInvitation(JSON.stringify(param));
+            disableBtn(username);
+            removeRecord(username);
+        }
+
+        function refuse(username) {
+            var param = {};
+            param.username = username;
+            param.reason = "";
+            uexEasemob.refuseInvitation(JSON.stringify(param));
+            disableBtn(username);
+            removeRecord(username);
+        }
+
+        function groupAccept(groupId, applyer) {
+            var memberArr = new Array();
+            memberArr.push(applyer);
+            var param = {
+                groupId : groupId,
+                newmembers : memberArr, //群聊新成员，List<String> Json格式
+                inviteMessage : ''// 新增参数 邀请信息
+            };
+            alert(JSON.stringify(param));
+            uexEasemob.addUsersToGroup(JSON.stringify(param));
+            groupDisableBtn(applyer, groupId);
+            groupRemoveRecord(applyer, groupId);
+        }
+
+        function groupRefuse(groupId, applyer) {
+            groupDisableBtn(applyer, groupId);
+            groupRemoveRecord(applyer, groupId);
+        }
+
+        function disableBtn(username) {
+            $("#btn-accept-" + username).addClass('hidden');
+            $("#btn-refuse-" + username).addClass('hidden');
+        }
+
+        function groupDisableBtn(applyer, groupId) {
+            alert("groupDisableBtn1");
+            $("#btn-group-accept-" + applyer + "-" + groupId).addClass('hidden');
+            $("#btn-group-refuse-" + applyer + "-" + groupId).addClass('hidden');
+            alert("groupDisableBtn2");
+        }
+
+        function groupRemoveRecord(applyer, groupId) {
+            var groupApplications = appcan.locStorage.getVal("groupApplications");
+            if (null == groupApplications) {
+                groupApplications = new Array();
+            }
+            groupApplications = JSON.parse(groupApplications);
+            var index = new Array();
+            for (var i = 0; i < groupApplications.length; i++) {
+                var json = JSON.parse(groupApplications[i]);
+                if (json.applyer == applyer && json.groupId == groupId) {
+                    index.push(i);
+                }
+            }
+            for (var j = index.length; j >= 0; j--) {
+                groupApplications.splice(j, 1);
+            }
+            appcan.locStorage.setVal("groupApplications", JSON.stringify(groupApplications));
+        }
+
+        function removeRecord(username) {
+            var friendsArr = appcan.locStorage.getVal("friendsNews");
+            friendsArr = JSON.parse(friendsArr);
+            var index = new Array();
+            for (var i = 0; i < friendsArr.length; i++) {
+                var json = JSON.parse(friendsArr[i]);
+                if (json.username == username) {
+                    index.push(i);
+                }
+            }
+            for (var j = index.length; j >= 0; j--) {
+                friendsArr.splice(j, 1);
+            }
+            appcan.locStorage.setVal("friendsNews", JSON.stringify(friendsArr));
+        }
+    </script>
+</html>

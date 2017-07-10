@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="search_content/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver" id="listview">
+
+        </div>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+        <script src="js/appcan.listview.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+            var data = appcan.locStorage.getVal("search");
+            var date = JSON.parse(data);
+            console.log(date.data[1].compId.compName);
+            var listData = [];  
+            for(var i=0;i<date.data.length;i++){
+                var list = {
+                   icon : date.data[i].compId.compLogoUrl,
+                   title : date.data[i].jobName,
+                   subTitle: date.data[i].compId.compName
+                }
+                listData.push(list);   
+            }
+             var lv1 = appcan.listview({
+                selector : "#listview",
+                type : "thinLine",
+                hasIcon : true,
+                hasAngle : true,
+                hasSubTitle : true,
+                multiLine : 1,
+                hasCheckbox : false,
+                align : 'right'
+            });
+            lv1.set(listData);
+            lv1.on("click",function(obj,data,subObj){
+                appcan.locStorage.setVal("id", data.id);
+                appcan.openWinWithUrl('index','index.html');
+            }) 
+        })
+       
+
+    </script>
+</html>

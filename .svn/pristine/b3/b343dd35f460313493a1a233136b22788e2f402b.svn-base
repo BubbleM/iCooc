@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="header" class="uh bc-text-head ub bc-head">
+            <h1 class="ut ub-f1 ulev-3 ut-s tx-c" id="title"></h1>
+        </div>
+        <div class="ub ub-ver" id="listview"></div>
+        <div id="list"></div>
+    </body>
+    <script src="js/appcan.js"></script>
+    <script src="js/appcan.control.js"></script>
+    <script src="js/appcan.listview.js"></script>
+    <script src="wgtRes/emojicons/emojson.js"></script>
+
+    <script>
+        var groupId = appcan.locStorage.getVal("inGroup");
+        var myId = appcan.locStorage.getVal("currUser");
+        var myName = myId;
+        var sendName = appcan.locStorage.getVal("groupName");
+        // 群聊
+
+        appcan.ready(function() {
+            appcan.initBounce();
+            $('#title').html(sendName + "(" + groupId + ")");
+            var param = {
+                "groupId" : groupId
+            };
+            uexEasemob.getGroup(JSON.stringify(param));
+
+            var jsonstr = '{"emojicons":"res://emojicons/emojicons.xml","shares":"res://shares/shares.xml","placeHold":"请输入内容","touchDownImg":"res://3.png","dragOutsideImg":"res://4.png","textColor":"#FFF","textSize":"15.5"}';
+            uexChatKeyboard.open(jsonstr);
+
+            uexWidgetOne.cbError = function(opid, type, data) {
+                alert(data);
+            }
+
+            uexChatKeyboard.onCommit = function(json) {
+                var str = eval('(' + json + ')');
+                str = str.emojiconsText;
+                addmychat(str, 1);
+                var sendParam = {};
+                sendParam.username = groupId;
+                sendParam.chatType = '1';
+                sendParam.content = str;
+                uexEasemob.sendText(JSON.stringify(sendParam));
+            }
+            uexChatKeyboard.onShareMenuItem = function(json) {
+                if (json == 0) {
+                    Cameraopen();
+                }
+                if (json == 1) {
+                    photoopen();
+                }
+                if (json == 2) {
+                    mapopen();
+                }
+                if (json == 3) {
+                    fileopen();
+                }
+            }
+            uexChatKeyboard.onVoiceAction = function(json) {
+                var str = eval("(" + json + ")");
+                if (str.status == 0) {
+                    ly();
+                }
+                if (str.status == 1) {
+                    stoply();
+                }
+                if (str.status == -1) {
+                    return;
+                }
+            }
+            // function newMessage(){
+            // var message=appcan.locStorage.getVal("receiveMsg");
+            // // //alert(message);
+            // sethtml(message);
+            // appcan.locStorage.remove('receiveMsg');
+            // }
+            // setInterval(newMessage,200);
+            newMessage();
+        });
+        var lv = appcan.listview({
+            selector : "#listview",
+            type : "thinLineTmp",
+            hasIcon : false,
+            hasAngle : false,
+            hasSubTitle : false
+        });
+        lv.set([{
+            title : "聊天记录"
+        }]);
+        lv.on('click', function(ele, obj, subobj) {
+            appcan.window.open({
+                name : 'chatHistory',
+                data : 'chatHistory.html'
+            });
+        });
+        function newMessage() {
+            var messages = appcan.locStorage.getVal("receivedMsg");
+            sethtml(messages);
+            //appcan.locStorage.remove('receivedMsg');
+        }
+
+        function sethtml(messages) {
+            var messages = eval('(' + messages + ')');
+            alert("sethtml:" + JSON.stringify(messages));
+            // alert("sethtml:" + messages.length + "groupId: " + groupId);
+            var arrIndex = new Array();
+            for ( i = 0; i < messages.length; i++) {
+                var json = messages[i];
+                json = JSON.parse(json);
+                if (groupId == json.to) {
+                    arrIndex.push(i);
+                    var html = "";
+                    html += "<div class='line'>";
+                    html += "<div class='receive-msg'>";
+                    html += "<img class='l-user' src='css/icons/icon-user-act.png' onclick='showUserInfo(" + groupId + ")'/>";
+                    html += "<p class='bc-text l-text ulev-3'>";
+                    if (json.messageType == 'text') {
+                        stremo = json.messageBody.text;
+                        var reg = /\[([^\]]+)\]/g;
+                        stremo = stremo.replace(reg, function($1) {
+                            return emoarr[$1] || $1;
+                        });
+                        html += stremo;
+                        html += "</p>";
+                        html += "</div>";
+                        html += "</div>";
+                        $('#list').append(html);
+                    }
+                    if (json.messageType == 'image') {
+                        html += "<img src='" + json.messageBody.thumbnailRemotePath + "' width='100%'/>";
+                        html += "</p>";
+                        html += "</div>";
+                        html += "</div>";
+                        $('#list').append(html);
+                    }
+                    if (json.messageType == 'audio') {
+                        html += "<span class='bc-text' onclick=playly('" + json.messageBody.remotePath + "');>&nbsp;&nbsp;[点击播放音频]</span>";
+                        html += "</p>";
+                        html += "</div>";
+                        html += "</div>";
+                        $('#list').append(html);
+                    }
+                    if (json.messageType == 'file') {
+                        var filepath = 0;
+                        var option = {
+                            maxtask : 3,
+                            url : json.messageBody.remotePath,
+                            progress : function(data, session) {
+                                var sdata = JSON.parse(JSON.stringify(data));
+                                var statu = sdata['status'];
+                                var percent = sdata['percent'];
+                                switch (statu) {
+                                case 0:
+                                    break;
+                                case 1:
+                                    alert("下载完成");
+                                    break;
+                                case 2:
+                                    alert("下载失败");
+                                    break;
+                                default:
+                                    break;
+                                }
+                            },
+                            success : function(path, session) {
+                                alert("path:" + path + ", \nsession:" + JSON.stringify(session));
+                                filepath = path;
+                                html += "<span class='bc-text' onclick=openfile('" + filepath + "');>" + json.messageBody.displayName + "</span>";
+                                html += "</p>";
+                                html += "</div>";
+                                html += "</div>";
+                                $('#list').append(html);
+                            },
+                            fail : function(session) {
+                                alert("session:" + JSON.stringify(session));
+                                alert("Download Fail");
+                            }
+                        };
+                        var cache = appcan.icache(option);
+                        cache.run(option);
+                    }
+                    if (json.messageType == 'location') {
+                        html += "<span class='bc-text' onclick=openmap('" + json.messageBody.latitude + "','" + json.messageBody.longitute + "');>&nbsp;&nbsp;[点击打开地图]</span>";
+                        html += "</p>";
+                        html += "</div>";
+                        html += "</div>";
+                        $('#list').append(html);
+                    }
+                }
+            }
+            for ( j = arrIndex.length; j >= 0; j--) {
+                messages.splice(arrIndex[j], 1);
+            }
+            appcan.locStorage.setVal("receivedMsg", JSON.stringify(messages));
+        }
+
+        function addmychat(str, typestr) {
+            var lat = appcan.getLocVal('lat');
+            var lon = appcan.getLocVal('lon');
+            var html = "";
+            html += "<div class='line'>";
+            html += "<div class='send-msg'>";
+            html += "<img class='r-user' src='css/icons/icon-user-act.png'/>";
+            html += "<p class='bc-text r-text ulev-3'>";
+            if (typestr == 1) {
+                stremo = str;
+                var reg = /\[([^\]]+)\]/g;
+                stremo = stremo.replace(reg, function($1) {
+                    return emoarr[$1] || $1;
+                });
+                html += stremo;
+            }
+            if (typestr == 2) {
+                html += "<img src='" + str + "' width='100%' />";
+            }
+            if (typestr == 3) {
+                html += "<span class='bc-text' onclick=playly('" + str + "');>&nbsp;&nbsp;[点击播放音频]</span>";
+            }
+            if (typestr == 4) {
+                html += "<span class='bc-text' onclick=openfile('" + str + "');>&nbsp;&nbsp;[文件]</span>";
+            }
+            if (typestr == 5) {
+                html += "<img src='css/icons/map.png' width='100%'/>";
+                html += "<span class='bc-text' onclick=openmap('" + lat + "','" + lon + "');>&nbsp;&nbsp;[点击打开地图]</span>";
+            }
+            html += "</p>";
+            html += "</div>";
+            html += "</div>";
+            $('#list').append(html);
+        }
+
+        function Cameraopen() {
+            uexCamera.cbOpen = function(opCode, dataType, data) {
+                //uexCamera.cbOpenInternal = function(opCode, dataType, data) {//仅android
+                sendpic(data);
+            }
+            uexCamera.open();
+            //uexCamera.openInternal();
+        }
+
+        function photoopen() {
+            uexImageBrowser.cbPick = function(opCode, dataType, data) {
+                sendpic(data);
+            }
+            uexImageBrowser.pick();
+        }
+
+        function sendpic(str) {
+            if (str == "") {
+                return;
+            }
+            imgurl = str;
+            addmychat(str, 2);
+            //发送的是图片
+            uexEasemob.sendPicture('{"username":"' + groupId + '","chatType":"1","filePath":"' + str + '","displayName":"mypic"}');
+        }
+
+        function mapopen() {
+            //var titHeight = $('#header').offset().height;
+            appcan.window.open({
+                name : "testLocation",
+                data : "testLocation.html"
+            })
+        }
+
+        function fileopen() {
+            uexFileMgr.cbExplorer = function(opCode, dataType, data) {
+                sendfile(data);
+            }
+            uexFileMgr.explorer('');
+        }
+
+        function sendfile(str) {
+            addmychat(str, 4);
+            //发送的是文件
+            uexEasemob.sendFile('{"username":"' + groupId + '","chatType":"1","filePath":"' + str + '","displayName":"myfile"}');
+        }
+
+        function openfile(str) {
+            alert("文件地址:" + str);
+            if (str) {
+                uexFileMgr.cbOpenFile = function(opCode, dataType, data) {
+                    if (data == 0) {
+                        alert("打开文件成功");
+                    } else {
+                        alert("打开文件失败");
+                    }
+                }
+                uexFileMgr.openFile(str, str, '1');
+            }
+        }
+
+        function ly() {
+            var t = Math.round(new Date().getTime());
+            //按时间做为文件名称
+            uexAudio.startBackgroundRecord(2, t);
+            //录音为mp3格式，需删除插件再请选择最新的插件。
+        }
+
+        function stoply() {
+            uexAudio.cbBackgroundRecord = function(opCode, dataType, data) {
+                alert("cbBackgroundRecord:" + data);
+                postly(data);
+            }
+            uexAudio.stopBackgroundRecord();
+        }
+
+        function postly(str) {
+            addmychat(str, 3);
+            //播放音频
+            var sendParam = {};
+            sendParam.username = groupId;
+            sendParam.chatType = '1';
+            sendParam.filePath = str;
+            sendParam.length = '60';
+            sendParam.displayName = "voiceMsg";
+            uexEasemob.sendVoice(JSON.stringify(sendParam));
+        }
+
+        function playly(str) {
+            if (str) {
+                uexAudio.open(str);
+                uexAudio.play('1');
+                isplay = true;
+            }
+        }
+
+        function showUserInfo(type) {
+            if (groupId == type) {
+                appcan.locStorage.setVal("userInfo") = 1;
+            } else {
+                appcan.locStorage.setVal("userInfo") = 0;
+            }
+            appcan.window.open({
+                name : 'friendInfo',
+                data : 'friend_info.html'
+            });
+        }
+
+        function openmap(latitude, longitude) {
+            alert("openmap: " + latitude + "+" + longitude);
+            appcan.setLocVal("lat", latitude);
+            appcan.setLocVal("lon", longitude);
+            appcan.window.open({
+                name : "testShowMap",
+                data : "testShowMap.html"
+            })
+        }
+    </script>
+</html>

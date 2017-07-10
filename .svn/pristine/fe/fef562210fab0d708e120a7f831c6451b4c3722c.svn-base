@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="indexCon_0/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        
+        <div class="ub ub-ver">
+            <div id="slider" class="slider">
+                <!--<div id="" style="position: absolute;z-index: 1;background-color: #FFFFFF;margin: 10px 20%;width: 60%;height: 35px;">
+                    <input type="text" name="" id="" placeholder="搜索职位/公司" style="padding: 5px;text-align: center;width: 90%;margin:3px 5px;color: #636363;"/>
+                </div>-->
+            </div>
+            <div class="ub uinn-busCon ub-ac c-gra1">
+                <div class="ub-f1 ulev-4 t-gra5 ut-s">
+                    当前：海淀区同辉寺大街
+                </div>
+                <div class="refresh ub-img umh1 umw1"></div>
+            </div>
+            
+             <a href="test.html">测试通道</a>
+            
+            <div class="ub ub-ver" id="jobList">
+
+            </div>
+           
+        </div>
+
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+        <script src="js/appcan.listview.js"></script>
+   <script src="js/appcan.slider.js"></script>
+ </body>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+            jobList();
+        })
+        function jobList() {
+            var arrData = [{
+                "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+                "postName" : "WEB前端开发",
+                "firmName" : "智一信息",
+                "date" : "2016年08月19日",
+                "info" : "西安｜高新路｜实习｜大四",
+                "address" : "上市公司 |13-26k|移动互联网",
+            },{
+                "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+                "postName" : "WEB前端开发",
+                "firmName" : "智一信息",
+                "date" : "2016年08月19日",
+                "info" : "西安｜高新路｜实习｜大四",
+                "address" : "上市公司 |13-26k|移动互联网",
+            },{
+                "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+                "postName" : "WEB前端开发",
+                "firmName" : "智一信息",
+                "date" : "2016年08月19日",
+                "info" : "西安｜高新路｜实习｜大四",
+                "address" : "上市公司 |13-26k|移动互联网",
+            },{
+                "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+                "postName" : "WEB前端开发",
+                "firmName" : "智一信息",
+                "date" : "2016年08月19日",
+                "info" : "西安｜高新路｜实习｜大四",
+                "address" : "上市公司 |13-26k|移动互联网",
+            },{
+                "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+                "postName" : "WEB前端开发",
+                "firmName" : "智一信息",
+                "date" : "2016年08月19日",
+                "info" : "西安｜高新路｜实习｜大四",
+                "address" : "上市公司 |13-26k|移动互联网",
+            },{
+                "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+                "postName" : "WEB前端开发",
+                "firmName" : "智一信息",
+                "date" : "2016年08月19日",
+                "info" : "西安｜高新路｜实习｜大四",
+                "address" : "上市公司 |13-26k|移动互联网",
+            },{
+                "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+                "postName" : "WEB前端开发",
+                "firmName" : "智一信息",
+                "date" : "2016年08月19日",
+                "info" : "西安｜高新路｜实习｜大四",
+                "address" : "上市公司 |13-26k|移动互联网",
+            },{
+                "icon" : "indexCon_0/css/img/icon02_50x50_@2x.png",
+                "postName" : "WEB前端开发",
+                "firmName" : "智一信息",
+                "date" : "2016年08月19日",
+                "info" : "西安｜高新路｜实习｜大四",
+                "address" : "上市公司 |13-26k|移动互联网",
+            },];
+            var listData = [];
+            for (var i = 0,
+                len = arrData.length; i < len; i++) {
+                var list = {
+                    title : '<div class="ub ub-ac"> <div class="ub ub-ac uinn">' + arrData[i].postName + '</div></div>',
+                    icon : arrData[i].icon,
+                    describe : '<div class="ub ub-ac"><div class=" ub-ac uba uc-a1 b-gre1 c-gre1 uinn-a14 ulev-2 t-gre2" style="margin-top:-10px;margin-left:5px;">'+ arrData[i].firmName +'</div></div>',
+                    subDescribe : arrData[i].date,
+                    note : arrData[i].info + '</br>'+ arrData[i].address,
+                }
+                listData.push(list);
+            }
+            var lv1 = appcan.listview({
+                selector : "#jobList",
+                type : "thickLine",
+                hasIcon : true,
+                hasAngle : false,
+                hasSubTitle : true,
+                multiLine : 1,
+                hasCheckbox : false,
+                align : 'left'
+            });
+            lv1.set(listData);
+        }
+
+   var slider = appcan.slider({
+  selector : '#slider',
+  aspectRatio:6/16,
+  hasLabel:true,
+  index:0
+});
+slider.set([{
+    img : "indexCon_0/css/img/ad_image_01_639x338_@2x.png",
+    label:""
+}, {
+    img : "indexCon_0/css/img/ad_image_02_637x317_@2x.png",
+    label:""
+}, {
+    img : "indexCon_0/css/img/ad_image_03_637x316_@2x.png",
+    label:""
+}])
+slider.on("clickItem",function(index,data){
+})
+        appcan.button("#jobList", "ani-act", function() {
+            appcan.openWinWithUrl('position_details','position_details.html');
+        });
+ </script>
+</html>

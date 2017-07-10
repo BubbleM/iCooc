@@ -1,0 +1,97 @@
+.uh-per1{
+	height:9.375em;
+}
+.uwh-per2{
+	height:2.875em;
+	width:2.875em;
+}
+.uwh-per3{
+	height:2.25em;
+	width:2.25em;
+}
+.banImg{
+	/*background-image:url('myImg/code.png');*/
+	
+	height: 250px;
+}
+.perImg2{
+	background-image:url('myImg/banImg2.png');
+}
+.userImg{
+	background-image:url('myImg/user1.png');
+}
+.userImg2{
+	background-image:url('myImg/user2.png');
+}
+.umar-per1{
+	margin:0.125em;
+}
+.umar-per2{
+	margin:-0.625em 0.625em 0.5625em 0;
+}
+.umar-b-per3{
+	margin-bottom:-0.5em;
+}
+.t-gra-per{
+	color:#8b8b8b;
+}
+
+.b-gra-per1{
+	border-color:#d1d1d1;
+}
+.uinn-per1{
+	padding:0.40625em 0 0.5em 0;
+}
+.triangle2 {
+	width: 0px;
+	border-top: 0.46875em solid #a0a0a0;
+	border-right: 0.46875em solid #f1f1f1;
+	border-bottom: 0;
+	border-left: 0.46875em solid #f1f1f1;
+}
+.c-gra-per1{
+	background-color:#a0a0a0;
+}
+.uinn-a7{
+    padding:0 0.625em;
+}
+.uinn-a1{
+    padding:0.625em;
+}
+.mar-ar1{
+    margin-right:0.625em;
+}
+.umar-at1{
+    margin-top:0.625em;
+}
+.c-wh{
+    background-color: white;
+}
+.ulev-app2{
+    font-size:0.9375em;
+}
+.ufm1{
+    font-family:Arial;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

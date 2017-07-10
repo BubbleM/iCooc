@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="addLink_content/css/main.css">
+        <style type="text/css">
+            body{
+                font-size: 30px;
+            }
+        </style>
+        <script type="text/javascript">
+            function ftn1 () {
+              uexCamera.open();
+            }
+        </script>
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver bc-text">
+            <div class="ub ub-ver">
+                <div class="ub-img1 ub-fh uh-per1 banImg">
+                    <div class="text-center" style="padding-top:5%; margin:auto; text-align: center; width:300px;height:200px;top:0;left: 0;color: #F6F6F6;font-family: sans-serif;font-weight:bolder;  font-size: 15px;">
+                    <ul class="text-center" style="list-style-type: none;text-align:center;">
+                        <li class="text-center" onclick="ftn1()"><img src="indexCon_0/css/img/icon02_50x50_@2x.png" style="border-radius: 50px;width: 100px;height: 100px;"></li>
+                        <li>Nichole</li>
+                        <li>女&nbsp;&nbsp;Web开发</li>
+                        <li>西安邮电大学&nbsp;&nbsp;电子商务安全与技术</li>
+                        <li>Just do it!</li>
+                    </ul>
+                </div>
+            </div>
+      
+            <h3 style="font-size: 35px;">&nbsp;&nbsp;TA所在的公司</h3>
+           <div class="" style="height: 100px;">
+                 <div class="col-xs-3" style="height: 100px;">
+                    <a href="#">
+                         <img src="indexCon_0/css/img/icon02_50x50_@2x.png" style="border-radius: 100px"> 
+                    </a>
+                </div>
+                <div class="col-xs-9" style="height:100px;">
+                    <ul>
+                        <li>
+                           <h3 href="#" class="company_details">腰果音乐</h3> 
+                        </li>
+                        <li>
+                           <span>天使融资&nbsp;|&nbsp;500以上&nbsp;|&nbsp;文化娱乐</span>
+                        </li>
+                    </ul>
+                </div>
+                <!--<span class="glyphicon glyphicon glyphicon-chevron-right"></span>-->
+            </div>
+            <br />
+            <h3 style="font-size: 35px;">&nbsp;&nbsp;TA发布的职位(10个)</h3>
+              <div>
+                <div class="position row" id="row_height">
+                    <div class="col-xs-3" id="row_height">
+                        <img src="indexCon_0/css/img/icon02_50x50_@2x.png">
+                    </div>
+                    <div class="col-xs-9" id="row_height">
+                         <ul>
+                            <li>
+                                <a href="#" class="position" style="float: left;">WEB前端开发</a>
+                                <a href="#" class="position" style="float:right;">2016年08月19日&nbsp;&nbsp;&nbsp;</a>
+                            </li><br />
+                            <li>
+                                <a href="#" class="company_details" style="float: left;">腾讯</a>
+                           
+                            </li><br>
+                            <li>
+                                <span>深圳&nbsp;&nbsp;经验1-3年&nbsp;&nbsp;本科</span>
+                            </li>
+                            <li>
+                                <span>上市公司&nbsp;|&nbsp;13k-26k&nbsp;|&nbsp;移动互联网</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <div class="row position" id="row_height">
+                    <div class="col-xs-3" id="row_height">
+                        <img src="indexCon_0/css/img/icon02_50x50_@2x.png">
+                    </div>
+                    <div class="col-xs-9" id="row_height">
+                         <ul>
+                            <li>
+                                <a href="#" class="position" style="float: left;">IOS开发</a>
+                                <a href="#" class="position" style="float:right;">2016年08月19日&nbsp;&nbsp;&nbsp;</a>
+                            </li><br />
+                            <li>
+                                <a href="#" class="company_details" style="float: left;">腰果音乐</a>
+                           
+                            </li><br>
+                            <li>
+                                <span>西安&nbsp;&nbsp;高新路&nbsp;&nbsp;实习&nbsp;&nbsp;大四</span>
+                            </li>
+                            <li>
+                                <span>天使融资&nbsp;|&nbsp;500以上&nbsp;|&nbsp;文化娱乐</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                 <hr>
+                <div class="row position" id="row_height">
+                    <div class="col-xs-3" id="row_height">
+                        <img src="indexCon_0/css/img/icon02_50x50_@2x.png">
+                    </div>
+                    <div class="col-xs-9" id="row_height">
+                         <ul>
+                            <li>
+                                <a href="#" class="position" style="float: left;">PHP技术经理</a>
+                                <a href="#" class="position" style="float:right;">2016年08月19日&nbsp;&nbsp;&nbsp;</a>
+                            </li><br />
+                            <li>
+                                <a href="#" class="company_details" style="float: left;">智一信息</a>
+                           
+                            </li><br>
+                            <li>
+                                <span>杭州&nbsp;&nbsp;经验5-10年&nbsp;&nbsp;本科</span>
+                            </li>
+                            <li>
+                                <span>数据服务&nbsp;|&nbsp;7k-12k&nbsp;|&nbsp;文化娱乐</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                 <hr>
+                <div class="row position" id="row_height">
+                    <div class="col-xs-3" id="row_height">
+                        <img src="indexCon_0/css/img/icon02_50x50_@2x.png">
+                    </div>
+                    <div class="col-xs-9" id="row_height">
+                         <ul>
+                            <li>
+                                <a href="#" class="position" style="float: left;">IOS开发</a>
+                                <a href="#" class="position" style="float:right;">2016年08月19日&nbsp;&nbsp;&nbsp;</a>
+                            </li><br />
+                            <li>
+                                <a href="#" class="company_details" style="float: left;">腰果音乐</a>
+                           
+                            </li><br>
+                            <li>
+                                <span>西安&nbsp;&nbsp;高新路&nbsp;&nbsp;实习&nbsp;&nbsp;大四</span>
+                            </li>
+                            <li>
+                                <span>天使融资&nbsp;|&nbsp;500以上&nbsp;|&nbsp;移动互联网</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+              </div>
+    </body>
+    <script src="js/appcan.js"></script>
+    <script src="js/appcan.control.js"></script>
+    </body>
+    <script>
+       
+        appcan.ready(function() {
+        appcan.initBounce();
+        comImg();
+    })
+appcan.button(".position","sni-act",function(){
+    appcan.window.open({
+        name:"position",
+        data:"position_details.html",
+        aniId:10
+    })
+})
+appcan.button(".company_details","sni-act",function(){
+    appcan.window.open({
+        name:"company_details",
+        data:"company_details.html",
+        aniId:10
+    })
+})
+    </script>
+</html>

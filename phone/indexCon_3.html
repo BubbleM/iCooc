@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="my_content/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver">
+           <div id="slider" class="slider">
+              <div id="inner">
+                   <!--<img src="position_details_content/css/myImg/icon01_50x50_@2x.png"/>-->
+                <ul class="text-center" style="list-style-type: none;text-align:center;margin-top: 3.5em;">
+                   <li class="text-center" onclick="ftn1()"><img id="img_post" src="" style="border-radius: 50px;width: 100px;height: 100px;"></li>
+                   <li id="postName" style="color:#FFFFFF;"></li>
+                </ul>
+                
+              </div>
+               
+           </div>   
+            <div class=" umar-at1">
+                <div id="listview1"  class="ubt bc-border c-wh">
+
+                </div>
+                <div id="listview2"  class="ubt bc-border ubb c-wh umar-at1 uinn-a7">
+
+                </div>
+
+            </div>
+            <div id="listview3"  class="ubt ubb bc-border c-wh umar-at1 uinn-a7">
+
+            </div>
+            <div  id="listview4"  class="ubt ubb bc-border c-wh umar-at1 uinn-a7">
+
+            </div>
+        </div>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+        <script src="js/appcan.listview.js"></script>
+   <script src="js/appcan.slider.js"></script>
+ </body>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+            var userId = appcan.locStorage.getVal("userId");
+           //var userId = "e78f5af9-3631-4cca-8ab1-1095fe3edbaa";
+           console.log(userId);
+            appcan.ajax({
+                url:'http://39.108.2.139/online/user/getMyInfo.do',
+                type:'GET',
+                data:{
+                   userId:userId
+                },
+              // contentType : 'application/json',
+               dataType:'json',
+               success:function(data){
+                    //alert("请求成功！");
+                    console.log(JSON.stringify(data));
+                    var jsonText = JSON.stringify(data);
+                    var contact = JSON.parse(jsonText);
+                    appcan.locStorage.setVal("userData", contact.data);
+                    //console.log(jsonText);
+                    //console.log(contact.data.phone);
+                    document.getElementById("img_post").src = contact.data.icon;
+                    document.getElementById("postName").innerText = contact.data.phone;
+                },
+                error:function(e){
+                    alert("请求失败！");
+                    alert(e);
+                }
+            });
+           
+           
+           
+        })
+       /* var lv1 = appcan.listview({
+            selector : "#listview1",
+            type : "thickLine",
+            hasIcon : true,
+            hasAngle : false,
+            hasSubTitle : false,
+            multiLine : 1
+        });
+        lv1.set([{
+            icon : 'indexCon_0/css/img/13718088,2560,1600.jpg_unsliced.png',
+            title : '',
+            describe : ''
+        }]);*/
+        var lv2 = appcan.listview({
+            selector : "#listview2",
+            type : "thinLine",
+            hasIcon : true,
+            hasAngle : true,
+            hasSubTitle : true,
+            multiLine : 1
+        });
+        lv2.set([{
+            icon : 'my_content/css/myImg/myImg1.png',
+            title : '我的资料',
+            subTitle : '',
+            url:'my.html'
+        }, {
+            icon : 'my_content/css/myImg/myImg2.png',
+            title : '我的收藏',
+            subTitle : '',
+            url:''
+        }, {
+            icon : 'my_content/css/myImg/myImg3.png',
+            title : '我的简历',
+            subTitle : '',
+            url:'resume.html'
+        }]);
+        lv2.on("click",function(obj,data,subObj){
+            appcan.openWinWithUrl('url',data.url);
+        })
+        var lv3 = appcan.listview({
+            selector : "#listview3",
+            type : "thinLine",
+            hasIcon : true,
+            hasAngle : true,
+            multiLine : 1
+        });
+        lv3.set([{
+            icon : 'my_content/css/myImg/myImg4.png',
+            title : '消息通知',
+            url:''
+        },{
+            icon : 'my_content/css/myImg/myImg5.png',
+            title : '意见反馈',
+            url:'suggestion.html'
+        }]);
+        lv3.on("click",function(obj,data,subObj){
+            appcan.openWinWithUrl('url',data.url);
+        })
+        var lv4 = appcan.listview({
+            selector : "#listview4",
+            type : "thinLine",
+            hasIcon : true,
+            hasAngle : true,
+            multiLine : 1
+        });
+        lv4.set([{
+            icon : 'my_content/css/myImg/myImg6.png',
+            title : '设置'
+        }]);
+        var slider = appcan.slider({
+            selector : '#slider',
+            aspectRatio:10/16,
+            hasLabel:true,
+            index:0
+        });
+        lv4.on("click",function(obj,data,subObj){
+           appcan.openWinWithUrl('setApp',"setApp.html");
+        })
+        slider.set([{
+          img : "indexCon_0/css/img/13718088,2560,1600.jpg_unsliced.png",/*大背景*/
+          label:""
+        }])
+        slider.on("clickItem",function(index,data){
+        })
+ </script>
+</html>

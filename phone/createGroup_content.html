@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="createGroup_content/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver uinn-a1">
+            <div class="uba b-gra3 uc-a1 c-wh ub uinn-a7 ub-ac">
+                <div class="ulev-app1 umw4">
+                    群名称
+                </div>
+                <div class="ub ub-ac umh5 ub-f1">
+                    <div class="uinput ub ub-f1">
+                        <input placeholder="exampleName" type="text" class="ub-f1" id="groupName">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra3 uc-a1 c-wh ub uinn-a7 ub-ac umar-at1">
+                <div class="ulev-app1 umw4">
+                    最大用户数(<=2000)
+                </div>
+                <div class="ub ub-ac umh5 ub-f1">
+                    <div class="uinput ub ub-f1">
+                        <input placeholder="200" type="text" class="ub-f1" id="maxUserNum">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra3 uc-a1 c-wh ub uinn-a7 ub-ac umar-at1">
+                <div class="ulev-app1 umw4">
+                    欢迎语
+                </div>
+                <div class="ub ub-ac umh5 ub-f1">
+                    <div class="uinput ub ub-f1">
+                        <input placeholder="欢迎加入群聊" type="text" class="ub-f1" id="welcome">
+                    </div>
+                </div>
+            </div>
+            <div class="uba b-gra3 uc-a1 c-wh ub uinn-a7 ub-ac umar-at1">
+                <div class="ulev-app1 umw4">
+                    群简介
+                </div>
+                <div class="ub ub-ac umh5 ub-f1">
+                    <div class="uinput ub ub-f1">
+                        <input placeholder="输入群简介" type="text" class="ub-f1" id="groupDesc">
+                    </div>
+                </div>
+            </div>
+            <div class="ub ub-ver">
+                <div class="ub ub-pe uinn-a6 ulev-4">
+                    <input type="checkbox" name="" id="" value="" style="margin-right: 2px;margin-top:1.4px;" />
+                    <div class="sc-text">
+                        我同意
+                    </div>
+                    <div class="sc-text-active">
+                        用户服务协议
+                    </div>
+                </div>
+                <div class="uinn-at1">
+                    <div class="btn ub ub-ac bc-text-head ub-pc bc-btn"  id="submit">
+                        创建
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="js/appcan.js"></script>
+    <script src="js/appcan.control.js"></script>
+    <script src="js/appcan.listview.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            appcan.initBounce();
+        })
+        appcan.button("#submit", "ani-act", function() {
+            var param = {
+                groupName : $("#groupName").val(), //要创建的群聊的名称
+                desc : $("#groupDesc").val(), //群聊简介
+                allowInvite : true, //是否允许群成员邀请人进群
+                needApprovalRequired : true,
+                maxUsers : $("#maxUserNum").val(), //最大群聊用户数，可选参数，默认为200，最大为2000
+                initialWelcomeMessage : $("#welcome").val()//群组创建时发送给每个初始成员的欢迎信息（仅iOS需要）
+            }
+            uexEasemob.createPublicGroup(JSON.stringify(param));
+            alert("成功创建群聊"+param.groupName);
+        });
+    </script>
+</html>
