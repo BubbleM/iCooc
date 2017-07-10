@@ -1,249 +1,247 @@
 <!DOCTYPE html>
 <html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
-    <head>
-        <title></title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="css/ui-box.css">
-        <link rel="stylesheet" href="css/ui-base.css">
-        <link rel="stylesheet" href="css/ui-color.css">
-        <link rel="stylesheet" href="css/appcan.icon.css">
-        <link rel="stylesheet" href="css/appcan.control.css">
-    </head>
-    <body class="um-vp " ontouchstart>
-        <div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
-            <!--header开始-->
-            <div id="header" class="uh bc-text-head ub bc-head">
-                <div class="nav-btn" id="nav-left"></div>
-                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">登录</h1>
-                <div class="nav-btn nav-bt" id="nav-right"></div>
-            </div>
-            <!--header结束--><!--content开始-->
-            <div id="content" class="ub-f1 tx-l">
+<head>
+  <title>登陆</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="css/ui-box.css">
+  <link rel="stylesheet" href="css/ui-base.css">
+  <link rel="stylesheet" href="css/ui-color.css">
+  <link rel="stylesheet" href="css/appcan.icon.css">
+  <link rel="stylesheet" href="css/appcan.control.css">
+</head>
+<body class="um-vp " ontouchstart>
+  <div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
+    <!--header开始-->
+    <div id="header" class="uh bc-text-head ub bc-head">
+      <div class="nav-btn" id="nav-left"></div>
+      <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">登录</h1>
+      <div class="nav-btn nav-bt" id="nav-right"></div>
+    </div>
+    <!--header结束--><!--content开始-->
+    <div id="content" class="ub-f1 tx-l">
 
-            </div>
-            <!--content结束-->
+    </div>
+    <!--content结束-->
+  </div>
+  <script src="js/appcan.js"></script>
+  <script src="js/appcan.control.js"></script>  
+</body>
+<script>
+// appcan.locStorage.remove("friendsNews");
+  appcan.ready(function() {
+    appcan.initBounce()
+    var titHeight = $('#header').offset().height
+    appcan.frame.open('content', 'login_content.html', 0, titHeight)
+    window.onorientationchange = window.onresize = function() {
+      appcan.frame.resize('content', 0, titHeight)
+    }
+    var appKey = '1172170304115284#bubblem'
+    var isAutoLoginEnabled = '1'
+    cp('login.html')
+    uexEasemob.initEasemob('{"appKey":"' + appKey + '","isAutoLoginEnabled":"' + isAutoLoginEnabled + '"}')
+    uexEasemob.cbLogin = function(data) {
+      // alert("cbLogin:" + data);
+      data = JSON.parse(data)
+      if (data['result'] === 1) {
+        appcan.openWinWithUrl('index', 'index.html')
+        /* uexEasemob.getLoginInfo();*/ // IOS仅有的方法
+      } else {
+        alert(data.msg) // 登录失败;
+      }
+    }
+    uexEasemob.cbRegisterUser = function(data) {
+      // alert("cbRegisterUser:" + data);
+      data = JSON.parse(data)
+      if (data['result'] === 1) {
+        alert('注册成功!')
+        appcan.openWinWithUrl('login', 'login.html')
+      } else {
+        alert(data.msg) // 注册失败
+      }
+    }
+    uexEasemob.cbGetContactUserNames = function(data)　{
+      //　postToFront('cbGetContactUserNames :',data);
+      //　alert('cbGetContactUserNames开始输出啦');
+      //　alert("cbGetContactUserNames:" + data);
+      appcan.locStorage.setVal('friendsList',　data)
+     　// appcan.locStorage.setVal('friendsList',data); //new add
+    }
 
-        </div>
-        <script src="js/appcan.js"></script>
-        <script src="js/appcan.control.js"></script>
-        
-    </body>
-    <script>
-    //appcan.locStorage.remove("friendsNews");
-    appcan.ready(function(){
-        appcan.initBounce();
-        var titHeight = $('#header').offset().height;
-            appcan.frame.open("content", "login_content.html", 0, titHeight);
-            window.onorientationchange = window.onresize = function() {
-                appcan.frame.resize("content", 0, titHeight);
-            }
-        var appKey = "1172170304115284#bubblem";
-        var isAutoLoginEnabled = "1";
-        cp('login.html');
-        uexEasemob.initEasemob('{"appKey":"' + appKey + '","isAutoLoginEnabled":"' + isAutoLoginEnabled + '"}');
-        uexEasemob.cbLogin = function(data) {
-            //alert("cbLogin:" + data);
-            data = JSON.parse(data);
-            if (data['result'] == 1) {
-                appcan.openWinWithUrl('index', 'index.html');
-               /* uexEasemob.getLoginInfo();*/ //IOS仅有的方法
-            }else{
-               // alert('username or password error!');// 登录失败;
-               alert(data.msg);
-            }
+    /*uexEasemob.cbGetContactUserNames = function(data) {
+      //　postToFront('cbGetContactUserNames:', data);
+      alert("cbGetContactUserNames:" + data)
+      window.localStorage.friendsList = data 
+      uexWindow.evaluatePopoverScript('indexCon_1', 'content', 'showFriendsList()')
+      }
+   　uexEasemob.cbGetLoginInfo = function(data) {
+      alert("cbGetLoginInfo:" + data)
+      data = JSON.parse(data)
+      appcan.locStorage.setVal('currUser', data['userInfo']['username']);
+    }*/
+    uexEasemob.cbGetChatterInfo = function(data) {
+        // alert('cbGetChatterInfo:'+data);
+        // appcan.locStorage.setVal('chatinfo',data);
+    }
+    uexEasemob.cbGetRecentChatters = function(data) {
+      // postToFront('cbGetRecentChatters:',data);
+      // alert('cbGetRecentChatters:'+data);
+      appcan.locStorage.setVal('chatinfo', data)
+    }      
+    uexEasemob.cbGetMessageHistory = function(data) {
+        alert('cbGetMessageHistory:' + data)
+        data = JSON.parse(data)
+        appcan.locStorage.setVal('historyMsg' + data['messages'])
+    }
+    uexEasemob.onNewMessage = function(data) {
+      alert('onNewMessage:' + data)
+      if (!appcan.locStorage.getVal('receivedMsg')) {
+        var msgArray = new Array()
+        msgArray.push(data)
+        // alert(JSON.stringify(msgArray));
+          appcan.locStorage.setVal('receivedMsg', JSON.stringify(msgArray))
+      } else {
+        var msgArray = JSON.parse(appcan.locStorage.getVal('receivedMsg'))
+        msgArray.push(data)
+        // alert(JSON.stringify(msgArray));
+        appcan.locStorage.setVal('receivedMsg', JSON.stringify(msgArray))
+      }
+      // alert("onNewMessage:" + appcan.locStorage.getVal("receivedMsg"));
+      // uexWindow.evaluatePopoverScript("testChat", "content", "newMessage()");
+    }
+    uexEasemob.onMessageSent = function(data) {
+      alert('onMessageSent:' + data)
+    }
+    uexEasemob.cbGetConversationByName = function(data) {
+      var chatType = appcan.locStorage.getVal('chatType')
+      alert('cbGetConversationByName:' + data)
+      appcan.locStorage.setVal('conversations', data)
+      if (chatType === '0') {
+        uexWindow.evaluatePopoverScript('chatHistory', 'content', 'historyhtml_0()')
+      } else if (chatType === '1') {
+        uexWindow.evaluatePopoverScript('chatHistory', 'content', 'historyhtml_1()')
+      }
+    }
+    uexEasemob.onContactInvited = function(data) {
+      alert('onContactInvited:' + data)
+      if (!appcan.locStorage.getVal('friendsNews')) {
+        var msgArray = new Array()
+        msgArray.push(data)
+        // alert(JSON.stringify(msgArray));
+        appcan.locStorage.setVal('friendsNews', JSON.stringify(msgArray))
+      }else {
+        var msgArray = JSON.parse(appcan.locStorage.getVal('friendsNews'))
+        var flag = true
+        for (var i = 0; i < msgArray.length; i++) {
+          var ele = JSON.parse(msgArray[i])
+          var d = JSON.parse(data)
+          if (ele.username === data.username && ele.reason === data.reason) {
+            flag = false
+            break
+          }
         }
-        uexEasemob.cbRegisterUser = function(data){
-            //alert("cbRegisterUser:" + data);
-            data = JSON.parse(data);
-            if(data['result']==1){
-                 alert("注册成功!");
-                 appcan.openWinWithUrl('login','login.html');
-            }else{
-                alert(data.msg);//注册失败
-            }
+        if (flag) {
+          msgArray.push(data)
         }
-        
-        
-        uexEasemob.cbGetContactUserNames = function(data){
-            //postToFront('cbGetContactUserNames :',data);
-            //alert('cbGetContactUserNames开始输出啦');
-            //alert("cbGetContactUserNames:" + data);
-            appcan.locStorage.setVal('friendsList',data);
-           // appcan.locStorage.setVal('friendsList',data); //new add
+        // alert(JSON.stringify(msgArray));
+        appcan.locStorage.setVal('friendsNews', JSON.stringify(msgArray))
+      }
+      // alert(appcan.locStorage.getVal("friendsNews"));
+    }
+    uexEasemob.onContactAgreed = function(data) {
+      alert('onContactAgreed:' + data)
+    }
+    uexEasemob.onContactRefused = function(data) {
+      alert('onContactRefused:' + data)
+    }
+    uexEasemob.onGroupCreated = function(data) {
+      alert('onGroupCreated:' + data)
+    }
+    uexEasemob.cbgetGroupsFromServer = function(data) {
+      // alert('cbGetGroupsFromServer开始输出啦');
+      // alert("cbGetGroupsFromServer:" + data);
+      // data = JSON.parse(data);
+      if (data['result'] === 0) {
+        appcan.locStorage.setVal('groupsList', data['grouplist'])
+        // uexWindow.evaluatePopoverScript("indexCon_1", "content", "showGroupsList()");
+      } else {
+        // 获取群组失败
+        alert('获取群组失败!')
+        // alert("cbGetGroupsFromServer error: " + data);
+      }
+    }
+    // 群聊邀请被拒绝
+    uexEasemob.onInvitationDeclined = function(data) {
+      alert('onInvitationDeclined:' + data)
+    }
+    // 当前用户被管理员移除出群聊
+    uexEasemob.onUserRemoved = function(data) {
+      alert('onUserRemoved:' + data)
+    }
+    // 群聊被创建者解散
+    uexEasemob.onGroupDestroy = function(data) {
+      alert('onGroupDestroy:' + data)
+    }
+    //用户申请加入群聊，收到加群申请
+    uexEasemob.onApplicationReceived = function(data) {
+      alert('onApplicationReceived:' + data)
+      if (!appcan.locStorage.getVal('groupApplications')) {
+        var msgArray = new Array()
+        msgArray.push(data)
+        // alert(JSON.stringify(msgArray));
+        appcan.locStorage.setVal('groupApplications', JSON.stringify(msgArray))
+        } else {
+          var msgArray = JSON.parse(appcan.locStorage.getVal('groupApplications'))
+          var flag = true
+          for (var i = 0; i < msgArray.length; i++) {
+            var ele = JSON.parse(msgArray[i])
+            var d = JSON.parse(data)
+            if (ele.groupId === data.groupId && ele.applyer === data.applyer && ele.reason === data.reason) {
+              flag = false
+              break
+            }
+          }
+          if (flag) {
+            msgArray.push(data)
+          }
+          // alert(JSON.stringify(msgArray));
+          appcan.locStorage.setVal('groupApplications', JSON.stringify(msgArray))
         }
-        
-     /*   uexEasemob.cbGetContactUserNames = function(data) {
-            //postToFront('cbGetContactUserNames:', data);
-            alert("cbGetContactUserNames:" + data);
-            window.localStorage.friendsList = data; 
-            uexWindow.evaluatePopoverScript("indexCon_1", "content", "showFriendsList()");
-            }*/
-           /*uexEasemob.cbGetLoginInfo = function(data) {
-                alert("cbGetLoginInfo:" + data);
-                data = JSON.parse(data);
-                appcan.locStorage.setVal("currUser", data['userInfo']['username']);
-            }*/
-            uexEasemob.cbGetChatterInfo= function(data){
-                //alert('cbGetChatterInfo:'+data);
-                //appcan.locStorage.setVal('chatinfo',data);
-            }
-            uexEasemob.cbGetRecentChatters=function(data){
-               // postToFront('cbGetRecentChatters:',data);
-               //alert('cbGetRecentChatters:'+data);
-               appcan.locStorage.setVal('chatinfo',data);
-            }
-           
-            uexEasemob.cbGetMessageHistory = function(data) {
-                alert("cbGetMessageHistory:" + data);
-                data = JSON.parse(data);
-                appcan.locStorage.setVal("historyMsg" + data['messages']);
-            }
-            uexEasemob.onNewMessage = function(data) {
-                alert("onNewMessage:" + data);
-                if (!appcan.locStorage.getVal("receivedMsg")) {
-                    var msgArray = new Array();
-                    msgArray.push(data);
-                    //alert(JSON.stringify(msgArray));
-                    appcan.locStorage.setVal("receivedMsg", JSON.stringify(msgArray));
-                } else {
-                    var msgArray = JSON.parse(appcan.locStorage.getVal("receivedMsg"));
-                    msgArray.push(data);
-                    //alert(JSON.stringify(msgArray));
-                    appcan.locStorage.setVal("receivedMsg", JSON.stringify(msgArray));
-                }
-                // alert("onNewMessage:" + appcan.locStorage.getVal("receivedMsg"));
-                //uexWindow.evaluatePopoverScript("testChat", "content", "newMessage()");
-            }
-            uexEasemob.onMessageSent = function(data) {
-                alert("onMessageSent:" + data);
-            }
-            uexEasemob.cbGetConversationByName = function(data) {
-                var chatType = appcan.locStorage.getVal("chatType");
-                alert("cbGetConversationByName:" + data);
-                appcan.locStorage.setVal("conversations", data);
-                if (chatType == '0') {
-                    uexWindow.evaluatePopoverScript("chatHistory", "content", "historyhtml_0()");
-                } else if (chatType == '1') {
-                    uexWindow.evaluatePopoverScript("chatHistory", "content", "historyhtml_1()");
-                }
-            }
-            uexEasemob.onContactInvited = function(data) {
-                alert("onContactInvited:" + data);
-                if (!appcan.locStorage.getVal("friendsNews")) {
-                    var msgArray = new Array();
-                    msgArray.push(data);
-                    //alert(JSON.stringify(msgArray));
-                    appcan.locStorage.setVal("friendsNews", JSON.stringify(msgArray));
-                } else {
-                    var msgArray = JSON.parse(appcan.locStorage.getVal("friendsNews"));
-                    var flag = true;
-                    for (var i = 0; i < msgArray.length; i++) {
-                        var ele = JSON.parse(msgArray[i]);
-                        var d = JSON.parse(data);
-                        if (ele.username == data.username && ele.reason == data.reason) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    if (flag) {
-                        msgArray.push(data);
-                    }
-                    //alert(JSON.stringify(msgArray));
-                    appcan.locStorage.setVal("friendsNews", JSON.stringify(msgArray));
-                }
-                //alert(appcan.locStorage.getVal("friendsNews"));
-            }
-            uexEasemob.onContactAgreed = function(data) {
-                alert("onContactAgreed:" + data);
-            }
-            uexEasemob.onContactRefused = function(data) {
-                alert("onContactRefused:" + data);
-            }
-            uexEasemob.onGroupCreated = function(data) {
-                alert("onGroupCreated:" + data);
-            }
-            uexEasemob.cbgetGroupsFromServer = function(data) {
-               // alert('cbGetGroupsFromServer开始输出啦');
-                //alert("cbGetGroupsFromServer:" + data);
-               // data = JSON.parse(data);
-                if (data['result'] == 0) {
-                    appcan.locStorage.setVal("groupsList", data['grouplist']);
-                   // uexWindow.evaluatePopoverScript("indexCon_1", "content", "showGroupsList()");
-                } else {
-                    // 获取群组失败
-                    alert('获取群组失败!');
-                    //alert("cbGetGroupsFromServer error: " + data);
-                }
-            }
-            uexEasemob.onInvitationDeclined = function(data) {
-                alert("onInvitationDeclined:" + data);
-            }//群聊邀请被拒绝
-            uexEasemob.onUserRemoved = function(data) {
-                alert("onUserRemoved:" + data);
-            }//当前用户被管理员移除出群聊
-            uexEasemob.onGroupDestroy = function(data) {
-                alert("onGroupDestroy:" + data);
-            }//群聊被创建者解散
-            uexEasemob.onApplicationReceived = function(data) {
-                alert("onApplicationReceived:" + data);
-                if (!appcan.locStorage.getVal("groupApplications")) {
-                    var msgArray = new Array();
-                    msgArray.push(data);
-                    //alert(JSON.stringify(msgArray));
-                    appcan.locStorage.setVal("groupApplications", JSON.stringify(msgArray));
-                } else {
-                    var msgArray = JSON.parse(appcan.locStorage.getVal("groupApplications"));
-                    var flag = true;
-                    for (var i = 0; i < msgArray.length; i++) {
-                        var ele = JSON.parse(msgArray[i]);
-                        var d = JSON.parse(data);
-                        if (ele.groupId == data.groupId && ele.applyer == data.applyer && ele.reason == data.reason) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    if (flag) {
-                        msgArray.push(data);
-                    }
-                    //alert(JSON.stringify(msgArray));
-                    appcan.locStorage.setVal("groupApplications", JSON.stringify(msgArray));
-                }
-            }//用户申请加入群聊，收到加群申请
-            uexEasemob.onApplicationAccept = function(data) {
-                alert("onApplicationAccept:" + data);
-            }// // 加群申请被同意
-            uexEasemob.onApplicationDeclined = function(data) {
-                alert("onApplicationDeclined:" + data);
-            }//加群申请被拒绝
-            uexEasemob.cbGetGroup = function(data) {
-                alert("cbGetGroup:" + data);
-                appcan.locStorage.setVal("groupInfo", data);
-            }
-    });
-    var cPage = "1";
-        cp = function(name) {
-            cPage = name;
-        }
-        postToFront = function(name, data) {
-            window.localStorage.fName = name;
-            window.localStorage.fData = data;
-            var jsStr = 'callBack();';
-            if (cPage == 'login') {
-                uexWindow.evaluatePopoverScript("login", "content", jsStr);
-            } else {
-                uexWindow.evaluateScript(cPage, 0, jsStr);
-            }
-        }
-        globalPost = function(data) {
-            window.localStorage.gData = data;
-            uexWindow.publishChannelNotification("1", "");
-        }
-        appcan.button(".nav-btn", "btn-act", function() {
-            appcan.window.close(-1);
-        })
-       
+    }
+    // 加群申请被同意
+    uexEasemob.onApplicationAccept = function(data) {
+        alert('onApplicationAccept:' + data)
+    }
+    // 加群申请被拒绝
+    uexEasemob.onApplicationDeclined = function(data) {
+        alert('onApplicationDeclined:' + data)
+    }
+    uexEasemob.cbGetGroup = function(data) {
+        alert('cbGetGroup:' + data)
+        appcan.locStorage.setVal('groupInfo', data)
+    }
+  })
+  var cPage = '1'
+  cp = function(name) {
+    cPage = name
+  }
+  postToFront = function(name, data) {
+    window.localStorage.fName = name
+    window.localStorage.fData = data
+    var jsStr = 'callBack();'
+    if (cPage === 'login') {
+      uexWindow.evaluatePopoverScript('login', 'content', jsStr)
+    } else {
+      uexWindow.evaluateScript(cPage, 0, jsStr)
+    }
+  }
+  globalPost = function(data) {
+    window.localStorage.gData = data
+    uexWindow.publishChannelNotification('1', '')
+  }
+  appcan.button('.nav-btn', 'btn-act', function() {
+    appcan.window.close(-1)
+  })
 </script>
-    
 </html>
