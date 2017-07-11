@@ -1,322 +1,201 @@
 <!DOCTYPE html>
 <html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
-    <head>
-        <title></title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="css/ui-box.css">
-        <link rel="stylesheet" href="css/ui-base.css">
-        <link rel="stylesheet" href="css/ui-color.css">
-        <link rel="stylesheet" href="css/appcan.icon.css">
-        <link rel="stylesheet" href="css/appcan.control.css">
-        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="css/main.css">
-        <style type="text/css">
-            body{
-                font-size: 20px;
-            }
-        </style>
-    </head>
-    <body class="um-vp bc-bg" ontouchstart>
-         <div>
-           <h2 style="margin-left: 15px;" id="jobName">&nbsp;&nbsp;</h2>
-           <div class="text-center">
-               <ul style="list-style-type: none;margin-left: 10px;">
-                   <li style="float: left;">
-                       &nbsp;<span class="glyphicon glyphicon glyphicon-map-marker" id="compCity">&nbsp;</span>&nbsp;&nbsp;&nbsp;
-                   </li>
-                  
-                   <li style="float: left;">
-                       <span class="glyphicon glyphicon glyphicon glyphicon-gift" id="education">&nbsp;</span>&nbsp;&nbsp;&nbsp;
-                   </li>
-                   
-                   <li style="float: left;">
-                      <span class="glyphicon glyphicon glyphicon glyphicon-dashboard" id="experience">&nbsp;</span>
-                   </li>
-                   <br /><hr />
-              </ul> 
-           </div>
-       </div>
-       
-       <div class="row" style="height:100px;" id="company">
-           <div class="col-xs-10">
-               <div class="row" >
-                   <div class="col-xs-3">
-                        <a href="#">
-                            <img src="" id="compLogoUrl" style="border-radius: 50px;width: 100px;height: 100px;"> 
-                        </a>
-                   </div>
-                   <div class="col-xs-8">
-                        <ul style="list-style-type: none;">
-                           <li>
-                               <h4 id="compName"></h4> 
-                           </li>
-                           <li>
-                               <span id="spanItem"></span>
-                           </li>
-                       </ul>
-                   </div>
-               </div>
-           </div>
-           <div class="col-xs-1">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-           </div>
-       </div>
-     
-      
-      
-      <!-- <div class="row" style="height: 100px;">
-           <hr>
-           <div class="col-xs-3" style="height: 100px;">
-               <a href="#">
-                   <img src="img/icon02_50x50_@2x.png" style="border-radius: 100px"> 
-               </a>
-           </div>
-           <div class="col-xs-7 " style="height:100px;">
-               <ul style="list-style-type: none;">
-                   <li>
-                       <h4>腰果音乐</h4> 
-                   </li>
-                   <li>
-                       <span>天使融资&nbsp;|&nbsp;500以上&nbsp;|&nbsp;移动互联网、文化娱乐</span>
-                   </li>
-               </ul>
-           </div>
-           <div class="col-xs-2 text-center" style="height: 100px;">
-               <span class="glyphicon glyphicon glyphicon-chevron-right" id="company"></span>
-           </div>
-       </div>-->
-       <div>
-            <h3 style="margin-left: 10px;">
-                &nbsp;<span class="glyphicon glyphicon glyphicon-user" style="font-size: 20px;">&nbsp;职位发布者</span>
-            </h3>
-            <div class="row" style="height: 100px;" id="person">
-                <div class="col-xs-10">
-                    <div class="row">
-                        <div class="col-xs-3">
-                             <a href="#">
-                                <img src="" id="postIcon" style="border-radius: 50px;width: 100px;height: 100px;"> 
-                             </a>
-                        </div>
-                        <div class="col-xs-8">
-                            <ul style="list-style-type: none;">
-                               <li>
-                                  <h4 id="postName">&nbsp;</h4> 
-                               </li>
-                               <li>
-                                  <h5 id="company1">&nbsp;</h5> 
-                               </li>
-                               <li>
-                                  <span id="province">&nbsp;</span> 
-                               </li>
-                           </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-1">
-                    <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
-                </div>
-            </div>   
-       </div>
-       
-       
-       <!--<div>
-           <h3>
-            <span class="glyphicon glyphicon glyphicon-user" style="font-size: 20px;">&nbsp;职位发布者</span>
-           </h3>
-           <div class="row" style="height: 100px;">
-               <div class="col-xs-3" style="height: 100px;">
-                   <a href="#">
-                       <img src="img/icon02_50x50_@2x.png" style="border-radius: 100px;"> 
-                   </a>
-               </div>
-               <div class="col-xs-7 " style="height:100px;">
-                   <ul style="list-style-type: none;">
-                       <li>
-                          <h4>&nbsp;谢培艺</h4> 
-                       </li>
-                       <li>
-                          <h5>&nbsp;项目经理</h5> 
-                       </li>
-                       <li>
-                          <span>&nbsp;西安邮电大学&nbsp;&nbsp;信息管理系统</span> 
-                       </li>
-                   </ul>
-               </div>
-               <div class="col-xs-2 text-center" style="height: 100px;">
-                    <span class="glyphicon glyphicon glyphicon-chevron-right" id="person"></span>
-               </div>
-            </div>
-       </div>-->
-       <div>
-           
-           
-           <p>
-               &nbsp;<span class="glyphicon glyphicon glyphicon-envelope" style="font-size: 20px;margin-left: 10px;">&nbsp;职位描述</span>
-             <h3 style="margin-left: 15px;">&nbsp;岗位职责：</h3>
-             <pre id="shortDesc">  </pre>
-<!-- 1.系统学习招聘体系建设、进行实操练习；</br>   2.学习人才测试技术、学习胜任力模型构建技术；</br>   3.负责Android或苹果ios的应用及硬件抽象层设计及开发;</br>   4.负责平台框架层的维护以及扩展;</br>   5.修改、完善Android平台层的bug;-->
-          <!--   <ol>
-                 <li>&nbsp;负责Android或苹果ios的应用及硬件抽象层设计及开发;</li>
-                 <li>&nbsp;负责平台框架层的维护以及扩展;</li>
-                 <li>&nbsp;修改、完善Android平台层的bug;</li>
-                 <li>&nbsp;撰写设计开发及实现文档。</li>
-             </ol>-->
-                                      &nbsp;<span style="font-size: 23px;margin-left: 15px;">任职要求</span>
-            <pre id="req"> </pre>
-<!--  1.计算机或相关专业本科以上学历，2年以上安卓或ios系统开发经验;</br>   2.对Android平台架构和Android framework有深入的理解，并根据需要进行相应改造;</br>   3.有Android开发经验，熟练使用java/c/c++/object-c等</br>   4.负责Android或苹果ios的应用及硬件抽象层设计及开发;-->         
-            <!-- <ol>
-                 <li>&nbsp;计算机或相关专业本科以上学历，2年以上安卓或ios系统开发经验;</li>
-                 <li>&nbsp;对Android平台架构和Android framework有深入的理解，并根据需要进行相应改造;</li>
-                 <li>&nbsp;有Android开发经验，熟练使用java/c/c++/object-c等</li>
-                 <li>&nbsp;负责Android或苹果ios的应用及硬件抽象层设计及开发;</li>
-                 <li>&nbsp;负责平台框架层的维护以及扩展;</li>
-                 <li>&nbsp;修改、完善Android平台层的bug;</li>
-                 <li>&nbsp;撰写设计开发及实现文档。</li>
-             </ol>-->
-           </p>
-       </div>
-       &nbsp;<span style="font-size: 23px;margin-left: 15px;">工作地址</span>
-       <pre id="detailPlace"> </pre>
-      
-       
-      <div class="text-center row  navbar-fixed-bottom"> 
-           <button class="btn btn-primary col-xs-6" style="height: 70px;margin-bottom: 5px;" id="resume">   
-                <span class="glyphicon glyphicon glyphicon-send" style="color: #484848;font-size: 20px;">发送简历</span>                              
-           </button>
-           
-           <button class="btn btn-primary col-xs-6" style="height: 70px;margin-bottom: 5px;" onclick="ftn1();">
-               <span class="glyphicon glyphicon glyphicon-earphone" style="color: #484848;font-size: 20px;">立即沟通</span>                                        
-           </button>
-       </div>  
-    </body>
-    <script src="js/appcan.js"></script>
-    <script src="js/appcan.control.js"></script>
-    </body>
-    <script>
-        appcan.ready(function() {
-          // jobPoster();
-           var id =  appcan.locStorage.getVal("id");
-           var dataCon = JSON.parse(id);
-            //alert(dataCon.id);
-            //alert(dataCon.interviewerid);
-            /*职位发布者信息*/
-            appcan.ajax({
-                url:'http://192.168.1.111:8080/online/user/getUserInfo.do',
-                type:'GET',
-                data:{
-                    userId:' ',
-                    id:dataCon.interviewerid
-                },
-               contentType : 'application/json',
-               dataType:'json',
-               success:function(data){
-                   // alert("请求成功！");
-                   console.log(data);
-                   // var jsonText = JSON.stringify(data);
-                    //var contact = JSON.parse(jsonText);
-                    //alert(jsonText);
-                     /*职位发布者信息显示*/
-    var jsonPost = JSON.stringify(data);
-    var postData = JSON.parse(jsonPost);
-    //alert(postData.code);
-    var postDate = JSON.stringify(postData.data);
-    appcan.locStorage.setVal("postDate",postDate);
-    var dataPost = JSON.parse(postDate); 
-    //alert(dataPost.icon);
-    document.getElementById("postIcon").src = dataPost.icon;
-    document.getElementById("postName").innerText = dataPost.name;
-    document.getElementById("company1").innerText = dataPost.company;
-    document.getElementById("province").innerHTML = dataPost.school + '&nbsp;&nbsp;' + dataPost.major;
-                   
-                },
-                error:function(e){
-                    alert("请求失败！");
-                    alert(e);
-                }
-            });
-           
-           
-           var compId1 = JSON.stringify(dataCon.compId);
-           var compId = JSON.parse(compId1);
-           appcan.locStorage.setVal("compId1", compId1);
-           //alert(dataCon.jobName);
-          // alert(id);
-          
-           
-           document.getElementById("jobName").innerText = dataCon.jobName;
-           document.getElementById("compCity").innerText = compId.compCity;
-           document.getElementById("education").innerText = dataCon.education;
-           document.getElementById("experience").innerText = dataCon.experience;
-           document.getElementById("compName").innerText = compId.compName;
-           document.getElementById("compLogoUrl").src = compId.compLogoUrl;
-           document.getElementById("spanItem").innerHTML = compId.financingType + '&nbsp;&nbsp|&nbsp;&nbsp' + compId.scale + '&nbsp;&nbsp|&nbsp;&nbsp' + compId.type;
-           document.getElementById("shortDesc").innerHTML = dataCon.shortDesc;
-           document.getElementById("req").innerHTML = dataCon.req;
-           document.getElementById("detailPlace").innerText = dataCon.detailPlace;
-       
-        });
-
-    appcan.button("#company","sni-act",function(){
-    appcan.window.open({
-        name:"company",
-        data:"company_details.html",
-        aniId:10
-    })
-})
-   appcan.button("#person","sni-act",function(){
-    appcan.window.open({
-        name:"person",
-        data:"personal_info.html",
-        aniId:10
-    })
-})
-  appcan.button("#resume","sni-act",function(){
-    appcan.window.open({
-        name:"resume",
-        data:"resume.html",
-        aniId:10
-    })
-})
-    function ftn1(){
-        uexCall.dial("");
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="css/ui-box.css">
+  <link rel="stylesheet" href="css/ui-base.css">
+  <link rel="stylesheet" href="css/ui-color.css">
+  <link rel="stylesheet" href="css/appcan.icon.css">
+  <link rel="stylesheet" href="css/appcan.control.css">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/main.css">
+  <style type="text/css">
+    body{
+      font-size: 20px;
     }
-    
-/*function jobPoster(){
-    var postData = {
-    "code": 0,
-    "data": {
-        "backgroudImageUrl": "https://img3.doubanio.com//spic//s11185741.jpg",
-        "company": "北京百度网讯科技有限公司",
-        "email": "1132629383@qq.com",
-        "gender": 0,
-        "icon": "https://img3.doubanio.com/view/site/small/public/ae2f20e33c40096.jpg",
-        "id": "5b4ea936-60c8-4466-b97b-efbf5fc64edc",
-        "isFriend": 0,
-        "major": "计算机科学与技术",
-        "name": "黎明",
-        "password": "654321",
-        "phone": "15091835714",
-        "province": "陕西省西安市",
-        "school": "西安邮电大学",
-        "shares": [],
-        "workType": -1
-        }   
-    };       
-    var jsonPost = JSON.stringify(postData);
-    var postData = JSON.parse(jsonPost);
-    //alert(postData.code);
-    var postDate = JSON.stringify(postData.data);
-    appcan.locStorage.setVal("postDate",postDate);
-    var dataPost = JSON.parse(postDate); 
-    //alert(dataPost.icon);
-    document.getElementById("postIcon").src = dataPost.icon;
-    document.getElementById("postName").innerText = dataPost.name;
-    document.getElementById("company1").innerText = dataPost.company;
-    document.getElementById("province").innerHTML = dataPost.school + '&nbsp;&nbsp;' + dataPost.major;
-    
-}*/
-    
-    </script>
+  </style>
+</head>
+<body class="um-vp bc-bg" ontouchstart>
+  <div>
+    <h2 style="margin-left: 15px;" id="jobName">&nbsp;&nbsp;</h2>
+    <div class="text-center">
+      <ul style="list-style-type: none;margin-left: 10px;">
+        <li style="float: left;">
+          &nbsp;<span class="glyphicon glyphicon glyphicon-map-marker" id="compCity">&nbsp;</span>&nbsp;&nbsp;&nbsp;
+        </li>
+        <li style="float: left;">
+          <span class="glyphicon glyphicon glyphicon glyphicon-gift" id="education">&nbsp;</span>&nbsp;&nbsp;&nbsp;
+        </li> 
+        <li style="float: left;">
+          <span class="glyphicon glyphicon glyphicon glyphicon-dashboard" id="experience">&nbsp;</span>
+        </li>
+        <br /><hr />
+      </ul> 
+    </div>
+  </div>  
+  <div class="row" style="height:100px;" id="company">
+    <div class="col-xs-10">
+      <div class="row" >
+        <div class="col-xs-3">
+          <a href="#">
+            <img src="" id="compLogoUrl" style="border-radius: 50px;width: 100px;height: 100px;"> 
+          </a>
+        </div>
+        <div class="col-xs-8">
+          <ul style="list-style-type: none;">
+            <li>
+              <h4 id="compName"></h4> 
+            </li>
+            <li>
+              <span id="spanItem"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-1">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </div>
+  </div>
+  <div>
+    <h3 style="margin-left: 10px;">
+      &nbsp;<span class="glyphicon glyphicon glyphicon-user" style="font-size: 20px;">&nbsp;职位发布者</span>
+    </h3>
+    <div class="row" style="height: 100px;" id="person">
+      <div class="col-xs-10">
+        <div class="row">
+          <div class="col-xs-3">
+            <a href="#">
+              <img src="" id="postIcon" style="border-radius: 50px;width: 100px;height: 100px;"> 
+            </a>
+          </div>
+          <div class="col-xs-8">
+            <ul style="list-style-type: none;">
+              <li>
+                <h4 id="postName">&nbsp;</h4> 
+              </li>
+              <li>
+                <h5 id="company1">&nbsp;</h5> 
+              </li>
+              <li>
+                <span id="province">&nbsp;</span> 
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-1">
+        <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
+      </div>
+    </div>   
+  </div>
+  <div>
+    <p>
+      &nbsp;<span class="glyphicon glyphicon glyphicon-envelope" style="font-size: 20px;margin-left: 10px;">&nbsp;职位描述</span>
+      <h3 style="margin-left: 15px;">&nbsp;岗位职责：</h3>
+      <pre id="shortDesc"></pre>
+
+      &nbsp;<span style="font-size: 23px;margin-left: 15px;">任职要求</span>
+      <pre id="req"></pre>
+    </p>
+  </div>
+  &nbsp;<span style="font-size: 23px;margin-left: 15px;">工作地址</span>
+  <pre id="detailPlace"> </pre>   
+  <div class="text-center row  navbar-fixed-bottom"> 
+    <button class="btn btn-primary col-xs-6" style="height: 70px;margin-bottom: 5px;" id="resume">   
+      <span class="glyphicon glyphicon glyphicon-send" style="color: #484848;font-size: 20px;">发送简历</span>                              
+    </button>       
+    <button class="btn btn-primary col-xs-6" style="height: 70px;margin-bottom: 5px;" onclick="ftn1();">
+      <span class="glyphicon glyphicon glyphicon-earphone" style="color: #484848;font-size: 20px;">立即沟通</span>                                        
+    </button>
+  </div>  
+  <script src="js/appcan.js"></script>
+  <script src="js/appcan.control.js"></script>
+</body>
+<script>
+  appcan.ready(function() {
+    // jobPoster();
+    var id =  appcan.locStorage.getVal("id");
+    var dataCon = JSON.parse(id);
+    // alert(dataCon.id);
+    // alert(dataCon.interviewerid);
+    /*职位发布者信息*/
+    appcan.ajax({
+      url: 'http://192.168.1.111:8080/online/user/getUserInfo.do',
+      type: 'GET',
+      data: {
+        userId: ' ',
+        id: dataCon.interviewerid
+      },
+      contentType: 'application/json',
+      dataType: 'json',
+      success: function(data) {
+        // alert("请求成功！");
+        console.log(data);
+        // var jsonText = JSON.stringify(data);
+        // var contact = JSON.parse(jsonText);
+        // alert(jsonText);
+      /*职位发布者信息显示*/
+        var jsonPost = JSON.stringify(data);
+        var postData = JSON.parse(jsonPost);
+        // alert(postData.code);
+        var postDate = JSON.stringify(postData.data);
+        appcan.locStorage.setVal("postDate",postDate);
+        var dataPost = JSON.parse(postDate); 
+        // alert(dataPost.icon);
+        document.getElementById("postIcon").src = dataPost.icon;
+        document.getElementById("postName").innerText = dataPost.name;
+        document.getElementById("company1").innerText = dataPost.company;
+        document.getElementById("province").innerHTML = dataPost.school + '&nbsp;&nbsp;' + dataPost.major;    
+      },
+      error: function(e) {
+        alert("请求失败！");
+        alert(e);
+      }
+    });
+    var compId1 = JSON.stringify(dataCon.compId);
+    var compId = JSON.parse(compId1);
+    appcan.locStorage.setVal("compId1", compId1);
+    // alert(dataCon.jobName);
+    // alert(id);   
+    document.getElementById("jobName").innerText = dataCon.jobName;
+    document.getElementById("compCity").innerText = compId.compCity;
+    document.getElementById("education").innerText = dataCon.education;
+    document.getElementById("experience").innerText = dataCon.experience;
+    document.getElementById("compName").innerText = compId.compName;
+    document.getElementById("compLogoUrl").src = compId.compLogoUrl;
+    document.getElementById("spanItem").innerHTML = compId.financingType + '&nbsp;&nbsp|&nbsp;&nbsp' + compId.scale + '&nbsp;&nbsp|&nbsp;&nbsp' + compId.type;
+    document.getElementById("shortDesc").innerHTML = dataCon.shortDesc;
+    document.getElementById("req").innerHTML = dataCon.req;
+    document.getElementById("detailPlace").innerText = dataCon.detailPlace;
+  });
+
+  appcan.button("#company", "sni-act", function() {
+    appcan.window.open({
+      name: "company",
+      data: "company_details.html",
+      aniId: 10
+    })
+  })
+  appcan.button("#person", "sni-act", function() {
+    appcan.window.open({
+      name: "person",
+      data: "personal_info.html",
+      aniId: 10
+    })
+  })
+  appcan.button("#resume", "sni-act", function() {
+    appcan.window.open({
+      name: "resume",
+      data: "resume.html",
+      aniId: 10
+    })
+  })
+  function ftn1() {
+    uexCall.dial("");
+  }
+</script>
 </html>

@@ -1,219 +1,113 @@
 <!DOCTYPE html>
 <html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
-    <head>
-        <title></title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="css/ui-box.css">
-        <link rel="stylesheet" href="css/ui-base.css">
-        <link rel="stylesheet" href="css/ui-color.css">
-        <link rel="stylesheet" href="css/appcan.icon.css">
-        <link rel="stylesheet" href="css/appcan.control.css">
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body class="um-vp bc-bg" ontouchstart>
-        <div class="ub-f1">
-            <div class="uinput ub ub-f1  bc-border uba srh-cs">                
-                 <div class="uinn fa fa-search sc-text"></div>
-                 <input placeholder="搜索" type="search" class="ub-f1">                 
-            </div>
-            <!--<div id="listview"  class="ubt bc-border sc-bg li-cs">
-            </div>
-            <div id="friendslist" class="ubt bc-border sc-bg bc-text">
-                    
-            </div>-->
-            
-            <div id="listview" class="ubt sc-border sc-bg"></div>
-            <!--<div id="grouplist" class="ubt sc-border sc-bg"></div>-->
-            <div id="friendlist" class="ubt sc-border sc-bg"></div>
-           
-            
-        </div>
-                    
-   <script src="js/appcan.js"></script>
-   <script src="js/appcan.control.js"></script>
-   <script src="js/appcan.listview.js"></script>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="css/ui-box.css">
+  <link rel="stylesheet" href="css/ui-base.css">
+  <link rel="stylesheet" href="css/ui-color.css">
+  <link rel="stylesheet" href="css/appcan.icon.css">
+  <link rel="stylesheet" href="css/appcan.control.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="um-vp bc-bg" ontouchstart>
+  <div class="ub-f1">
+    <div class="uinput ub ub-f1  bc-border uba srh-cs">                
+      <div class="uinn fa fa-search sc-text"></div>
+      <input placeholder="搜索" type="search" class="ub-f1">                 
+    </div>
+    <div id="listview" class="ubt sc-border sc-bg"></div>
+    <!--<div id="grouplist" class="ubt sc-border sc-bg"></div>-->
+    <div id="friendlist" class="ubt sc-border sc-bg"></div> 
+  </div>
+  <script src="js/appcan.js"></script>
+  <script src="js/appcan.control.js"></script>
+  <script src="js/appcan.listview.js"></script>
 </body>
-    <script>
-        appcan.ready(function(){
-            appcan.initBounce();  
-            uexEasemob.getContactUserNames();
-           // uexEasemob.getGroupsFromServer(false);
-        });
-        var lv1 = appcan.listview({
-                selector : "#listview",
-                type : "thinLine",
-                hasIcon : true,
-                hasAngle : false,
-                hasSubTitle : false,
-                multiLine : 1
-            });
-            lv1.set([{
-                title : "通知",
-                icon:"./css/res/ichat-alt.png",
-                pagename : "news",
-                pageurl:"news.html"  
-            }])
-            lv1.on("click",function(ele, context, obj, subobj){
-               // appcan.openWinWithUrl(context.name,context.name+'.html');
-                appcan.window.open(context.pagename,context.pageurl,10);
-            })
-            
-            
-           /* var lv2 = appcan.listview({
-                selector : "#grouplist",
-                type : "thinLine",
-                hasIcon : true,
-                hasAngle : true,
-                hasSubTitle : true,
-                multiLine : 1,
-                hasRadiobox : false,
-                align : 'left'
-            });
-            var data = appcan.locStorage.getVal("groupsList");
-            data = JSON.parse(data);
-            var listData = new Array();
-            $.each(data, function(i, item) {
-                alert(JSON.stringify(item));
-                var listItem = {};
-                listItem['title'] = item['groupName'];
-                listItem['id'] = item['groupId'];
-                listItem['icon'] = "css/icons/icon-chat-act.png";
-                listData.push(listItem);
-            });
-            lv2.set(listData);
-
-            lv2.on("click", function(ele, obj, curEle) {
-                appcan.locStorage.setVal('inGroup', obj.id);
-                appcan.locStorage.setVal("groupName", obj.title);
-                appcan.locStorage.setVal("chatType", '1');
-                appcan.window.open({
-                    name : 'groupChat',
-                    data : 'groupChat.html'
-                });
-            })*/
-            
-            var lv3 = appcan.listview({
-                selector : "#friendlist",
-                type : "thinLine",
-                hasIcon : true,
-                hasAngle : true,
-                hasSubTitle : true,
-                multiLine : 1,
-                hasRadiobox : false,
-                align : 'left'
-            })
-            var data = appcan.locStorage.getVal("friendsList");
-            data = JSON.parse(data);
-            var listData = new Array();
-            $.each(data, function(i, item) {
-                var listItem = {};
-                listItem['title'] = item;
-                listItem['icon'] = "css/icons/icon-user-act.png";
-                listData.push(listItem);
-            })
-            lv3.set(listData);
-            lv3.on("click", function(ele, obj, curEle) {
-                appcan.locStorage.setVal('toUser', obj.title);
-                appcan.locStorage.setVal("chatType", '0');
-                appcan.window.open({
-                    name : 'chat',
-                    data : 'chat1.html'
-                });
-            })
-     /*
-        function showGroupsList() {
-            var lv2 = appcan.listview({
-                selector : "#grouplist",
-                type : "thinLine",
-                hasIcon : true,
-                hasAngle : true,
-                hasSubTitle : false,
-                multiLine : 1,
-                hasRadiobox : false,
-                align : 'left'
-            });
-            var data = appcan.locStorage.getVal("groupsList");
-            data = JSON.parse(data);
-            var listData = new Array();
-            $.each(data, function(i, item) {
-                //alert(JSON.stringify(item));
-                var listItem = {};
-                listItem['title'] = item['groupName'];
-                listItem['id'] = item['groupId'];
-                listItem['icon'] = "css/icons/icon-chat-act.png";
-                listData.push(listItem);
-            });
-            lv2.set(listData);
-
-            lv2.on("click", function(ele, obj, curEle) {
-                appcan.locStorage.setVal('inGroup', obj.id);
-                appcan.locStorage.setVal("groupName", obj.title);
-                appcan.locStorage.setVal("chatType", '1');
-                appcan.window.open({
-                    name : 'groupChat',
-                    data : 'groupChat.html'
-                });
-            });
-        }  
-         
-       /* function showFriendList(){             
-                var jsons = var data = appcan.locStorage.getVal("friendsList");
-                var lv3 = appcan.listview({
-                    selector : "#friendlist",
-                    type : "thickLine",
-                    hasIcon : true,
-                    hasAngle : true,
-                    hasSubTitle : true,
-                    multiLine : 1
-                });
-            
-                var datalist =new Array();
-                for (var i = 0; i < jsons.length; i++) {
-                    var title=new Array();
-                    title["title"]=jsons[i].email;
-                    title["id"]=jsons[i].id;
-                    datalist.push(title);  
-                }
-                lv3.set(datalist);
-                lv3.on("click", function(ele, obj, curEle) {
-                    openDetail(obj.title);
-                    appcan.locStorage.setVal('chatname',obj.title);                    
-                    appcan.locStorage.setVal('chatId',obj.id);
-                })
-            }
-        */
-        
-       /* function showFriendsList() {
-            var lv3 = appcan.listview({
-                selector : "#friendlist",
-                type : "thinLine",
-                hasIcon : true,
-                hasAngle : true,
-                hasSubTitle : true,
-                multiLine : 1,
-                hasRadiobox : false,
-                align : 'left'
-            });
-            var data = appcan.locStorage.getVal("friendsList");
-            data = JSON.parse(data);
-            var listData = new Array();
-            $.each(data, function(i, item) {
-                var listItem = {};
-                listItem['title'] = item;
-                listItem['icon'] = "css/icons/icon-user-act.png";
-                listData.push(listItem);
-            });
-            lv3.set(listData);
-            lv3.on("click", function(ele, obj, curEle) {
-                appcan.locStorage.setVal('toUser', obj.title);
-                appcan.locStorage.setVal("chatType", '0');
-                appcan.window.open({
-                    name : 'chat',
-                    data : 'chat1.html'
-                });
-            });
-        }*/
- </script>
+<script>
+  appcan.ready(function() {
+    appcan.initBounce();  
+    uexEasemob.getContactUserNames();
+    // uexEasemob.getGroupsFromServer(false);
+  });
+  var lv1 = appcan.listview({
+    selector: "#listview",
+    type: "thinLine",
+    hasIcon: true,
+    hasAngle: false,
+    hasSubTitle: false,
+    multiLine: 1
+  });
+  lv1.set([{
+    title: "通知",
+    icon: "./css/res/ichat-alt.png",
+    pagename: "news",
+    pageurl: "news.html"  
+  }])
+  lv1.on("click", function(ele, context, obj, subobj){
+    // appcan.openWinWithUrl(context.name,context.name+'.html');
+    appcan.window.open(context.pagename, context.pageurl, 10);
+  })
+ /* var lv2 = appcan.listview({
+    selector : "#grouplist",
+    type : "thinLine",
+    hasIcon : true,
+    hasAngle : true,
+    hasSubTitle : true,
+    multiLine : 1,
+    hasRadiobox : false,
+    align : 'left'
+  });
+  var data = appcan.locStorage.getVal("groupsList");
+  data = JSON.parse(data);
+  var listData = new Array();
+  $.each(data, function(i, item) {
+    alert(JSON.stringify(item));
+    var listItem = {};
+    listItem['title'] = item['groupName'];
+    listItem['id'] = item['groupId'];
+    listItem['icon'] = "css/icons/icon-chat-act.png";
+    listData.push(listItem);
+  });
+  lv2.set(listData);
+  lv2.on("click", function(ele, obj, curEle) {
+    appcan.locStorage.setVal('inGroup', obj.id);
+    appcan.locStorage.setVal("groupName", obj.title);
+    appcan.locStorage.setVal("chatType", '1');
+    appcan.window.open({
+      name : 'groupChat',
+      data : 'groupChat.html'
+    });
+  })*/     
+  var lv3 = appcan.listview({
+    selector: "#friendlist",
+    type: "thinLine",
+    hasIcon: true,
+    hasAngle: true,
+    hasSubTitle: true,
+    multiLine: 1,
+    hasRadiobox: false,
+    align: 'left'
+  })
+  var data = appcan.locStorage.getVal("friendsList");
+  data = JSON.parse(data);
+  var listData = new Array();
+  $.each(data, function(i, item) {
+    var listItem = {};
+    listItem['title'] = item;
+    listItem['icon'] = "css/icons/icon-user-act.png";
+    listData.push(listItem);
+  })
+  lv3.set(listData);
+  lv3.on("click", function(ele, obj, curEle) {
+    appcan.locStorage.setVal('toUser', obj.title);
+    appcan.locStorage.setVal("chatType", '0');
+    appcan.window.open({
+      name: 'chat',
+      data: 'chat1.html'
+    });
+  })
+</script>
 </html>

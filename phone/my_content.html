@@ -1,203 +1,106 @@
 <!DOCTYPE html>
 <html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
-    <head>
-        <title></title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="css/ui-box.css">
-        <link rel="stylesheet" href="css/ui-base.css">
-        <link rel="stylesheet" href="css/ui-color.css">
-        <link rel="stylesheet" href="css/appcan.icon.css">
-        <link rel="stylesheet" href="css/appcan.control.css">
-        <link rel="stylesheet" href="my_content/css/main.css">
-    </head>
-    <body class="um-vp bc-bg" ontouchstart>
-        <div class="ub ub-ver">
-           <!--  <div id="slider" class="slider">
-            <div id="inner"> -->
-                   <!--<img src="position_details_content/css/myImg/icon01_50x50_@2x.png"/>-->
-           <!--     <ul class="text-center" style="list-style-type: none;text-align:center;margin-top: 3.5em;">
-                   <li class="text-center" onclick="ftn1()"><img id="img_post" src="my_content/css/myImg/myImg1.png" style="border-radius: 50px;width: 100px;height: 100px;"></li>
-                   <li id="postName" style="color:#FFFFFF;">事实上</li>
-                </ul>
-                
-              </div>-->
-               
-           </div>   
-            <div class=" umar-at1">
-                
-                <div id="listview2"  class="ubt bc-border ubb c-wh umar-at1 uinn-a7">
-
-                </div>
-
-            </div>
-            <div id="listview3"  class="ubt ubb bc-border c-wh umar-at1 uinn-a7">
-
-            </div>
-           
-        </div>
-        <script src="js/appcan.js"></script>
-        <script src="js/appcan.control.js"></script>
-        <script src="js/appcan.listview.js"></script>
-   <script src="js/appcan.slider.js"></script>
- </body>
-    <script>
-        appcan.ready(function() {
-            appcan.initBounce();
-            var userData1 = appcan.locStorage.getVal("userData");
-           // var jsonText1 = JSON.stringify(userData1);
-            var userData = JSON.parse(userData1);
-            console.log(userData);
-            console.log(userData.phone);
-            console.log(userData.introduction);
-            
-        var lv2 = appcan.listview({
-            selector : "#listview2",
-            type : "thinLine",
-            hasIcon : false,
-            hasAngle : true,
-            hasSubTitle : true,
-            multiLine : 1
-        });
-        
-        lv2.set([{
-            title : '头像',
-            subTitle : '<img style="height:60px;width:60px;" src="'+ userData.icon +'"/>',
-        }, {
-            title : '姓名',
-            subTitle : userData.name,
-            url:'setName.html'
-        }, {
-            title : '手机号',
-            subTitle : userData.phone,
-            url:''
-        }, {
-            title : '我的学校',
-            subTitle : userData.school,
-            url:''
-        }, {
-            title : '我的专业',
-            subTitle : userData.major,
-            url:''
-        }]);
-        lv2.on("click",function(obj,data,subObj){
-            if(data.title == "头像"){
-                //alert("hah");
-                uexCamera.open();
-            }else if(data.title == "姓名"){
-                appcan.openWinWithUrl('setName','setName.html');   
-            }else{
-                return;
-            }
-            
-        })
-        var lv3 = appcan.listview({
-            selector : "#listview3",
-            type : "thinLine",
-            hasIcon : false,
-            hasAngle : true,
-            multiLine : 1,
-            hasSubTitle : true
-        });
-        if(userData.gender == -1){
-            sex = "男";
-        }else{
-            sex = "女";
-        }
-        lv3.set([{
-            title : '性别',
-            subTitle : sex,
-            url:''
-        },{
-            title : '意向行业',
-            subTitle : '机器学习',
-            url:'setIndustry.html'
-        },{
-            title : '个性签名',
-            subTitle : userData.introduction,
-            url:'setSignature.html'
-        }]);
-        lv3.on("click",function(obj,data,subObj){
-           appcan.openWinWithUrl('setApp',data.url);
-        })
- document.getElementById("userImg").src = userData.backgroudImageUrl;  
-        })
-       /* var lv1 = appcan.listview({
-            selector : "#listview1",
-            type : "thickLine",
-            hasIcon : true,
-            hasAngle : false,
-            hasSubTitle : false,
-            multiLine : 1
-        });
-        lv1.set([{
-            icon : 'indexCon_0/css/img/13718088,2560,1600.jpg_unsliced.png',
-            title : '',
-            describe : ''
-        }]);*/
-      /*  var lv2 = appcan.listview({
-            selector : "#listview2",
-            type : "thinLine",
-            hasIcon : false,
-            hasAngle : true,
-            hasSubTitle : true,
-            multiLine : 1
-        });
-        lv2.set([{
-            title : '头像',
-            subTitle : '<img style="height:60px;width:60px;" src="https://b-ssl.duitang.com/uploads/item/201607/18/20160718203142_8QWwu.thumb.700_0.jpeg"/>',
-        }, {
-            title : '姓名',
-            subTitle : '刘敏',
-            url:'setName.html'
-        }, {
-            title : '手机号',
-            subTitle : '18229060824',
-            url:'resume.html'
-        }, {
-            title : '我的学校',
-            subTitle : '西安邮电大学',
-            url:'resume.html'
-        }, {
-            title : '我的专业',
-            subTitle : '电子商务',
-            url:'resume.html'
-        }]);
-        lv2.on("click",function(obj,data,subObj){
-            if(data.title == "头像"){
-                //alert("hah");
-                uexCamera.open();
-            }else if(data.title == "姓名"){
-                appcan.openWinWithUrl('setName','setName.html');   
-            }else{
-                return;
-            }
-            
-        })
-        var lv3 = appcan.listview({
-            selector : "#listview3",
-            type : "thinLine",
-            hasIcon : false,
-            hasAngle : true,
-            multiLine : 1,
-            hasSubTitle : true
-        });
-        lv3.set([{
-            title : '性别',
-            subTitle : '女',
-            url:'setSex.html'
-        },{
-            title : '意向行业',
-            subTitle : '未设置',
-            url:'setIndustry.html'
-        },{
-            title : '个性签名',
-            subTitle : '啦啦啦',
-            url:'setSignature.html '
-        }]);
-        lv3.on("click",function(obj,data,subObj){
-           appcan.openWinWithUrl('setApp',data.url);
-        })*/
- </script>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="css/ui-box.css">
+  <link rel="stylesheet" href="css/ui-base.css">
+  <link rel="stylesheet" href="css/ui-color.css">
+  <link rel="stylesheet" href="css/appcan.icon.css">
+  <link rel="stylesheet" href="css/appcan.control.css">
+  <link rel="stylesheet" href="my_content/css/main.css">
+</head>
+<body class="um-vp bc-bg" ontouchstart>
+  <div class="ub ub-ver"></div>   
+    <div class=" umar-at1">    
+      <div id="listview2"  class="ubt bc-border ubb c-wh umar-at1 uinn-a7"></div>
+    </div>
+    <div id="listview3"  class="ubt ubb bc-border c-wh umar-at1 uinn-a7"></div> 
+  </div>
+  <script src="js/appcan.js"></script>
+  <script src="js/appcan.control.js"></script>
+  <script src="js/appcan.listview.js"></script>
+  <script src="js/appcan.slider.js"></script>
+</body>
+<script>
+  appcan.ready(function() {
+    appcan.initBounce();
+    var userData1 = appcan.locStorage.getVal("userData");
+   　// var jsonText1 = JSON.stringify(userData1);
+    var userData = JSON.parse(userData1);
+    console.log(userData);
+    console.log(userData.phone);
+    console.log(userData.introduction);
+    var lv2 = appcan.listview({
+      selector: "#listview2",
+      type: "thinLine",
+      hasIcon: false,
+      hasAngle: true,
+      hasSubTitle: true,
+      multiLine: 1
+    }); 
+    lv2.set([{
+      title: '头像',
+      subTitle: '<img style="height:60px;width:60px;" src="'+ userData.icon +'"/>',
+    }, {
+      title: '姓名',
+      subTitle: userData.name,
+      url: 'setName.html'
+    }, {
+      title: '手机号',
+      subTitle: userData.phone,
+      url: ''
+    }, {
+      title: '我的学校',
+      subTitle: userData.school,
+      url: ''
+    }, {
+      title: '我的专业',
+      subTitle: userData.major,
+      url: ''
+    }]);
+    lv2.on("click",　function(obj,　data,　subObj)　{
+      if(data.title == "头像")　{
+        //alert("hah");
+        uexCamera.open();
+      }　else if　(data.title == "姓名"){
+          appcan.openWinWithUrl('setName',　'setName.html');   
+      }　else　{
+          return;
+      }   
+    })
+    var lv3 = appcan.listview({
+      selector: "#listview3",
+      type: "thinLine",
+      hasIcon: false,
+      hasAngle: true,
+      multiLine: 1,
+      hasSubTitle: true
+    });
+    if(userData.gender == -1){
+      sex = "男";
+    }else{
+      sex = "女";
+    }
+    lv3.set([{
+      title: '性别',
+      subTitle: sex,
+      url: ''
+    },{
+      title: '意向行业',
+      subTitle: '机器学习',
+      url: 'setIndustry.html'
+    },{
+      title: '个性签名',
+      subTitle: userData.introduction,
+      url: 'setSignature.html'
+    }]);
+    lv3.on("click",　function(obj,　data,　subObj)　{
+      appcan.openWinWithUrl('setApp',　data.url);
+    })
+ 　　　document.getElementById("userImg").src = userData.backgroudImageUrl;  
+  })
+</script>
 </html>

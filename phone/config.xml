@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <widget appId="11613738" channelCode="0000" height="480" pid="" sreensize="4.5" version="00.00.0000" viewmode="application" widgetId="" width="320">
-	
 	<name>Jarvisbook</name>
 	<description/>
 	<author email="bubblelm@163.com"> BubbleM</author>
@@ -13,7 +12,7 @@
 	<obfuscation>true</obfuscation>
 	<bgcolor>#fefefe</bgcolor>
 	<orientation>15</orientation>
-<debug>true</debug>
-<partobfuscation/>
-<webapp/>
+	<debug>true</debug>
+	<partobfuscation/>
+	<webapp/>
 </widget>

@@ -1,82 +1,71 @@
 <!DOCTYPE html>
 <html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
-    <head>
-        <title></title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="css/ui-box.css">
-        <link rel="stylesheet" href="css/ui-base.css">
-        <link rel="stylesheet" href="css/ui-color.css">
-        <link rel="stylesheet" href="css/appcan.icon.css">
-        <link rel="stylesheet" href="css/appcan.control.css">
-        <link rel="stylesheet" href="login_content/css/main.css">
-    </head>
-    <body class="um-vp bc-bg" ontouchstart>
-         <div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
-            <!--header开始-->
-            <div id="header" class="uh bc-text-head ub bc-head">
-                <div class="nav-btn" id="nav-left">
-                    <div class="fa fa-angle-left fa-2x" id=""></div>
-                </div>
-                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">意向行业</h1>
-                <div class="nav-btn nav-bt" id="nav-right">
-                   <span id="saveIndustry">保存</span>
-                </div>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="css/ui-box.css">
+  <link rel="stylesheet" href="css/ui-base.css">
+  <link rel="stylesheet" href="css/ui-color.css">
+  <link rel="stylesheet" href="css/appcan.icon.css">
+  <link rel="stylesheet" href="css/appcan.control.css">
+  <link rel="stylesheet" href="login_content/css/main.css">
+</head>
+<body class="um-vp bc-bg" ontouchstart>
+ 　<div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
+    <!--header开始-->
+    <div id="header" class="uh bc-text-head ub bc-head">
+      <div class="nav-btn" id="nav-left">
+        <div class="fa fa-angle-left fa-2x" id=""></div>
+      </div>
+      <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">意向行业</h1>
+      <div class="nav-btn nav-bt" id="nav-right">
+        <span id="saveIndustry">保存</span>
+      </div>
+    </div>
+    <div id="content" class="ub-f1 tx-l">
+      <div class="ub ub-ver uinn-a3 ub-fv">
+        <div class="ub ub-ver uinn uinn-at1">
+          <div class="umar-a uba bc-border c-wh">
+            <div class="ub ub-ac ubb umh5 bc-border ">
+              <div class=" uinput ub ub-f1">
+                <input placeholder="" type="text" class="ub-f1" id="industry" value="">
+              </div>     
             </div>
-            <div id="content" class="ub-f1 tx-l">
-            
-        <div class="ub ub-ver uinn-a3 ub-fv">
-            <div class="ub ub-ver uinn uinn-at1">
-                <div class="umar-a uba bc-border c-wh">
-                    <div class="ub ub-ac ubb umh5 bc-border ">
-                        <div class=" uinput ub ub-f1">
-                            <input placeholder="" type="text" class="ub-f1" id="industry" value="">
-                        </div>     
-                    </div>
-                </div>   
-            </div>
+          </div>   
         </div>
       </div>
-   </div>
-        <script src="js/appcan.js"></script>
-        <script src="js/appcan.control.js"></script>
-        <script src="js/test.js"></script>
-    </body>
-    <script>
-        appcan.ready(function() {
-            appcan.initBounce();
-        });
-        
-        appcan.button("#saveIndustry", "ani-act", function() {
-              appcan.ajax({
-                url:'http://39.108.2.139/online/user/changeJobPosition.do',
-                type:'POST',
-                data:{
-                    userId:appcan.locStorage.getVal("userId");
-                    tPosition:document.getElementById("industry").value,
-                },
-               success:function(data){
-                    alert("请求成功！");
-                    console.log(JSON.stringify(data));
-                },
-                error:function(e){
-                    alert("请求失败！");
-                    alert(e);
-                }
-            });
-        });
-        
-        appcan.button(".nav-btn", "btn-act", function() {
-            appcan.window.close(-1);
-        })
-        //通过验证码修改密码
-      /*  appcan.button("#chagePwd","sni-act",function(){
-            appcan.window.open({
-                name:"regst",
-                data:"register.html",
-                aniId:10
-            })
-        })*/
-    </script>
+    </div>
+  </div>
+  <script src="js/appcan.js"></script>
+  <script src="js/appcan.control.js"></script>
+  <script src="js/test.js"></script>
+</body>
+<script>
+  appcan.ready(function() {
+    appcan.initBounce();
+  });   
+  appcan.button("#saveIndustry", "ani-act", function() {
+    appcan.ajax({
+      url:　'http://39.108.2.139/online/user/changeJobPosition.do',
+      type:　'POST',
+      data:　{
+          userId:　appcan.locStorage.getVal("userId");
+          tPosition:　document.getElementById("industry").value,
+      },
+     　success:　function(data)　{
+        alert("请求成功！");
+        console.log(JSON.stringify(data));
+      },
+      error:　function(e)　{
+        alert("请求失败！");
+        alert(e);
+      }
+    });
+  }); 
+  appcan.button(".nav-btn", "btn-act", function() {
+    appcan.window.close(-1);
+  })
+</script>
 </html>
