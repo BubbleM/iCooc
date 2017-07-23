@@ -79,9 +79,9 @@
   tabview.on("click", function(obj, index) {
     openCon(index);
   })
-  /*appcan.button(".nav-btn", "btn-act", function() {
-   　appcan.window.open('add_friend','add_friend.html',10);
-  })*/
+  appcan.button(".nav-btn", "btn-act", function() {
+   　appcan.window.open('add_Friend','addFriend.html',10);
+  })
   function openCon(idx) {
     for (var i = 0, l = $("#header")[0].children.length; i < l; i++) {
       if (idx == i) {
