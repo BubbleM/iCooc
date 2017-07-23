@@ -66,7 +66,7 @@ appcan.ready(function() {
           title: '<div class="ub ub-ac"> <div class="ub ub-ac uinn">' + dataCon.jobName + '</div></div>',
           icon: compId.compLogoUrl,
           describe: '<div class="ub ub-ac"><div class=" ub-ac uba uc-a1 b-gre1 c-gre1 uinn-a14 ulev-2 t-gre2" style="margin-top:-10px;margin-left:5px;">'+ compId.compName +'</div></div>',
-          subDescribe: dataCon.modified,
+          subDescribe: dataCon.modified.substr(0,10),
           note: compId.compCity + '&nbsp;|&nbsp;' +  compId.financingType + '&nbsp;|&nbsp;' +compId.type + '</br>'+ dataCon.education + '&nbsp;|&nbsp;' + dataCon.experience + '&nbsp;|&nbsp;' + dataCon.salary + '<div class="id" style="display:none;">' + dataCon.id + '</div>', 
           id: contact.data[i],
         }

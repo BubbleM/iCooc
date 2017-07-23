@@ -207,7 +207,7 @@
           console.log(jobDivs[i]);
           jobDivs[i].getElementsByTagName('img')[0].src = date.data[i].compId.compLogoUrl;
           jobDivs[i].getElementsByClassName('positionName')[0].innerText = date.data[i].jobName;
-          jobDivs[i].getElementsByClassName('time')[0].innerText = date.data[i].modified;
+          jobDivs[i].getElementsByClassName('time')[0].innerText = date.data[i].modified.substr(0,10);
           jobDivs[i].getElementsByClassName('company_details')[0].innerText = date.data[i].compId.compName;
           jobDivs[i].getElementsByClassName('info1')[0].innerHTML = date.data[i].compId.compCity + '&nbsp;|&nbsp;' +  date.data[i].compId.financingType + '&nbsp;|&nbsp;' +date.data[i].compId.type;
           jobDivs[i].getElementsByClassName('info2')[0].innerHTML = date.data[i].education + '&nbsp;|&nbsp;' + date.data[i].experience + '&nbsp;|&nbsp;' + date.data[i].salary;
