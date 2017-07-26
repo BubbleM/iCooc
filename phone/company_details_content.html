@@ -16,52 +16,67 @@
     body{
       font-size: 20px;
     }
+    .title_span{
+        font-weight: bolder;
+    }
   </style>
 </head>
 <body class="um-vp bc-bg" ontouchstart>
-  <hr/>
-  <div>
-  <br>
-    <div>
-      <div class="" id="row_height">
-        <div class="col-xs-3" id="row_height">
-          <img src="" id="compLogoUrl" style="border-radius: 50px;width: 100px;height: 100px;">
-        </div>
-        <div class="col-xs-8" id="row_height">
-          <ul>
-            <li>
-              <span id="compName" style="float: left;"></span>
-            </li><br/>
-            <li>
-              <span id="compCity"></span>
-            </li>
-            <li>
-              <span id="spanlist"></span>
-            </li>
-          </ul>
-        </div>
+  <div class="ub ub-ver">
+    <div class=" umar-at1">
+      <div id="listview2" class="ubt bc-border ubb c-wh umar-at1 uinn-a7">    
+      
       </div>
-      <hr>
+      
+      <div id="listview3"  class="ubt ubb bc-border c-wh umar-at1 uinn-a7">
+
+      </div>
+      <div  id="listview4"  class="ubt ubb bc-border c-wh umar-at1 uinn-a7">
+
+      </div>
     </div>
   </div>
-  <h3 style="margin-top:7em;margin-left:15px;">&nbsp;公司介绍</h3>
-  <pre id="introduction" class="ulev-1"></pre>
-  &nbsp;<span style="font-size: 23px;margin-left: 15px;">公司地址</span>
-  <pre id="compLocation" class="ulev-1"> </pre>      
   <script src="js/appcan.js"></script>
   <script src="js/appcan.control.js"></script>
+  <script src="js/appcan.listview.js"></script>
 </body>
-<script>
-  appcan.ready(function() {
-   　var compId1 = appcan.locStorage.getVal("compId1");
-   　var compId = JSON.parse(compId1);
-   　//　alert(compId.introduction);
-   　document.getElementById("compLogoUrl").src = compId.compLogoUrl;
-   　document.getElementById("compName").innerHTML = compId.compName;
-   　document.getElementById("compCity").innerHTML = compId.compCity;
-   　document.getElementById("spanlist").innerHTML = compId.financingType　+ '&nbsp;&nbsp|&nbsp;&nbsp' + compId.scale　+ '&nbsp;&nbsp|&nbsp;&nbsp' + compId.type;
-   　document.getElementById("introduction").innerHTML = compId.introduction;
-   　document.getElementById("compLocation").innerHTML = compId.compLocation;
+<script type="text/javascript">
+appcan.ready(function() {
+  var compId1 = appcan.locStorage.getVal("compId1");
+  var compId = JSON.parse(compId1);
+  var lv2 = appcan.listview({
+    selector : "#listview2",
+    type : "thickLine",
+    hasIcon : true,
+    hasAngle : false,
+    hasSubTitle : false,
+    multiLine : 1
   });
+  lv2.set([{
+    icon : compId.compLogoUrl,
+    title : '<div class="ub"><div class="umar-ar3" style="font-weight:bold;">' + compId.compName + '</div></div>',
+    describe : '<div style="font-size:0.8em;color:orange;">' + compId.compCity + '</div>' + compId.financingType　+ '&nbsp;&nbsp|&nbsp;&nbsp' + compId.scale　+ '&nbsp;&nbsp|&nbsp;&nbsp' + compId.type
+  }]);
+  var lv3 = appcan.listview({
+    selector: "#listview3",
+    type: "thickLine",
+    hasIcon: false,
+    hasAngle: false,
+    multiLine: 1
+  });
+  lv3.set([{
+    title : '<div style="height:40%;"><p><span class="title_span">公司介绍：</span></br>' + compId.introduction + '</p></div>'
+  }]);  
+  var lv4 = appcan.listview({
+    selector: "#listview4",
+    type: "thickLine",
+    hasIcon: false,
+    hasAngle: false,
+    multiLine: 1
+  });
+  lv4.set([{
+    title : '<div style="height:40%;"><p><span class="title_span">公司地址：</span></br>' + compId.compLocation + '</p></div>'
+  }]);  
+});
 </script>
 </html>
