@@ -73,11 +73,14 @@
 .ufm1{
     font-family:Arial;
 }
-
-
-
-
-
+#compName{
+    margin-top: 0;
+}
+a{
+   color: #286090;
+   text-decoration: none;
+   -webkit-backface-visibility: hidden;
+}
 
 
 
