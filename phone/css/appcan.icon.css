@@ -4,6 +4,7 @@
 .icon-add {
     background-image: url('icons/icon-add.png') !important;
 }
+
 .icon-act .icon-adduser {
     background-image: url('icons/icon-adduser-act.png') !important;
 }
@@ -147,4 +148,13 @@
 }
 .icon-warn {
     background-image: url('icons/icon-warn.png') !important;
+}
+.icon-time {
+    background-image: url('icons/icon-time.png') !important;
+}
+.icon-address {
+    background-image: url('icons/icon-address.png') !important;
+}
+.icon-education {
+    background-image: url('icons/icon-education.png') !important;
 }

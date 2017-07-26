@@ -8,7 +8,7 @@
 	<license href=""/>
 	<content encoding="utf-8" src="login.html"/>
 	<updateurl/>
-	<logserverip>222.24.14.52</logserverip> 
+	<logserverip>192.168.191.1</logserverip> 
 	<showmyspace>false</showmyspace>
 	<obfuscation>true</obfuscation>
 	<bgcolor>#fefefe</bgcolor>

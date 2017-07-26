@@ -80,7 +80,7 @@
     openCon(index);
   })
   appcan.button(".nav-btn", "btn-act", function() {
-   　appcan.window.open('add_Friend','addFriend.html',10);
+    appcan.window.open('add_Friend','addFriend.html',10);
   })
   function openCon(idx) {
     for (var i = 0, l = $("#header")[0].children.length; i < l; i++) {
@@ -94,14 +94,13 @@
   }
   appcan.button("#search1", "btn-act", function() {
     var searchJob = document.getElementById('search').value;
-    alert(searchJob);
   })
   var search = document.getElementById('search');
+  // 输入数据按下回车开始搜索
   search.onkeydown = function(event) {
     var searchJob = this.value;
     var e = event || window.event || arguments.callee.caller.arguments[0];
     if(e && e.keyCode == 13){ // enter 键
-      // alert(searchJob);
       appcan.ajax({
         url: 'http://39.108.2.139/online/job/searchJob.do',
         type: 'GET',
@@ -112,7 +111,6 @@
           userId: ' '
         },
         success: function(data) {
-          // var data = data;
           // console.log(data);
           appcan.locStorage.setVal("search", data);
           // alert("请求成功！");
@@ -125,7 +123,7 @@
         },
         error: function(e) {
           alert("请求失败！");
-          alert(e);
+          // alert(e);
         }
       });
     }

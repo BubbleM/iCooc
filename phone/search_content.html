@@ -44,9 +44,9 @@
       align: 'right'
     });
     lv1.set(listData);
-    lv1.on("click", function(obj, data, subObj) {
+    lv1.on("click", function(obj, data, subObj) { 
       appcan.locStorage.setVal("id", data.id);
-      appcan.openWinWithUrl('index', 'index.html');
+      appcan.window.open('index','index.html');
     }) 
   })     
 </script>

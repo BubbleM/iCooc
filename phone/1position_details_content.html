@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
 <head>
-  <title></title>
+  <title>职位详情</title>
   <meta charset="utf-8">
   <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
@@ -10,18 +10,17 @@
   <link rel="stylesheet" href="css/ui-color.css">
   <link rel="stylesheet" href="css/appcan.icon.css">
   <link rel="stylesheet" href="css/appcan.control.css">
-  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="position_details_content/css/main.css">
 </head>
 <body class="um-vp bc-bg" ontouchstart>
   <div class="ub ub-ver">
     <div id="top">
-      <div id="title" id="jobName"></div>
+      <div id="title"><span id="jobName"></span></div>
       <div id="detail">
         <ul>
-          <li><span class="glyphicon glyphicon glyphicon-map-marker" id="compCity"></span></li>
-          <li><span class="glyphicon glyphicon glyphicon glyphicon-gift" id="education"></span></li>
-          <li><span class="glyphicon glyphicon glyphicon glyphicon-dashboard" id="experience"></span></li>
+          <li class="ub-img icon-address umw1 umh1"></li><li class="ul_li" id="compCity"></li>
+          <li class="ub-img icon-education umw1 umh1"></li><li class="ul_li" id="education"></li>
+          <li class="ub-img icon-time umw1 umh1"></li><li class="ul_li" id="experience"></li>
         </ul>
       </div>
     </div>
@@ -54,10 +53,11 @@
     var compId1 = JSON.stringify(dataCon.compId);
     var compId = JSON.parse(compId1);
     appcan.locStorage.setVal("compId1", compId1);
-    // console.log(JSON.stringify(dataCon));
+    // console.log(dataCon.jobName);
     // var userId = appcan.locStorage.getVal("userId");
     // var userId = 'e78f5af9-3631-4cca-8ab1-1095fe3edbaa';
     // var jobId =  appcan.locStorage.getVal("jobId");
+    document.getElementById("jobName").innerText = dataCon.jobName;
     document.getElementById("compCity").innerText = compId.compCity;
     document.getElementById("education").innerText = dataCon.education;
     document.getElementById("experience").innerText = dataCon.experience;
@@ -70,10 +70,10 @@
       },
       success: function(data) {
         console.log("请求发布者信息成功");
-        console.log(data);
+        // console.log(data);
         var date = JSON.parse(data);
         appcan.locStorage.setVal("postDate", date.data);
-        console.log(date.data.company);
+        // console.log(date.data.company);
         var lv2 = appcan.listview({
           selector : "#listview2",
           type : "thickLine",
@@ -90,7 +90,7 @@
       },
       error:function(e) {
         alert("请求失败！");
-        alert(e);
+        // alert(e);
       }
     });           
     /* 取消职位收藏 */
@@ -105,16 +105,16 @@
       dataType: 'json',
       success: function(data) {
         alert("取消请求成功！");
-        console.log(data);
+        // console.log(data);
       },
       error:function(xhr, erroType, error, msg){
-        alert("请求失败！");
+        // alert("请求失败！");
         // var err = JSON.stringify(errormessage);
         // console.log("error:   "+err);
-        alert("erroType:" + erroType);
-        alert("error:" + error);
-        alert("msg:" + msg);
-        alert("xhr:" + JSON.stringify(xhr));
+        // alert("erroType:" + erroType);
+        // alert("error:" + error);
+        // alert("msg:" + msg);
+        // alert("xhr:" + JSON.stringify(xhr));
       }
     });       
     var lv1 = appcan.listview({
@@ -171,9 +171,5 @@
       aniId: 10
     })
   })
- /* var btn = document.getElementById("left");
-  btn.addEventListener("click",function(){
-    appcan.openWinWithUrl('resume','resume.html');     
-  }); */
 </script>
 </html>

@@ -80,12 +80,11 @@
     line-height: 1.5em;
     margin: 0.5em;
 }
-#detail ul{
-    margin-left: 0.5em;
-}
 #detail ul li{
-    float: left;
-    margin-right: 4em;
+    float: left; 
+}
+.ul_li{
+    margin-right: 2em;
 }
 .span{
     background-color: #FFFFFF;
@@ -97,16 +96,19 @@
     padding: 0.5em;
 }
 #listview1{
-    height:7em;
+    height:5em;
     padding: 1em;
 }
 #listview2{
-    height:7em;
-    padding:1em;
+    height:5em;
+    padding:0 1em 1em 1em;
 }
 #listview3{
     display: block;
 }
 #footer input{
     height: 3em;
+}
+.btn-primary{
+    background: #286090;
 }
