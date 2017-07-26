@@ -39,7 +39,7 @@
     var jsonstr = '{"emojicons":"res://emojicons/emojicons.xml","shares":"res://shares/shares.xml","placeHold":"请输入内容","touchDownImg":"res://3.png","dragOutsideImg":"res://4.png","textColor":"#FFF","textSize":"15.5"}';
     uexChatKeyboard.open(jsonstr);
     uexWidgetOne.cbError = function(opid, type, data) {
-      alert(data);
+      // alert(data);
     }
     uexChatKeyboard.onCommit = function(json) {
       var str = eval('(' + json + ')');
@@ -109,7 +109,7 @@
   }
   function sethtml(messages) {
     var messages = eval('(' + messages + ')');
-    alert("sethtml:" + JSON.stringify(messages));
+    // alert("sethtml:" + JSON.stringify(messages));
     // alert("sethtml:" + messages.length + "groupId: " + groupId);
     var arrIndex = new Array();
     for ( i = 0; i < messages.length; i++) {
@@ -171,7 +171,7 @@
               }
             },
             success: function(path, session) {
-              alert("path:" + path + ", \nsession:" + JSON.stringify(session));
+              // alert("path:" + path + ", \nsession:" + JSON.stringify(session));
               filepath = path;
               html += "<span class='bc-text' onclick=openfile('" + filepath + "');>" + json.messageBody.displayName + "</span>";
               html += "</p>";
@@ -180,8 +180,8 @@
               $('#list').append(html);
             },
             fail: function(session) {
-              alert("session:" + JSON.stringify(session));
-              alert("Download Fail");
+              // alert("session:" + JSON.stringify(session));
+              // alert("Download Fail");
             }
           };
           var cache = appcan.icache(option);
@@ -280,7 +280,7 @@
   }
 
   function openfile(str) {
-    alert("文件地址:" + str);
+    // alert("文件地址:" + str);
     if (str) {
       uexFileMgr.cbOpenFile = function(opCode, dataType, data) {
         if (data == 0) {
@@ -302,7 +302,7 @@
 
   function stoply() {
     uexAudio.cbBackgroundRecord = function(opCode, dataType, data) {
-      alert("cbBackgroundRecord:" + data);
+      // alert("cbBackgroundRecord:" + data);
       postly(data);
     }
     uexAudio.stopBackgroundRecord();
@@ -341,7 +341,7 @@
   }
 
   function openmap(latitude, longitude) {
-    alert("openmap: " + latitude + "+" + longitude);
+    // alert("openmap: " + latitude + "+" + longitude);
     appcan.setLocVal("lat", latitude);
     appcan.setLocVal("lon", longitude);
     appcan.window.open({

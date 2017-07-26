@@ -58,7 +58,7 @@
     json = json.messages;
     // alert(json.length);
     for (var i = 0; i < json.length; i++) {
-      alert(JSON.stringify(json[i]));
+      // alert(JSON.stringify(json[i]));
         if (myId == json[i].to) {
           if (sendId == json[i].from) {
             var html = "";
@@ -115,7 +115,7 @@
                   }
                 },
                 success: function(path, session) {
-                  alert("path:" + path + ", \nsession:" + JSON.stringify(session));
+                 // alert("path:" + path + ", \nsession:" + JSON.stringify(session));
                   filepath = path;
                   html += "<span class='bc-text' onclick=openfile('" + filepath + "');>" + json[i].messageBody.displayName + "</span>";
                   html += "</p>";
@@ -124,8 +124,8 @@
                   $('#list').append(html);
                 },
                 fail: function(session) {
-                  alert("session:" + JSON.stringify(session));
-                  alert("Download Fail");
+                  // alert("session:" + JSON.stringify(session));
+                  // alert("Download Fail");
                 }
               };
               var cache = appcan.icache(option);
@@ -167,7 +167,7 @@
             $('#list').append(html);
           }
           if (json[i].messageType == 'audio') {
-            alert(json[i].messageBody.remotePath);
+            // alert(json[i].messageBody.remotePath);
             html += "<span class='bc-text' onclick=playly('" + json[i].messageBody.remotePath + "');>&nbsp;&nbsp;[点击播放音频]</span>";
             html += "</p>";
             html += "</div>";
@@ -181,7 +181,7 @@
             html += "</div>";
             html += "</div>";
             $('#list').append(html);
-            alert("file:" + json[i].messageBody.remotePath);               
+            // alert("file:" + json[i].messageBody.remotePath);               
             /*
             var filepath = 0;
             var option = {

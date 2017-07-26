@@ -48,7 +48,7 @@
         appcan.openWinWithUrl('index', 'index.html')
         /* uexEasemob.getLoginInfo();*/ // IOS仅有的方法
       } else {
-        alert(data.msg) // 登录失败;
+        // alert(data.msg) // 登录失败;
       }
     }
     uexEasemob.cbRegisterUser = function(data) {
@@ -58,7 +58,7 @@
         alert('注册成功!')
         appcan.openWinWithUrl('login', 'login.html')
       } else {
-        alert(data.msg) // 注册失败
+       // alert(data.msg) // 注册失败
       }
     }
     uexEasemob.cbGetContactUserNames = function(data)　{
@@ -90,12 +90,12 @@
       appcan.locStorage.setVal('chatinfo', data)
     }      
     uexEasemob.cbGetMessageHistory = function(data) {
-        alert('cbGetMessageHistory:' + data)
+        // alert('cbGetMessageHistory:' + data)
         data = JSON.parse(data)
         appcan.locStorage.setVal('historyMsg' + data['messages'])
     }
     uexEasemob.onNewMessage = function(data) {
-      alert('onNewMessage:' + data)
+      // alert('onNewMessage:' + data)
       if (!appcan.locStorage.getVal('receivedMsg')) {
         var msgArray = new Array()
         msgArray.push(data)
@@ -111,11 +111,11 @@
       // uexWindow.evaluatePopoverScript("testChat", "content", "newMessage()");
     }
     uexEasemob.onMessageSent = function(data) {
-      alert('onMessageSent:' + data)
+      // alert('onMessageSent:' + data)
     }
     uexEasemob.cbGetConversationByName = function(data) {
       var chatType = appcan.locStorage.getVal('chatType')
-      alert('cbGetConversationByName:' + data)
+      // alert('cbGetConversationByName:' + data)
       appcan.locStorage.setVal('conversations', data)
       if (chatType === '0') {
         uexWindow.evaluatePopoverScript('chatHistory', 'content', 'historyhtml_0()')
@@ -124,7 +124,7 @@
       }
     }
     uexEasemob.onContactInvited = function(data) {
-      alert('onContactInvited:' + data)
+      // alert('onContactInvited:' + data)
       if (!appcan.locStorage.getVal('friendsNews')) {
         var msgArray = new Array()
         msgArray.push(data)
@@ -150,13 +150,13 @@
       // alert(appcan.locStorage.getVal("friendsNews"));
     }
     uexEasemob.onContactAgreed = function(data) {
-      alert('onContactAgreed:' + data)
+      // alert('onContactAgreed:' + data)
     }
     uexEasemob.onContactRefused = function(data) {
-      alert('onContactRefused:' + data)
+      // alert('onContactRefused:' + data)
     }
     uexEasemob.onGroupCreated = function(data) {
-      alert('onGroupCreated:' + data)
+      // alert('onGroupCreated:' + data)
     }
     uexEasemob.cbgetGroupsFromServer = function(data) {
       // alert('cbGetGroupsFromServer开始输出啦');
@@ -185,7 +185,7 @@
     }
     //用户申请加入群聊，收到加群申请
     uexEasemob.onApplicationReceived = function(data) {
-      alert('onApplicationReceived:' + data)
+      // alert('onApplicationReceived:' + data)
       if (!appcan.locStorage.getVal('groupApplications')) {
         var msgArray = new Array()
         msgArray.push(data)
@@ -218,7 +218,7 @@
         alert('onApplicationDeclined:' + data)
     }
     uexEasemob.cbGetGroup = function(data) {
-        alert('cbGetGroup:' + data)
+        // alert('cbGetGroup:' + data)
         appcan.locStorage.setVal('groupInfo', data)
     }
   })

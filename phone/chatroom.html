@@ -51,7 +51,7 @@
       var jsonstr = '{"emojicons":"res://emojicons/emojicons.xml","shares":"res://shares/shares.xml","placeHold":"请输入内容","touchDownImg":"res://3.png","dragOutsideImg":"res://4.png","textColor":"#FFF","textSize":"15.5"}';
       uexChatKeyboard.open(jsonstr);      
       uexWidgetOne.cbError = function(opid, type, data) {
-        alert(data);
+        // alert(data);
       }      
       uexChatKeyboard.onCommit = function(json) {
         var str = eval('(' + json + ')');
@@ -145,7 +145,7 @@
                   }
                 },
                 success: function(path, session)　{
-                  alert("path:"　+　path　+　", \nsession:"　+　JSON.stringify(session));
+                  // alert("path:"　+　path　+　", \nsession:"　+　JSON.stringify(session));
                   filepath　=　path;
                   html　+=　"<span class='bc-text' onclick=openfile('"　+　filepath　+　"');>"　+　json[i].messageBody.displayName　+　"</span>";  
                   html　+=　"</p>";
@@ -154,8 +154,8 @@
                   $('#list').append(html);
                 },
                 fail: function(session)　{
-                  alert("session:"　+　JSON.stringify(session));
-                  alert("Download Fail");
+                  // alert("session:"　+　JSON.stringify(session));
+                  // alert("Download Fail");
                 }
               }; 
               var cache = appcan.icache(option);
@@ -226,7 +226,7 @@
                   }
                 },
                 success: function(path, session)　{
-                  alert("path:"+path+", \nsession:"+JSON.stringify(session));
+                  // alert("path:"+path+", \nsession:"+JSON.stringify(session));
                   filepath　=　path;
                   html　+=　"<span class='bc-text' onclick=openfile('"+filepath+"');>"+json[i].messageBody.displayName+"</span>";  
                   html　+=　"</p>";
@@ -235,8 +235,8 @@
                   $('#list').append(html);
                 },
                 fail: function(session)　{
-                  alert("session:"+JSON.stringify(session));
-                  alert("Download Fail");
+                  // alert("session:"+JSON.stringify(session));
+                  // alert("Download Fail");
                 }
               }; 
               var cache = appcan.icache(option);
@@ -315,7 +315,7 @@
               }
             },
             success: function(path, session)　{
-              alert("path:"+path+", \nsession:"+JSON.stringify(session));
+              // alert("path:"+path+", \nsession:"+JSON.stringify(session));
               filepath　=　path;
               html　+=　"<span class='bc-text' onclick=openfile('"+filepath+"');>"+json.messageBody.displayName+"</span>";  
               html　+=　"</p>";
@@ -324,8 +324,8 @@
               $('#list').append(html);
             },
             fail: function(session) {
-              alert("session:"+JSON.stringify(session));
-              alert("Download Fail");
+              // alert("session:"+JSON.stringify(session));
+              // alert("Download Fail");
             }
           }; 
           var cache = appcan.icache(option);
@@ -416,7 +416,7 @@
       $("#nav-left").addClass('hidden');
       $("#nav-right").addClass('hidden');
       $("#to").removeClass('hidden');
-      alert("lat+lon:"+lat+"+"+lon);
+      // alert("lat+lon:"+lat+"+"+lon);
       uexEasemob.sendLocationMsg('{"username":"'+groupid+'","chatType":"1","locationAddress":"位置信息","latitude":"'+lat+'","longitude":"'+lon+'"}');
       var str = 0;
       addmychat(str, 5);
@@ -427,7 +427,7 @@
       $("#to").addClass('hidden');
       $("#nav-my").removeClass('hidden');
       $("#nav-left").removeClass('hidden');
-      alert("lat+lon:"+latitude+"+"+longitude);
+      // alert("lat+lon:"+latitude+"+"+longitude);
       uexBaiduMap.open(0,titHeight, screen.availWidth, screen.availHeight, longitude, latitude);
       uexBaiduMap.setMyLocationEnable(1);
       uexBaiduMap.setCenter(longitude, latitude);
@@ -443,7 +443,7 @@
       uexEasemob.sendFile('{"username":"'+groupid+'","chatType":"1","filePath":"'+str+'","displayName":"myfile"}');
     }
     function openfile(str) {
-      alert("文件地址:"+str);
+      // alert("文件地址:"+str);
       if(str) {  
         uexFileMgr.cbOpenFile = function(opCode, dataType, data) {
           if(data == 0) {
