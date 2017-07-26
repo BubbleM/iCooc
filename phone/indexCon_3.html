@@ -133,15 +133,15 @@
     icon: 'my_content/css/myImg/myImg6.png',
     title: '设置'
   }]);
+  lv4.on("click", function(obj, data, subObj) {
+     appcan.openWinWithUrl('setApp', "setApp.html");
+  });
   var slider = appcan.slider({
     selector: '#slider',
     aspectRatio: 10/16,
     hasLabel: true,
     index: 0
   });
-  lv4.on("click", function(obj, data, subObj) {
-     appcan.openWinWithUrl('setApp', "setApp.html");
-  })
   slider.set([{
     img: "indexCon_0/css/img/13718088,2560,1600.jpg_unsliced.png",/*大背景*/
     label: ""
