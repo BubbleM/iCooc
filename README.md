@@ -2,7 +2,7 @@
 🔍 This project is based on solving the problem of difficult employment of college students. To the school as an intermediary for everyone to provide a link in school students and in-service platform. (The project has been achieved, is currently working to improve the details)
 
 ## Experience
-* [You can download demo video and watch](http://ofmz75843.bkt.clouddn.com/iCooc1.0%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91.wmv)
+* [You can download demo video and watch](http://pan.baidu.com/s/1kUPP44v)
 * or You can Scan the following two-dimensional code to install app <br>
 <img src="https://github.com/BubbleM/iCooc/blob/master/src/iCooc.png" width="100"><br>Currently only install the Android version of the app
 
