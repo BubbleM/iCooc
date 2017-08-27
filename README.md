@@ -46,4 +46,3 @@
 ## <a id="Hope"></a>Less Well
 
 - If you have any questions during the process or want more interfaces to customize，you can [issues me](https://github.com/BubbleM/iCooc/issues/new)! 
-- Instead of giving me star, it is better to throw a bug to me!
