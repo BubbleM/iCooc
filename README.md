@@ -43,11 +43,7 @@
 #### settingApp
 <img src="https://github.com/BubbleM/iCooc/blob/master/src/setting.jpg" width="375">  <img src="https://github.com/BubbleM/iCooc/blob/master/src/suggest.jpg" width="375">
 
-## <a id="Hope"></a>Hope
+## <a id="Hope"></a>Less Well
 
 - If you have any questions during the process or want more interfaces to customize，you can [issues me](https://github.com/BubbleM/iCooc/issues/new)! 
 - Instead of giving me star, it is better to throw a bug to me!
-- If you want to participate in the maintenance of this project or have a good design style, welcome to pull request!
-- If you feel slightly discomfort in use, please contact me QQ:2436347334 or Email:2436347334@qq.com.
-- Hope to improve this project together, let it become more powerful, able to meet the needs of most users!
-
